@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router';
-import HomePage from './pages/HomePage';
+import { HomePage, NotFound, Profile } from './pages';
 import Layout from './layouts/Layout';
-import NotFound from './pages/NotFound';
 
 const App = () => {
   return (
@@ -14,7 +13,7 @@ const App = () => {
           </Layout>
         }
       />
-
+      <Route path='/user' element={<Profile />} />
       <Route path='*' element={<NotFound />} />
     </Routes>
   )
