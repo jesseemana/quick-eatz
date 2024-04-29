@@ -7,7 +7,7 @@ const MainNav = () => {
 
   return (
     <div className='flex gap-2'>
-      {/* {isAuthenticated ? <User /> : 
+      {isAuthenticated ? <User /> : 
         <Button 
           variant='outline' 
           onClick={async () => await loginWithRedirect()}
@@ -15,8 +15,7 @@ const MainNav = () => {
         >
           log in
         </Button>
-      } */}
-      <User />
+      }
     </div>
   )
 }
