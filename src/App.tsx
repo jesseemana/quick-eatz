@@ -1,9 +1,22 @@
+import { Routes, Route } from 'react-router';
+import HomePage from './pages/HomePage';
+import Layout from './layouts/Layout';
+import NotFound from './pages/NotFound';
 
 const App = () => {
   return (
-    <div className="text-red-500 text-3xl font-bold">
-      <p className="capitalize">poor mans uber eats</p>
-    </div>
+    <Routes>
+      <Route 
+        path='/'
+        element={
+          <Layout showHero>
+            <HomePage />
+          </Layout>
+        }
+      />
+
+      <Route path='*' element={<NotFound />} />
+    </Routes>
   )
 }
 
