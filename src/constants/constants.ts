@@ -7,7 +7,7 @@ export const links = [
   {
     id: 2,
     name: 'profile',
-    link: '/user-profile'
+    link: '/user'
   },
   {
     id: 3,
@@ -19,17 +19,17 @@ export const links = [
 export const main_links = [
   {
     id: 1,
-    title: 'user',
-    link: 'profile'
+    title: 'profile',
+    link: '/user'
   },
   {
     id: 2,
     title: 'orders',
-    link: 'my-orders'
+    link: '/my-orders'
   },
   {
     id: 3,
     title: 'restaurant',
-    link: 'my-restaurant'
+    link: '/my-restaurant'
   },
 ]
