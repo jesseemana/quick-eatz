@@ -1,6 +1,6 @@
 import Links from './Links';
 import { Button } from '../ui/button';
-import { links } from '@/constants/data';
+import { links } from '@/constants/constants';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const MobileNavLinks = () => {
@@ -13,6 +13,7 @@ const MobileNavLinks = () => {
           key={link.id} 
           link={link.link} 
           title={link.name} 
+          styles='flex bg-white items-center font-normal hover:text-orange-500 capitalize'
         />
       ))}
       <Button

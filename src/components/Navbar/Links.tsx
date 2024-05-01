@@ -1,12 +1,9 @@
 import { Link } from 'react-router-dom';
 
-const Links = ({ link, title }: { link: string, title: string }) => {
+const Links = ({ link, title, styles }: { link: string, title: string, styles: string }) => {
   return (
     <>
-      <Link 
-        to={link} 
-        className='flex bg-white items-center font-normal hover:text-orange-500 capitalize'
-      >
+      <Link to={link} className={styles}>
         {title}
       </Link>
     </>
