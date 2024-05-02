@@ -7,7 +7,7 @@ const useRegisterUser = () => {
   async function registerUserRequest({ auth0Id, email }: { auth0Id: string, email: string }) {
     try {
       const access_token = await getAccessTokenSilently();
-      await fetch(`${String(import.meta.env.VITE_API_BASE_URL)}/my/user/`, {
+      await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/my/user/`, {
         method: 'POST',
         headers: {
           authorization: `Bearer ${access_token}`,
