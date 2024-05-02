@@ -9,13 +9,18 @@ const App = () => {
       <Route 
         path='/'
         element={
-          <Layout showHero>
+          <Layout showHero styles='bg-transparent'>
             <HomePage />
           </Layout>
         }
       />
       <Route path='/auth-callback' element={<AuthCallBackPage />} />
-      <Route path='/user' element={<Profile />} />
+      <Route path='/user' element={
+        <Layout styles='bg-black'>
+          <Profile/>
+        </Layout>
+        } 
+      />
       <Route path='*' element={<NotFound />} />
     </Routes>
   )

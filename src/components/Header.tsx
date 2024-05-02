@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import MobileNav from './Navbar/MobileNav';
-import MainNav from './Navbar/MainNav';
+import MainNav from './navbar/MainNav';
+import MobileNav from './navbar/MobileNav';
 
-const Header = () => {
+const Header = ({ styles }: { styles?: string }) => {
   return (
-    <header className='fixed bg-transparent w-full py-4'>
+    <header className={`fixed w-full py-4 ${styles}`}>
       <nav className='container mx-auto flex justify-between items-center'>
         <Link
           to='/'
