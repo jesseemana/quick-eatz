@@ -1,3 +1,4 @@
+import axios from '@/api/axios';
 import { useMutation } from 'react-query';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -16,13 +17,11 @@ const useUpdateUser = () => {
   async function updateUserRequest(data: UpdateUserData) {
     try {
       const access_token = getAccessTokenSilently();
-      await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/my/user`, { 
-        method: 'PUT', 
+      await axios.put('/api/my/user', JSON.stringify(data), {
         headers: {
           authorization: `Bearer ${access_token}`, 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
       });
     } catch (error) {
       console.log(`Error updating user: ${error}`);
