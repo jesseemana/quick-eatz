@@ -1,9 +1,9 @@
-import axios from '@/api/axios';
+import { axios_instance, handleErrors } from '@/api/axios';
 import { useMutation } from 'react-query';
 import { useAuth0 } from '@auth0/auth0-react';
 
 
-interface UpdateUserData {
+type UserData = {
   name: string
   city: string
   country: string
@@ -14,17 +14,19 @@ interface UpdateUserData {
 const useUpdateUser = () => {
   const { getAccessTokenSilently } = useAuth0();
 
-  async function updateUserRequest(data: UpdateUserData) {
+  async function updateUserRequest(user_data: UserData) {
     try {
-      const access_token = getAccessTokenSilently();
-      await axios.put('/api/my/user', JSON.stringify(data), {
+      const access_token = await getAccessTokenSilently();
+      const response = await axios_instance.put('/api/my/user', JSON.stringify(user_data), {
         headers: {
-          authorization: `Bearer ${access_token}`, 
+          Authorization: `Bearer ${access_token}`, 
           'Content-Type': 'application/json',
         },
       });
+      return response.status;
     } catch (error) {
-      console.log(`Error updating user: ${error}`);
+      console.log('Error updating user:', error);
+      return handleErrors(error);
     }
   }
 
