@@ -4,7 +4,7 @@ import MobileNav from './navbar/MobileNav';
 
 const Header = ({ styles }: { styles?: string }) => {
   return (
-    <header className={`fixed w-full py-4 ${styles}`}>
+    <header className={`fixed w-full py-4 z-10 ${styles}`}>
       <nav className='container mx-auto flex justify-between items-center'>
         <Link
           to='/'
