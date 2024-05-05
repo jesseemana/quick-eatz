@@ -1,7 +1,7 @@
-import { axios_instance, handleErrors } from '@/api/axios';
+import { axios_instance } from '@/api/axios';
 import { useMutation } from 'react-query';
 import { useAuth0 } from '@auth0/auth0-react';
-
+import { toast } from 'sonner';
 
 type UserData = {
   name: string
@@ -10,29 +10,34 @@ type UserData = {
   addressLine1: string
 }
 
-
 const useUpdateUser = () => {
   const { getAccessTokenSilently } = useAuth0();
 
   async function updateUserRequest(user_data: UserData) {
     try {
-      const access_token = await getAccessTokenSilently();
+      const token = await getAccessTokenSilently();
       const response = await axios_instance.put('/api/my/user', JSON.stringify(user_data), {
         headers: {
-          Authorization: `Bearer ${access_token}`, 
+          Authorization: `Bearer ${token}`, 
           'Content-Type': 'application/json',
         },
       });
-      return response.status;
+      return response.data;
     } catch (error) {
-      console.log('Error updating user:', error);
-      return handleErrors(error);
+      console.error('Failed to update user:', error);
     }
   }
 
-  const { isLoading, isSuccess, isError, mutateAsync: updateUser, } = useMutation(updateUserRequest);
+  const { mutateAsync: updateUser, isLoading, isSuccess, error, reset } = useMutation(updateUserRequest);
+
+  if (isSuccess) { toast.success('User updated!'); }
+
+  if (error) { 
+    toast.error('Error updating user!'); 
+    reset();
+  }
   
-  return { isLoading, isSuccess, isError, updateUser, }
+  return { isLoading, updateUser, }
 }
 
 export default useUpdateUser;

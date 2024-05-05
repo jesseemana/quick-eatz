@@ -1,4 +1,4 @@
-import { axios_instance, handleErrors } from '@/api/axios';
+import { axios_instance } from '@/api/axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useMutation } from 'react-query';
 
@@ -7,17 +7,16 @@ const useRegisterUser = () => {
 
   async function registerUserRequest({ auth0Id, email }: { auth0Id: string, email: string }) {
     try {
-      const access_token = getAccessTokenSilently();
+      const token = getAccessTokenSilently();
       const response = await axios_instance.post('/api/my/user', JSON.stringify({ auth0Id, email }), {
         headers: {
-          Authorization: `Bearer ${access_token}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       });
-      return response.status;
+      return response.data;
     } catch (error) {
-      console.error('Failed to register user: ', error);
-      return handleErrors(error);
+      console.error('Failed to register user:', error);
     }
   }
   
