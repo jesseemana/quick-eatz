@@ -1,9 +1,11 @@
 import landingImage from '../assets/landing.png';
 import appDownloadImage from '../assets/appDownload.png';
+import useDocumentTitle from '@/hooks/useDocumentTitle';
 // import SearchBar, { SearchForm } from '@/components/SearchBar';
 // import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
+  useDocumentTitle('Quick Eatz - Your Next Meal Delivered At Your At Your Door')
   // const navigate = useNavigate();
 
   // const handleSearchSubmit = (searchFormValues: SearchForm) => {
