@@ -1,3 +1,5 @@
+import { UserFormData } from './schemas/user-profile';
+
 export type User = {
   _id: string;
   email: string;
@@ -6,6 +8,21 @@ export type User = {
   city: string;
   country: string;
 };
+
+export type UserData = {
+  name: string
+  city: string
+  country: string
+  addressLine1: string
+}
+
+export type FormProps = {
+  onSave: (userData: UserFormData) => void
+  isLoading: boolean
+  currentUser: User
+  title?: string
+  buttonText?: string
+}
 
 export type MenuItem = {
   _id: string;
@@ -28,11 +45,11 @@ export type Restaurant = {
 };
 
 export type OrderStatus =
-  | "placed"
-  | "paid"
-  | "inProgress"
-  | "outForDelivery"
-  | "delivered";
+  | 'placed'
+  | 'paid'
+  | 'inProgress'
+  | 'outForDelivery'
+  | 'delivered';
 
 export type Order = {
   _id: string;

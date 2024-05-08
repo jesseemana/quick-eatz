@@ -23,9 +23,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Auth0ProviderWithNavigate>
           <App />
           <Toaster 
-            visibleToasts={1} 
-            position='top-right' 
             richColors 
+            visibleToasts={1} 
+            position='bottom-right' 
           />
         </Auth0ProviderWithNavigate>
       </QueryClientProvider>

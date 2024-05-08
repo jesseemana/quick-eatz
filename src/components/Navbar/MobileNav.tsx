@@ -28,7 +28,7 @@ const MobileNav = () => {
               {user?.email}
             </div> 
             ): 
-            <h1 className='capitalize'>quick eatz</h1>
+            <p className='capitalize'>quick eatz</p>
           }
         </SheetTitle>
         <Separator />

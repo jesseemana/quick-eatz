@@ -15,23 +15,27 @@ const Menu = () => {
   return (
     <div className='space-y-2'>
       <>
-        <h1 className='capitalize font-semibold text-2xl'>cuisines</h1>
+        <h1 className='capitalize font-semibold text-2xl'>menu</h1>
         <FormDescription>
           Create your menu and give each item a name and a price
         </FormDescription>
       </>
       
-      <FormField control={control} name='menuItems' render={() => (
-        <FormItem>
-          {fields.map((_, index) => (
-            <MenuItemInput 
-              key={index} 
-              index={index} 
-              removeItem={() => remove(index)} 
-            />
-          ))}
-        </FormItem>
-      )} />
+      <FormField 
+        control={control} 
+        name='menuItems' 
+        render={() => (
+          <FormItem>
+            {fields.map((_, index) => (
+              <MenuItemInput 
+                key={index} 
+                index={index} 
+                removeItem={() => remove(index)} 
+              />
+            ))}
+          </FormItem>
+        )} 
+      />
 
       <Button 
         type='button' 

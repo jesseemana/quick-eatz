@@ -4,7 +4,7 @@ import {
   DropdownMenuContent, 
   DropdownMenuTrigger, 
 } from './ui/dropdown-menu';
-import Links from './Navbar/Links';
+import Links from './navbar/Links';
 import { Button } from './ui/button';
 import { Separator } from './ui/separator';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -17,9 +17,11 @@ const User = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className='flex items-center font-bold hover:text-white gap-2'>
-        <CircleUserRound className='text-white sticky' />
-        {user && user.picture}
+      <DropdownMenuTrigger className='grid place-items-center font-bold hover:text-white gap-2'>
+        {user ? 
+          user.picture : 
+          <CircleUserRound className='text-white sticky' />
+        }
       </DropdownMenuTrigger>
       <DropdownMenuContent className='mr-8'>
         {main_links.map((link) => (
