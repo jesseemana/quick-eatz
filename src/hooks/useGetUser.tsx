@@ -7,18 +7,17 @@ const useGetUser = () => {
   const { getAccessTokenSilently } = useAuth0();
 
   async function getMyUserRequest() {
-    try {
-      const token = await getAccessTokenSilently();
-      const response = await axios_instance.get('/api/my/user', {
+    const token = await getAccessTokenSilently();
+    const response = await axios_instance.get(
+      import.meta.env.VITE_MY_USER_ENDPOINT, 
+      {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Failed to fetch user:', error);
-    }
+      }
+    );
+    return response.data;
   }
 
   const { data: currentUser, isLoading, error, } = useQuery('fetchCurrentUser', getMyUserRequest);

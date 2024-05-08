@@ -1,28 +1,33 @@
 import { axios_instance } from '@/api/axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useMutation } from 'react-query';
+import { toast } from 'sonner';
 
 const useRegisterUser = () => {
   const { getAccessTokenSilently } = useAuth0();
 
   async function registerUserRequest({ auth0Id, email }: { auth0Id: string, email: string }) {
-    try {
-      const token = getAccessTokenSilently();
-      const response = await axios_instance.post('/api/my/user', JSON.stringify({ auth0Id, email }), {
+    const token = getAccessTokenSilently();
+    const response = await axios_instance.post(
+      import.meta.env.VITE_MY_USER_ENDPOINT, 
+      JSON.stringify({ auth0Id, email }), 
+      {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Failed to register user:', error);
-    }
+      }
+    );
+    return response.data;
   }
   
-  const { mutateAsync: registerUser, isLoading, isSuccess, isError, } = useMutation(registerUserRequest);
+  const { mutateAsync: registerUser, isLoading, isSuccess, error, } = useMutation(registerUserRequest);
 
-  return { registerUser, isLoading, isSuccess, isError, }
+  if (isSuccess) { toast.success('User registered!'); }
+
+  if (error) { toast.error(error.toString()); }
+
+  return { registerUser, isLoading, }
 }
 
 export default useRegisterUser;
