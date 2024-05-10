@@ -29,7 +29,7 @@ const HomeSearch = ({ onSubmit, searchQuery, styles }: SearchProps) => {
   
   return (
     <div className={`flex flex-col gap-8 p-4 ${styles}`}>
-      <p className='md:text-5xl text-3xl font-bold text-black lg:text-white'>
+      <p className='md:text-5xl text-3xl font-bold text-black lg:text-white md:tracking-wide'>
         Order delivery near you
       </p>
       <Form {...form}>
