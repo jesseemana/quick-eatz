@@ -1,33 +1,17 @@
 import landingImage from '../assets/landing.png';
 import appDownloadImage from '../assets/appDownload.png';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
-// import SearchBar, { SearchForm } from '@/components/SearchBar';
-// import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
-  useDocumentTitle('Quick Eatz - Your Next Meal Delivered At Your At Your Door')
-  // const navigate = useNavigate();
-
-  // const handleSearchSubmit = (searchFormValues: SearchForm) => {
-  //   navigate({
-  //     pathname: `/search/${searchFormValues.searchQuery}`,
-  //   });
-  // };
-
+  useDocumentTitle('Quick Eatz - Your Next Meal Delivered At Your At Your Door');
   return (
     <div className='flex flex-col gap-12'>
-      <div className='md:px-32 bg-white rounded-lg shadow-md py-8 flex flex-col gap-5 text-center -mt-16'>
-        <h1 className='md:text-5xl text-3xl font-bold tracking-tight text-orange-600'>
-          Tuck into a takeway today
-        </h1>
-        <p className='text-xl text-gray-700'>Your next meal is just a click away!</p>
-        {/* <SearchBar
-          placeHolder='Search by City or Town'
-          onSubmit={handleSearchSubmit}
-        /> */}
-      </div>
       <div className='grid md:grid-cols-2 gap-5'>
-        <img src={landingImage} />
+        <img 
+          src={landingImage} 
+          alt='application landing page image'
+          className='h-auto w-auto'
+        />
         <div className='flex flex-col items-center justify-center gap-4 text-center'>
           <p className='font-bold text-3xl tracking-tighter text-gray-900 capitalize'>
             order takeaway even faster!
@@ -35,7 +19,11 @@ const HomePage = () => {
           <p className='text-gray-700'>
             Download the Quick Eatz app for faster ordering and personalised recommendations.
           </p>
-          <img src={appDownloadImage} />
+          <img 
+            src={appDownloadImage} 
+            alt='app download image' 
+            className='h-auto w-auto'
+          />
         </div>
       </div>
     </div>
