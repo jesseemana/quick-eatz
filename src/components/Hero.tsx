@@ -16,7 +16,8 @@ const Hero = () => {
       <img 
         src={hero} 
         alt='hero image' 
-        className='w-full object-cover min-h-screen lg:max-h-[600px] relative'
+        className='w-full object-cover min-h-screen lg:max-h-[600px]'
+        loading='lazy'
       />
       <div className='grid place-items-center md:flex'>
         <HomeSearch 
