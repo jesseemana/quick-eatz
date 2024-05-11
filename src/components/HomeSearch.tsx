@@ -7,7 +7,7 @@ import { Button } from './ui/button';
 
 const formSchema = z.object({
   searchQuery: z.string({
-    required_error: 'Restaurant name is required',
+    required_error: 'search value is required',
   }),
 });
 
@@ -15,16 +15,12 @@ export type SearchForm = z.infer<typeof formSchema>;
 
 type SearchProps = { 
   onSubmit: (searchValues: SearchForm) => void 
-  searchQuery?: string 
   styles?: string 
 }
 
-const HomeSearch = ({ onSubmit, searchQuery, styles }: SearchProps) => {
+const HomeSearch = ({ onSubmit, styles }: SearchProps) => {
   const form = useForm<SearchForm>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      searchQuery,
-    }
   });
   
   return (
@@ -35,18 +31,18 @@ const HomeSearch = ({ onSubmit, searchQuery, styles }: SearchProps) => {
       <Form {...form}>
         <form 
           onSubmit={form.handleSubmit(onSubmit)} 
-          className={`flex items-center gap-3 flex-col md:flex-row ${
-            form.formState.errors.searchQuery && 'border-red-500'
-          }`}
+          className={`flex items-center gap-3 flex-col md:flex-row`}
         >
           <FormField 
             control={form.control} 
             name='searchQuery' 
             render={({ field }) => (
-              <FormItem className='bg-white text-black w-full md:w-[400px] rounded-[1px] h-12 px-2 grid place-items-center font-light'>
+              <FormItem className={`bg-white text-black rounded-sm w-full md:w-[400px] h-12 px-2 grid place-items-center font-light ${
+                form.formState.errors.searchQuery && 'border-2 border-red-500'}`}
+              >
                 <FormControl>
                   <Input
-                    {...field}
+                   {...field}
                     placeholder='Search by location'
                     className='border-none shadow-none text-xl focus-visible:ring-0'
                   />
@@ -63,7 +59,7 @@ const HomeSearch = ({ onSubmit, searchQuery, styles }: SearchProps) => {
         </form>
       </Form>
     </div>
-  )
+  );
 }
 
 export default HomeSearch;
