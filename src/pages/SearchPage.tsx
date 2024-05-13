@@ -6,7 +6,8 @@ import PaginationSelector from '@/components/Pagination';
 import SearchResultInfo from '@/components/SearchResultInfo';
 import SearchResultCard from '@/components/SearchResultCard';
 import useSearchRestaurants from '@/hooks/useSearchRestaurants';
-
+import CuisineFilter from '@/components/CuisineFilter';
+import useDocumentTitle from '@/hooks/useDocumentTitle';
 
 export type SearchState = {
   searchQuery: string;
@@ -15,11 +16,14 @@ export type SearchState = {
   sortOption: string;
 };
 
-
 const SearchPage = () => {
   const { city } = useParams();
 
-  const [searchState, setSearchState] = useState({
+  useDocumentTitle(`Search Results - ${city}`)
+
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  const [searchState, setSearchState] = useState<SearchState>({
     searchQuery: '',
     page: 1,
     selectedCuisines: [],
@@ -32,6 +36,14 @@ const SearchPage = () => {
     setSearchState(prev => ({
       ...prev,
       page,
+    }))
+  }
+
+  function setSelectedCuisines(selectedCuisines: string[]) {
+    setSearchState(prev => ({
+      ...prev,
+      selectedCuisines,
+      page: 1
     }))
   }
 
@@ -52,11 +64,17 @@ const SearchPage = () => {
   }
 
   return (
-    <div className='min-h-screen pt-16 grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5'>
-      <div id='cuisine-list' className='border border-red-400 p-1'>
-        cuisines
+    <div className='min-h-[700px] md:pt-16 flex flex-col lg:grid lg:grid-cols-[250px_1fr] gap-5'>
+      <div id='cuisine-list' className='p-1 pt-10 md:pt-4'>
+        <CuisineFilter 
+          isExpanded={isExpanded}
+          onChange={setSelectedCuisines}
+          selectedCuisines={searchState.selectedCuisines}
+          onExpandedClick={() => setIsExpanded(prev => !prev)} 
+        />
       </div>
-      <div id='main-content' className='border border-red-400 p-1'>
+
+      <div id='main-content' className='p-1 '>
         <SearchBar 
           onReset={resetSearch} 
           onSubmit={setSearchQuery}
@@ -80,7 +98,7 @@ const SearchPage = () => {
             </div>
           
             {!results || !city ? (
-              <p className='text-center py-20'>No restaurants to display</p>
+              <p className='text-center py-20'>No results to display</p>
             ):(
               results.data.map(restaurant => (
                 <SearchResultCard 
