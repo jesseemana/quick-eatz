@@ -5,23 +5,19 @@ import { Restaurant } from '@/types';
 import { Form } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import LoadingButton from '@/components/LoadingButton';
 import { RestaurantFormData, restaurantSchema } from '@/schemas/restaurant';
-
+import LoadingButton from '@/components/LoadingButton';
 import Menu from './Menu';
 import Banner from './Banner';
 import Details from './Details';
 import Cuisines from './Cuisines';
 
 
-type RestaurantFormProps = { 
+const ManageRestaurantForm = ({ onSave, loading, restaurant }: { 
   onSave: (data: FormData) => void, 
   loading: boolean, 
-  restaurant?: Restaurant 
-}
-
-
-const ManageRestaurantForm = ({ onSave, loading, restaurant }: RestaurantFormProps) => {
+  restaurant?: Restaurant, 
+}) => {
   const form = useForm<RestaurantFormData>({
     resolver: zodResolver(restaurantSchema),
     defaultValues: {

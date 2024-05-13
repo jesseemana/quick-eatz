@@ -7,13 +7,12 @@ import { Button } from './ui/button';
 import { Form, FormControl, FormField, FormItem } from './ui/form';
 import { SearchForm, searchSchema } from '@/schemas/search';
 
-type Props = {
-  onSubmit: (formData: SearchForm) => void;
-  onReset?: () => void;
-  searchQuery: string;
-};
 
-const SearchBar = ({ onSubmit, onReset, searchQuery }: Props) => {
+const SearchBar = ({ onSubmit, onReset, searchQuery }: {
+  onSubmit: (formData: SearchForm) => void;
+  onReset: () => void;
+  searchQuery: string;
+}) => {
   const form = useForm<SearchForm>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
@@ -34,7 +33,7 @@ const SearchBar = ({ onSubmit, onReset, searchQuery }: Props) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={`flex items-center gap-3 justify-between flex-row border-2 border-gray-500 rounded-full p-3 mb-4 ${
+        className={`flex items-center gap-3 justify-between flex-row border border-gray-500 rounded-full p-3 mb-4 ${
           form.formState.errors.searchQuery && 'border-red-500'
         }`}
       >
@@ -52,8 +51,8 @@ const SearchBar = ({ onSubmit, onReset, searchQuery }: Props) => {
               <FormControl>
                 <Input
                   {...field}
-                  className='border-none shadow-none text-md md:text-xl focus-visible:ring-0'
-                  placeholder='search by cuisine or restaurant Name'
+                  className='border-none shadow-none text-sm md:text-lg focus-visible:ring-0'
+                  placeholder='search by restaurant name or cuisine'
                 />
               </FormControl>
             </FormItem>
@@ -66,7 +65,7 @@ const SearchBar = ({ onSubmit, onReset, searchQuery }: Props) => {
           variant='outline'
           className='rounded-full'
         >
-          Reset
+          clear
         </Button>
         <Button 
           type='submit'

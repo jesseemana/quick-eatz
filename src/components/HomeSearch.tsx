@@ -1,26 +1,22 @@
-import { z } from 'zod';
 import { useForm } from 'react-hook-form';
-import { Form, FormControl, FormField, FormItem } from './ui/form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { 
+  Form, 
+  FormControl, 
+  FormField, 
+  FormItem, 
+} from './ui/form';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { SearchForm, searchSchema } from '@/schemas/search';
 
-const formSchema = z.object({
-  searchQuery: z.string({
-    required_error: 'search value is required',
-  }),
-});
 
-export type SearchForm = z.infer<typeof formSchema>;
-
-type SearchProps = { 
+const HomeSearch = ({ onSubmit, styles }: { 
   onSubmit: (searchValues: SearchForm) => void 
   styles?: string 
-}
-
-const HomeSearch = ({ onSubmit, styles }: SearchProps) => {
+}) => {
   const form = useForm<SearchForm>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(searchSchema),
   });
   
   return (
@@ -37,14 +33,15 @@ const HomeSearch = ({ onSubmit, styles }: SearchProps) => {
             control={form.control} 
             name='searchQuery' 
             render={({ field }) => (
-              <FormItem className={`bg-white text-black rounded-sm w-full md:w-[400px] h-12 px-2 grid place-items-center font-light ${
+              <FormItem className={`bg-white text-black rounded-sm w-full md:w-[400px] h-12 px-2 grid place-items-center font-normal ${
                 form.formState.errors.searchQuery && 'border-2 border-red-500'}`}
               >
                 <FormControl>
                   <Input
-                   {...field}
+                    {...field}
                     placeholder='Search by location'
-                    className='border-none shadow-none text-xl focus-visible:ring-0'
+                    className='border-none shadow-none text-lg md:text-xl focus-visible:ring-0 text-black'
+                    autoComplete='off'
                   />
                 </FormControl>
               </FormItem>

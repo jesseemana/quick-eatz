@@ -7,13 +7,12 @@ import {
   PaginationNext, 
 } from './ui/pagination';
 
-type Props = {
+
+const PaginationSelector = ({ page, pages, onPageChange, }: {
   page: number;
   pages: number;
   onPageChange: (page: number) => void;
-};
-
-const PaginationSelector = ({ page, pages, onPageChange, }: Props) => {
+}) => {
   const pageNumbers = [];
   for (let i = 0; i <= pages; i++) {
     pageNumbers.push(i);
@@ -22,14 +21,15 @@ const PaginationSelector = ({ page, pages, onPageChange, }: Props) => {
   return (
     <Pagination>
       <PaginationContent>
-        {page !== 1 && (
+        {/* {page !== 1 && ( */}
           <PaginationItem>
             <PaginationPrevious
               href='#'
               onClick={() => onPageChange(page - 1)}
+              aria-disabled={page !== 1}
             />
           </PaginationItem>
-        )}
+        {/* )}  */}
 
         {pageNumbers.map((number) => (
           <PaginationItem>
@@ -43,14 +43,15 @@ const PaginationSelector = ({ page, pages, onPageChange, }: Props) => {
           </PaginationItem>
         ))}
 
-        {page !== pageNumbers.length && (
+        {/* {page !== pageNumbers.length && ( */}
           <PaginationItem>
             <PaginationNext 
               href='#' 
               onClick={() => onPageChange(page + 1)} 
+              aria-disabled={page !== pageNumbers.length}
             />
           </PaginationItem>
-        )}
+        {/* )}  */}
       </PaginationContent>
     </Pagination>
   )

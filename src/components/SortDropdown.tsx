@@ -7,7 +7,10 @@ import {
 import { sort_options } from '@/constants/constants';
 
 
-const SortDropdown = ({ onChange, sortOption, }: { onChange: (value: string) => void, sortOption: string }) => {
+const SortDropdown = ({ onChange, sortOption, }: { 
+  onChange: (value: string) => void, 
+  sortOption: string, 
+}) => {
   const sort_label = sort_options.find(option => option.value === sortOption)?.label || sort_options[0].label
 
   return (

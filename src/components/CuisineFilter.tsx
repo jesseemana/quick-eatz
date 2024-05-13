@@ -4,14 +4,13 @@ import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { ChangeEvent } from 'react';
 import { Button } from './ui/button';
 
-type Props = {
+
+const CuisineFilter = ({ onChange, selectedCuisines, isExpanded, onExpandedClick }: {
   onChange: (cuisines: string[]) => void;
   selectedCuisines: string[];
   isExpanded: boolean;
   onExpandedClick: () => void;
-};
-
-const CuisineFilter = ({ onChange, selectedCuisines, isExpanded, onExpandedClick }:  Props) => {
+}) => {
 
   function handleCuisineChange(e: ChangeEvent<HTMLInputElement>) { 
     const cuisineList = e.target.value;

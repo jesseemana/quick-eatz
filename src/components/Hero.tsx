@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router';
 import hero from '../assets/hero.jpg';
-import HomeSearch, { SearchForm } from './HomeSearch';
+import HomeSearch from './HomeSearch';
+import { SearchForm } from '@/schemas/search';
 
 const Hero = () => {
   const navigate = useNavigate();
 
-  function handleSearch(searchValues: SearchForm) {
+  const handleSearch = (searchValues: SearchForm) => {
     navigate({
       pathname: `/search/${searchValues.searchQuery}`,
     });
