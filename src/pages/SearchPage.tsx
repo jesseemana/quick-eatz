@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { SearchForm } from '@/schemas/search';
-import SearchBar from '@/components/SearchBar';
+import useDocumentTitle from '@/hooks/useDocumentTitle';
 import PaginationSelector from '@/components/Pagination';
 import SearchResultInfo from '@/components/SearchResultInfo';
 import SearchResultCard from '@/components/SearchResultCard';
 import useSearchRestaurants from '@/hooks/useSearchRestaurants';
 import CuisineFilter from '@/components/CuisineFilter';
-import useDocumentTitle from '@/hooks/useDocumentTitle';
+import SortDropdown from '@/components/SortDropdown';
+import SearchBar from '@/components/SearchBar';
 
 export type SearchState = {
   searchQuery: string;
@@ -21,7 +22,7 @@ const SearchPage = () => {
 
   useDocumentTitle(`Search Results - ${city}`)
 
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState<boolean>(false)
 
   const [searchState, setSearchState] = useState<SearchState>({
     searchQuery: '',
@@ -32,7 +33,7 @@ const SearchPage = () => {
 
   const { results, isLoading, } = useSearchRestaurants(searchState, city);
 
-  function setPage(page: number) {
+  const setPage = (page: number) => {
     setSearchState(prev => ({
       ...prev,
       page,
@@ -47,6 +48,14 @@ const SearchPage = () => {
     }))
   }
 
+  function setSortOption(sortOption: string) {
+    setSearchState(prev => ({
+      ...prev,
+      sortOption,
+      page: 1,
+    }))
+  }
+
   function setSearchQuery(data: SearchForm) {
     setSearchState(prev => ({
       ...prev,
@@ -55,7 +64,7 @@ const SearchPage = () => {
     }));
   }
 
-  function resetSearch() {
+  const resetSearch = () => {
     setSearchState(prev => ({
       ...prev,
       searchQuery: '',
@@ -80,23 +89,28 @@ const SearchPage = () => {
           onSubmit={setSearchQuery}
           searchQuery={searchState.searchQuery}
         />
-         
+
         {isLoading ? <p>loading...</p> : (
           <>
-            <div className='flex justify-between flex-col gap-3 lg:flex-row'>
-              {!results || !city ? (
-                <SearchResultInfo 
-                  total={0} 
-                  city={city} 
-                />
-              ):(
-                <SearchResultInfo 
-                  city={city} 
-                  total={results.pagination.total} 
-                />
-              )}
+            <div className='flex justify-between flex-col gap-3 md:flex-row'>
+              <div>
+                {!results || !city ? (
+                  <SearchResultInfo 
+                    total={0} 
+                    city={city} 
+                  />
+                ):(
+                  <SearchResultInfo 
+                    city={city} 
+                    total={results.pagination.total} 
+                  />
+                )}
+              </div>
+              <SortDropdown 
+                sortOption={searchState.sortOption} 
+                onChange={(value) => setSortOption(value) } 
+              />
             </div>
-          
             {!results || !city ? (
               <p className='text-center py-20'>No results to display</p>
             ):(
