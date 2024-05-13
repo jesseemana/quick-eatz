@@ -34,6 +34,21 @@ export const main_links = [
   },
 ]
 
+export const sort_options = [
+  {
+    label: 'Best Match',
+    value: 'bestMatch'
+  },
+  {
+    label: 'Delivery Price',
+    value: 'deliveryPrice'
+  },
+  {
+    label: 'Estimated Delivery Time',
+    value: 'estimatedDeliveryTime'
+  },
+]
+
 export const cuisine_list = [
   'American',
   'BBQ',
@@ -43,6 +58,7 @@ export const cuisine_list = [
   'Chinese',
   'Desserts',
   'French',
+  'Fastfood',
   'Greek',
   'Healthy',
   'Indian',
@@ -59,6 +75,5 @@ export const cuisine_list = [
   'Steak',
   'Sushi',
   'Tacos',
-  'Tapas',
   'Vegan',
 ];
