@@ -1,4 +1,3 @@
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
@@ -6,14 +5,7 @@ import { Search } from 'lucide-react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Form, FormControl, FormField, FormItem } from './ui/form';
-
-const formSchema = z.object({
-  searchQuery: z.string({
-    required_error: 'Restaurant name or location is required',
-  }),
-});
-
-export type SearchForm = z.infer<typeof formSchema>;
+import { SearchForm, searchSchema } from '@/schemas/search';
 
 type Props = {
   onSubmit: (formData: SearchForm) => void;
@@ -23,7 +15,7 @@ type Props = {
 
 const SearchBar = ({ onSubmit, onReset, searchQuery }: Props) => {
   const form = useForm<SearchForm>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(searchSchema),
     defaultValues: {
       searchQuery,
     },
@@ -42,7 +34,7 @@ const SearchBar = ({ onSubmit, onReset, searchQuery }: Props) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={`flex items-center gap-3 justify-between flex-row border-2 border-gray-500 rounded-full p-3 ${
+        className={`flex items-center gap-3 justify-between flex-row border-2 border-gray-500 rounded-full p-3 mb-4 ${
           form.formState.errors.searchQuery && 'border-red-500'
         }`}
       >
@@ -51,6 +43,7 @@ const SearchBar = ({ onSubmit, onReset, searchQuery }: Props) => {
           size={30}
           className='ml-1 text-black hidden md:block'
         />
+        
         <FormField
           control={form.control}
           name='searchQuery'
@@ -59,8 +52,8 @@ const SearchBar = ({ onSubmit, onReset, searchQuery }: Props) => {
               <FormControl>
                 <Input
                   {...field}
-                  className='border-none shadow-none text-xl focus-visible:ring-0'
-                  placeholder='Search by Cuisine or Restaurant Name'
+                  className='border-none shadow-none text-md md:text-xl focus-visible:ring-0'
+                  placeholder='search by cuisine or restaurant Name'
                 />
               </FormControl>
             </FormItem>
