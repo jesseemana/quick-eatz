@@ -1,4 +1,5 @@
 import { axios_instance } from '@/api/axios';
+import { User } from '@/types';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useQuery } from 'react-query';
 import { toast } from 'sonner';
@@ -6,7 +7,7 @@ import { toast } from 'sonner';
 const useGetUser = () => {
   const { getAccessTokenSilently } = useAuth0();
 
-  async function getMyUserRequest() {
+  async function getMyUserRequest(): Promise<User> {
     const token = await getAccessTokenSilently();
     const response = await axios_instance.get(
       import.meta.env.VITE_MY_USER_ENDPOINT, 

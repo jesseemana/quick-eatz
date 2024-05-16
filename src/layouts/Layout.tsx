@@ -2,15 +2,14 @@ import Hero from '@/components/Hero';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 
-interface LayOutProps {
+const Layout = ({ children, styles, showHero, background, }: {
   children: React.ReactNode 
   styles?: string 
+  background?: string
   showHero?: boolean
-}
-
-const Layout = ({ children, styles, showHero }: LayOutProps) => {
+}) => {
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div className={`flex flex-col min-h-screen ${background}`}>
       <Header styles={styles} />
       <main>
         {showHero && <Hero />}

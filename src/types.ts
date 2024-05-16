@@ -9,6 +9,21 @@ export type User = {
   country: string;
 };
 
+export type CheckoutRequestType = {
+  cartItems: {
+    menuItemId: string;
+    name: string;
+    quantity: string;
+  }[];
+  deliveryDetails: {
+    email?: string;
+    name: string;
+    addressLine1: string;
+    city: string;
+  };
+  restaurantId: string;
+};
+
 export type UserData = {
   name: string
   city: string
@@ -18,7 +33,8 @@ export type UserData = {
 
 export type FormProps = {
   onSave: (userData: UserFormData) => void
-  isLoading: boolean
+  isLoading?: boolean
+  checkOut?: boolean
   currentUser: User
   title?: string
   buttonText?: string

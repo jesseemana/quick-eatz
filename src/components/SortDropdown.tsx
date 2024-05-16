@@ -17,7 +17,7 @@ const SortDropdown = ({ onChange, sortOption, }: {
     <DropdownMenu>
       <DropdownMenuTrigger className='cursor-pointer flex items-start'>
         <span className='w-auto shadow bg-gray-50 p-2 text-gray-700 rounded-sm font-normal hover:bg-gray-50 hover:border-gray-50 hover:shadow-md'>
-          Sort by: {sort_label}
+          Sort: {sort_label}
         </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='mr-40 md:mr-12'>

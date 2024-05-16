@@ -17,7 +17,7 @@ import LoadingButton from '@/components/LoadingButton';
 import { UserFormData, userSchema } from '@/schemas/user-profile';
 
 
-const UserProfileForm = ({ onSave, isLoading, currentUser, title='user profile', buttonText='submit' }: FormProps) => {
+const UserProfileForm = ({ onSave, isLoading, currentUser, checkOut, title='user profile', buttonText='submit' }: FormProps) => {
   const form = useForm<UserFormData>({
     resolver: zodResolver(userSchema),
     defaultValues: currentUser,
@@ -35,7 +35,7 @@ const UserProfileForm = ({ onSave, isLoading, currentUser, title='user profile',
       >
         <>
           <h2 className='text-2xl font-bold capitalize'>{title}</h2>
-          <FormDescription>view and update your profile.</FormDescription>
+          {!checkOut && <FormDescription>view and update your profile.</FormDescription>}
         </>
 
         <FormField 

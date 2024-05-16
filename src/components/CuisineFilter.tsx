@@ -70,7 +70,7 @@ const CuisineFilter = ({ onChange, selectedCuisines, isExpanded, onExpandedClick
 
         <Button 
           variant='link'
-          className='flex-1 capitalize underline text-blue-500 font-semibold'
+          className='flex-1 capitalize hover:underline text-black font-semibold'
           onClick={onExpandedClick} 
         >
           {isExpanded ?  (

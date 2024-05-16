@@ -8,7 +8,7 @@ const MenuItems = ({ menuItem, addToCart }: {
   return (
     <Card 
       onClick={addToCart} 
-      className='cursor-pointer' 
+      className='cursor-pointer rounded-sm' 
     >
       <CardHeader>
         <CardTitle className='capitalize'>
