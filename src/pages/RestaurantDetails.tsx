@@ -87,7 +87,8 @@ const RestaurantDetails = () => {
       restaurantId: restaurant._id,
     }
 
-    await createCheckoutSession(checkoutData);
+    const data = await createCheckoutSession(checkoutData);
+    window.location.href = data.url;
   }
 
   const addToCart = (menu_item: MenuItem) => {
