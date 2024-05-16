@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 const useCreateCheckoutSession = () => {
   const { getAccessTokenSilently } = useAuth0();
 
-  async function createCheckoutSessionRequest(checkoutData: CheckoutRequestType) {
+  async function createCheckoutSessionRequest(checkoutData: CheckoutRequestType): Promise<{ url: string }> {
     const token = await getAccessTokenSilently();
     const response = await axios_instance.post(
       '/api/order/create-checkout-session', 
@@ -23,7 +23,12 @@ const useCreateCheckoutSession = () => {
     return response.data;
   }
 
-  const { mutate: createCheckoutSession, isLoading, error, reset, } = useMutation(createCheckoutSessionRequest);
+  const { 
+    mutateAsync: createCheckoutSession, 
+    isLoading, 
+    error, 
+    reset, 
+  } = useMutation(createCheckoutSessionRequest);
 
   if (error) { 
     toast.error(error.toString()); 
