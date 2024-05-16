@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
-import { MenuItem, Restaurant } from '@/types';
+import { CheckoutRequestType, MenuItem, Restaurant } from '@/types';
+import { Card, CardFooter } from '@/components/ui/card';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { Card } from '@/components/ui/card';
+import { UserFormData } from '@/schemas/user-profile';
 import useGetRestaurant from '@/hooks/useGetRestaurants';
+import useDocumentTitle from '@/hooks/useDocumentTitle';
 import RestaurantInfo from '@/components/RestaurantInfo';
 import OrderSummary from '@/components/OrderSummary';
 import MenuItems from '@/components/MenuItems';
+import CheckOut from '@/components/CheckOut';
 import banner from '../assets/restaurant1.jpg';
+import useCreateCheckoutSession from '@/hooks/useCreateCheckoutSession';
 
 export type CartItem = {
   _id: string;
@@ -16,12 +20,75 @@ export type CartItem = {
   quantity: number;
 };
 
+const restaurant: Restaurant = {
+  _id: '90709809198sf90akjaz78',
+  user: '897109rj1gs989asf9100',
+  restaurantName: 'new ho king',
+  city: 'toronto',
+  country: 'canada',
+  deliveryPrice: 10,
+  estimatedDeliveryTime: 20,
+  cuisines: ['chinese', 'breakfast', 'organic', 'noodles', 'vegan'],
+  menuItems: [
+    {
+      _id: 'random_id_1',
+      name: 'fried rice',
+      price: 15
+    },
+    {
+      _id: 'random_id_2',
+      name: 'dip sauce',
+      price: 7
+    },
+    {
+      _id: 'random_id_3',
+      name: 'dumplings',
+      price: 6
+    },
+    {
+      _id: 'random_id_4',
+      name: 'chicken stew',
+      price: 12
+    },
+  ],
+  imageUrl: 'randomimageurl',
+  lastUpdated: '2024-05-13',
+}
+
 const RestaurantDetails = () => {
   const { id } = useParams();
 
-  const { isLoading, restaurant } = useGetRestaurant(id);
+  const { isLoading: isRestaurantLoading, } = useGetRestaurant(id);
+  const { createCheckoutSession, isLoading: isCheckoutLoading } = useCreateCheckoutSession();
+  
+  useDocumentTitle(`${restaurant.restaurantName}`);
 
-  const [cartItems, setCartItems] = useState<CartItem[]>([])
+ 
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    const stored_items = sessionStorage.getItem(`cartItems-${id}`);
+    return stored_items? JSON.parse(stored_items) : [];
+  });
+
+  const onCheckOut = async (userData: UserFormData) => {
+    if (!restaurant) return;
+    
+    const checkoutData: CheckoutRequestType = {
+      cartItems: cartItems.map(cartItem => ({
+        menuItemId: cartItem._id,
+        name: cartItem.name,
+        quantity: cartItem.quantity.toString(),
+      })),
+      deliveryDetails: {
+        name: userData.name,
+        city: userData.city,
+        email: userData.email,
+        addressLine1: userData.addressLine1,
+      },
+      restaurantId: restaurant._id,
+    }
+
+    await createCheckoutSession(checkoutData);
+  }
 
   const addToCart = (menu_item: MenuItem) => {
     setCartItems((prev) => {
@@ -52,13 +119,18 @@ const RestaurantDetails = () => {
         ]
       }
 
+      sessionStorage.setItem(
+        `cartItems-${id}`, 
+        JSON.stringify(updatedCartItems)
+      );
+
       return updatedCartItems;
     });
   }
 
   const decreaseCart = (menu_item: CartItem) => {
     setCartItems((prev) => {
-      const updatedCartItems = prev.map(cartitem => 
+      const cartItems = prev.map(cartitem => 
         cartitem._id === menu_item._id 
         ? cartitem.quantity > 1 
           ? { 
@@ -69,18 +141,29 @@ const RestaurantDetails = () => {
         : cartitem
       )
 
-      return updatedCartItems;
+      sessionStorage.setItem(
+        `cartItems-${id}`, 
+        JSON.stringify(cartItems)
+      );
+
+      return cartItems;
     })
   }
 
   const removeFromCart = (cart_item: CartItem) => {
     setCartItems((prev) => {
-      const updated_cart = prev.filter((item) => item._id !== cart_item._id);
-      return updated_cart;
+      const updatedCart = prev.filter((item) => item._id !== cart_item._id);
+
+      sessionStorage.setItem(
+        `cartItems-${id}`, 
+        JSON.stringify(updatedCart)
+      );
+
+      return updatedCart;
     });
   }
 
-  if (isLoading) return <p className='pt-14 min-h-[500px]'>loading...</p>
+  if (isRestaurantLoading) return <p className='pt-14 min-h-[500px]'>loading...</p>
 
   return (
     <div className='pt-14'>
@@ -112,6 +195,13 @@ const RestaurantDetails = () => {
               decreaseCart={decreaseCart}
               removeFromCart={removeFromCart}
             />
+            <CardFooter className='grid place-items-center'>
+              <CheckOut 
+                disabled={cartItems.length === 0} 
+                onCheckout={onCheckOut}
+                isLoading={isCheckoutLoading}
+              />
+            </CardFooter>
           </Card>
         </div>
       </div>

@@ -9,7 +9,7 @@ const useCreateCheckoutSession = () => {
 
   async function createCheckoutSessionRequest(checkoutData: CheckoutRequestType) {
     const token = await getAccessTokenSilently();
-    await axios_instance.post(
+    const response = await axios_instance.post(
       '/api/order/create-checkout-session', 
       JSON.stringify(checkoutData), 
       {
@@ -19,11 +19,16 @@ const useCreateCheckoutSession = () => {
         },
       },
     );
+
+    return response.data;
   }
 
-  const { mutate: createCheckoutSession, isLoading, error } = useMutation(createCheckoutSessionRequest);
+  const { mutate: createCheckoutSession, isLoading, error, reset, } = useMutation(createCheckoutSessionRequest);
 
-  if (error) { toast.error(error.toString()); }
+  if (error) { 
+    toast.error(error.toString()); 
+    reset();
+  }
 
   return { createCheckoutSession, isLoading, }
 }
