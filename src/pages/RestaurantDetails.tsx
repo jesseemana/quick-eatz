@@ -4,6 +4,8 @@ import { CheckoutRequestType, MenuItem, Restaurant } from '@/types';
 import { Card, CardFooter } from '@/components/ui/card';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { UserFormData } from '@/schemas/user-profile';
+import { Separator } from '@/components/ui/separator';
+import { Dot } from 'lucide-react';
 import useGetRestaurant from '@/hooks/useGetRestaurants';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import RestaurantInfo from '@/components/RestaurantInfo';
@@ -28,7 +30,7 @@ const restaurant: Restaurant = {
   country: 'canada',
   deliveryPrice: 10,
   estimatedDeliveryTime: 20,
-  cuisines: ['chinese', 'breakfast', 'organic', 'noodles', 'vegan'],
+  cuisines: ['chinese', 'fastfood', 'organic', 'noodles', 'vegan'],
   menuItems: [
     {
       _id: 'random_id_1',
@@ -140,7 +142,7 @@ const RestaurantDetails = () => {
             } 
           : cartitem
         : cartitem
-      )
+      );
 
       sessionStorage.setItem(
         `cartItems-${id}`, 
@@ -148,7 +150,7 @@ const RestaurantDetails = () => {
       );
 
       return cartItems;
-    })
+    });
   }
 
   const removeFromCart = (cart_item: CartItem) => {
@@ -168,16 +170,53 @@ const RestaurantDetails = () => {
 
   return (
     <div className='pt-14'>
-      <AspectRatio ratio={16/5}>
-        <img 
-          src={banner} 
-          alt='restaurant banner' 
-          className='rounded-md object-cover h-full w-full'
-        />
-      </AspectRatio>
-      <div className='grid md:grid-cols-[4fr_2fr] gap-5 md:px-32'>
+      <div className='space-y-4'>
+        <AspectRatio ratio={16/5}>
+          <img 
+            src={banner} 
+            alt='restaurant banner' 
+            className='rounded-3xl object-cover h-full w-full'
+          />
+        </AspectRatio>
+        <div className='space-y-2 capitalize'>
+          <p className='md:text-4xl font-bold text-xl'>{restaurant.restaurantName}</p>
+          <p className='md:text-lg font-semibold'>
+            {restaurant.city}, {restaurant.country}
+          </p>
+          <div className='flex gap-8 flex-col md:flex-row'>
+            <p className='flex'>
+              {restaurant.cuisines.map((cuisine, index) => (
+                <span key={cuisine} className='flex'>
+                  <span className='text-gray-600 text-[16px]'>{cuisine}</span>
+                  {index < restaurant.cuisines.length - 1 && <Dot />}
+                </span>
+              ))}
+            </p>
+            <div className='border py-2 px-4 rounded-md ml-2 flex w-full justify-center md:justify-end'>
+              <div className='flex gap-4 md:items-end'>
+                <div className='flex flex-col items-center'>
+                  <span className='font font-semibold'>delivery time</span>
+                  <span className='text-gray-800 font-semibold'>
+                    Mon - Sat: 
+                    <span className='font-normal ml-1'>09:00AM - 10:00PM</span>
+                  </span>
+                </div>
+                <Separator orientation='vertical' />
+                <div className='flex flex-col items-center'>
+                  <span className='font-semibold text-sm'>delivery price</span>
+                  <span className='text-gray-600 font-semibold'>${restaurant.deliveryPrice}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Separator className='w-[400px] mt-4 md:mt-0' />
+      <div className='grid md:grid-cols-[4fr_2fr] gap-5 md:px-32 mt-8'>
         <div className='flex flex-col gap-4'>
-          <RestaurantInfo restaurant={restaurant} />
+          {/* <RestaurantInfo 
+            restaurant={restaurant} 
+          /> */}
           <h1 className='text-2xl font-bold tracking-tight capitalize'>menu</h1>
           {restaurant.menuItems.map(item => (
             <MenuItems 
