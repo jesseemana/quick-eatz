@@ -1,19 +1,17 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
-import { CheckoutRequestType, MenuItem, Restaurant } from '@/types';
-import { Card, CardFooter } from '@/components/ui/card';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { UserFormData } from '@/schemas/user-profile';
 import { Separator } from '@/components/ui/separator';
-import { Dot } from 'lucide-react';
+import { Card, CardFooter } from '@/components/ui/card';
+import { CheckoutRequestType, MenuItem, Restaurant } from '@/types';
+import useCreateCheckoutSession from '@/hooks/useCreateCheckoutSession';
 import useGetRestaurant from '@/hooks/useGetRestaurants';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import RestaurantInfo from '@/components/RestaurantInfo';
 import OrderSummary from '@/components/OrderSummary';
 import MenuItems from '@/components/MenuItems';
 import CheckOut from '@/components/CheckOut';
-import banner from '../assets/restaurant1.jpg';
-import useCreateCheckoutSession from '@/hooks/useCreateCheckoutSession';
+import Banner from '@/components/Banner';
 
 export type CartItem = {
   _id: string;
@@ -28,32 +26,50 @@ const restaurant: Restaurant = {
   restaurantName: 'new ho king',
   city: 'toronto',
   country: 'canada',
-  deliveryPrice: 10,
+  delivery: true,
+  deliveryPrice: 20,
+  deliveryTime: '09:00AM - 10:00PM',
   estimatedDeliveryTime: 20,
-  cuisines: ['chinese', 'fastfood', 'organic', 'noodles', 'vegan'],
+  cuisines: ['chinese', 'fastfood', 'noodles', 'vegan', 'american'],
   menuItems: [
     {
       _id: 'random_id_1',
-      name: 'fried rice',
+      name: 'kendrick lamar special',
+      ingridients: 'Fried rice, dip sauce, blammy.',
       price: 15
     },
     {
       _id: 'random_id_2',
-      name: 'dip sauce',
+      name: 'hot wings',
+      ingridients: 'Fried chicken, chilli sauce, chips, pepsi or coke.',
       price: 7
     },
     {
       _id: 'random_id_3',
-      name: 'dumplings',
+      name: 'magherita pizza',
+      ingridients: 'Tomato, mozarella, basil & olive oil.',
       price: 6
     },
     {
       _id: 'random_id_4',
-      name: 'chicken stew',
+      name: 'calamari fritti',
+      ingridients: 'Deep fried calamari, smoked paprika, olives & preserved lemon.',
+      price: 12
+    },
+    {
+      _id: 'random_id_5',
+      name: 'bacon & avo & feta pizza',
+      ingridients: 'Tomato, mozarella, bacon, avocadp & feta.',
+      price: 6
+    },
+    {
+      _id: 'random_id_6',
+      name: 'melanzane parmigiana',
+      ingridients: 'Aurbegine, mozarella, napolitana & basil aioli.',
       price: 12
     },
   ],
-  imageUrl: 'randomimageurl',
+  imageUrl: '',
   lastUpdated: '2024-05-13',
 }
 
@@ -64,27 +80,26 @@ const RestaurantDetails = () => {
   const { createCheckoutSession, isLoading: isCheckoutLoading } = useCreateCheckoutSession();
   
   useDocumentTitle(`${restaurant.restaurantName}`);
-
  
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const stored_items = sessionStorage.getItem(`cartItems-${id}`);
     return stored_items? JSON.parse(stored_items) : [];
   });
 
-  const onCheckOut = async (userData: UserFormData) => {
+  const onCheckOut = async (user_data: UserFormData) => {
     if (!restaurant) return;
     
     const checkoutData: CheckoutRequestType = {
-      cartItems: cartItems.map(cartItem => ({
-        menuItemId: cartItem._id,
-        name: cartItem.name,
-        quantity: cartItem.quantity.toString(),
+      cartItems: cartItems.map(cart_item => ({
+        menuItemId: cart_item._id,
+        name: cart_item.name,
+        quantity: cart_item.quantity.toString(),
       })),
       deliveryDetails: {
-        name: userData.name,
-        city: userData.city,
-        email: userData.email,
-        addressLine1: userData.addressLine1,
+        name: user_data.name,
+        city: user_data.city,
+        email: user_data.email,
+        addressLine1: user_data.addressLine1,
       },
       restaurantId: restaurant._id,
     }
@@ -95,12 +110,11 @@ const RestaurantDetails = () => {
 
   const addToCart = (menu_item: MenuItem) => {
     setCartItems((prev) => {
-      const existing_item = prev.find((cart_item) => cart_item._id === menu_item._id);
+      const existing_item = prev.find(cart_item => cart_item._id === menu_item._id);
 
       let updatedCartItems;
 
-      // increase item quantity if item is already in cart
-      if (existing_item) {
+      if (existing_item) {  
         updatedCartItems = prev.map((cart_item) => 
           cart_item._id === menu_item._id 
           ? { 
@@ -109,8 +123,7 @@ const RestaurantDetails = () => {
             } 
           : cart_item
         );
-      } else {
-        // push the item into the array
+      } else {  
         updatedCartItems = [
           ...prev,
           {
@@ -131,17 +144,17 @@ const RestaurantDetails = () => {
     });
   }
 
-  const decreaseCart = (menu_item: CartItem) => {
+  const decreaseCart = (menu_item: CartItem) => { 
     setCartItems((prev) => {
-      const cartItems = prev.map(cartitem => 
-        cartitem._id === menu_item._id 
-        ? cartitem.quantity > 1 
+      const cartItems = prev.map(cart_item => 
+        cart_item._id === menu_item._id 
+        ? cart_item.quantity > 1 
           ? { 
-              ...cartitem, 
-              quantity: cartitem.quantity - 1 
+              ...cart_item, 
+              quantity: cart_item.quantity - 1 
             } 
-          : cartitem
-        : cartitem
+          : cart_item
+        : cart_item
       );
 
       sessionStorage.setItem(
@@ -153,9 +166,9 @@ const RestaurantDetails = () => {
     });
   }
 
-  const removeFromCart = (cart_item: CartItem) => {
+  const removeFromCart = (cart_item: CartItem) => { 
     setCartItems((prev) => {
-      const updatedCart = prev.filter((item) => item._id !== cart_item._id);
+      const updatedCart = prev.filter(item => item._id !== cart_item._id);
 
       sessionStorage.setItem(
         `cartItems-${id}`, 
@@ -169,65 +182,27 @@ const RestaurantDetails = () => {
   if (isRestaurantLoading) return <p className='pt-14 min-h-[500px]'>loading...</p>
 
   return (
-    <div className='pt-14'>
-      <div className='space-y-4'>
-        <AspectRatio ratio={16/5}>
-          <img 
-            src={banner} 
-            alt='restaurant banner' 
-            className='rounded-3xl object-cover h-full w-full'
-          />
-        </AspectRatio>
-        <div className='space-y-2 capitalize'>
-          <p className='md:text-4xl font-bold text-xl'>{restaurant.restaurantName}</p>
-          <p className='md:text-lg font-semibold'>
-            {restaurant.city}, {restaurant.country}
-          </p>
-          <div className='flex gap-8 flex-col md:flex-row'>
-            <p className='flex'>
-              {restaurant.cuisines.map((cuisine, index) => (
-                <span key={cuisine} className='flex'>
-                  <span className='text-gray-600 text-[16px]'>{cuisine}</span>
-                  {index < restaurant.cuisines.length - 1 && <Dot />}
-                </span>
-              ))}
-            </p>
-            <div className='border py-2 px-4 rounded-md ml-2 flex w-full justify-center md:justify-end'>
-              <div className='flex gap-4 md:items-end'>
-                <div className='flex flex-col items-center'>
-                  <span className='font font-semibold'>delivery time</span>
-                  <span className='text-gray-800 font-semibold'>
-                    Mon - Sat: 
-                    <span className='font-normal ml-1'>09:00AM - 10:00PM</span>
-                  </span>
-                </div>
-                <Separator orientation='vertical' />
-                <div className='flex flex-col items-center'>
-                  <span className='font-semibold text-sm'>delivery price</span>
-                  <span className='text-gray-600 font-semibold'>${restaurant.deliveryPrice}</span>
-                </div>
-              </div>
-            </div>
+    <div className='pt-8'>
+      <div className='space-y-2'>
+        <Banner image={restaurant.imageUrl} />
+        <RestaurantInfo restaurant={restaurant} />
+      </div>
+      <Separator className='md:w-[380px] lg:w-[500px] mt-4 md:mt-0' />
+      <div className='grid md:grid-cols-[4fr_2fr] gap-5 mt-4'>
+        <div className='gap-4'>
+          <h1 className='text-2xl font-semibold tracking-tight capitalize'>menu</h1>
+          <div className='grid md:grid-cols-2 gap-4'>
+            {restaurant.menuItems.map(item => (
+              <MenuItems 
+                key={item._id} 
+                menuItem={item}
+                addToCart={() => addToCart(item)}
+              />
+            ))}
           </div>
         </div>
-      </div>
-      <Separator className='w-[400px] mt-4 md:mt-0' />
-      <div className='grid md:grid-cols-[4fr_2fr] gap-5 md:px-32 mt-8'>
-        <div className='flex flex-col gap-4'>
-          {/* <RestaurantInfo 
-            restaurant={restaurant} 
-          /> */}
-          <h1 className='text-2xl font-bold tracking-tight capitalize'>menu</h1>
-          {restaurant.menuItems.map(item => (
-            <MenuItems 
-              key={item._id} 
-              menuItem={item}
-              addToCart={() => addToCart(item)}
-            />
-          ))}
-        </div>
         <div>
-          <Card className='mt-8 rounded-sm'>
+          <Card className='mt-8 rounded-lg'>
             <OrderSummary 
               addToCart={addToCart}
               cartItems={cartItems} 
@@ -237,8 +212,9 @@ const RestaurantDetails = () => {
             />
             <CardFooter className='grid place-items-center'>
               <CheckOut 
-                disabled={cartItems.length === 0} 
                 onCheckout={onCheckOut}
+                checkout={cartItems.length > 0}
+                disabled={cartItems.length === 0} 
                 isLoading={isCheckoutLoading}
               />
             </CardFooter>
