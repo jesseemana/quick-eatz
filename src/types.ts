@@ -43,16 +43,19 @@ export type FormProps = {
 export type MenuItem = {
   _id: string;
   name: string;
+  ingridients?: string;
   price: number;
 };
 
 export type Restaurant = {
   _id: string;
   user: string;
+  delivery: boolean,
   restaurantName: string;
   city: string;
   country: string;
   deliveryPrice: number;
+  deliveryTime: string;
   estimatedDeliveryTime: number;
   cuisines: string[];
   menuItems: MenuItem[];

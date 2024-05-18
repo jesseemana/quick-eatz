@@ -9,6 +9,7 @@ import {
 } from './pages';
 import Layout from './layouts/Layout';
 import ProtectedRoute from './auth/ProtectedRoute';
+import OrderStatus from './pages/OrderStatus';
 import RestaurantDetails from './pages/RestaurantDetails';
 
 
@@ -45,6 +46,15 @@ const App = () => {
             <RestaurantDetails />
           </Layout> 
         } 
+      />
+
+      <Route 
+        path='/order-status' 
+        element={
+          <Layout styles='bg-black'>
+            <OrderStatus />
+          </Layout>
+        }
       />
 
       <Route 
