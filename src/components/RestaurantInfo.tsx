@@ -9,12 +9,12 @@ const RestaurantInfo = ({ restaurant }: { restaurant: Restaurant }) => {
       <p className='md:text-lg text-gray-700 capitalize'>
         {restaurant.city}, {restaurant.country}
       </p>
-      <div className='flex gap-10 flex-col md:flex-row'>
-        <div className='flex flex-col'>
+      <div className='flex gap-2 flex-col md:flex-row'>
+        <div className='flex flex-col w-[500px]'>
           <p className='flex flex-wrap capitalize'>
             {restaurant.cuisines.map((cuisine, index) => (
               <span key={cuisine} className='flex items-center'>
-                <span className='text-gray-700 text-[12px] md:text-[16px]'>{cuisine}</span>
+                <span className='text-gray-700 text-[12px] md:text-[14px]'>{cuisine}</span>
                 {index < restaurant.cuisines.length - 1 && <Dot />}
               </span>
             ))}
