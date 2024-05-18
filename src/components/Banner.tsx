@@ -1,4 +1,4 @@
-import banner from '../assets/restaurant1.jpg';
+import banner from '../assets/banner.jpg';
 import { AspectRatio } from './ui/aspect-ratio';
 
 const Banner = ({ image }: { image: string }) => {
