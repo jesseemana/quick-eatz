@@ -1,37 +1,65 @@
-import { Dot } from 'lucide-react';
 import { Restaurant } from '@/types';
 import { Separator } from './ui/separator';
-
+import { Dot, ShoppingBasket, } from 'lucide-react';
 
 const RestaurantInfo = ({ restaurant }: { restaurant: Restaurant }) => {
   return (
-    <div className='space-y-2 capitalize'>
-      <p className='md:text-4xl font-bold text-xl'>{restaurant.restaurantName}</p>
-      <p className='md:text-lg font-semibold'>
+    <div className='space-y-2'>
+      <p className='md:text-4xl font-bold text-xl capitalize'>{restaurant.restaurantName}</p>
+      <p className='md:text-lg text-gray-700 capitalize'>
         {restaurant.city}, {restaurant.country}
       </p>
-      <div className='flex gap-8 flex-col md:flex-row'>
-        <p className='flex'>
-          {restaurant.cuisines.map((cuisine, index) => (
-            <span key={cuisine} className='flex'>
-              <span className='text-gray-600 text-[16px]'>{cuisine}</span>
-              {index < restaurant.cuisines.length - 1 && <Dot />}
-            </span>
-          ))}
-        </p>
-        <div className='border py-2 px-4 rounded-md ml-2 flex w-full justify-center md:justify-end'>
-          <div className='flex gap-4 md:items-end'>
-            <div className='flex flex-col items-center'>
-              <span className='font font-semibold'>delivery time</span>
-              <span className='text-gray-800 font-semibold'>
-                Mon - Sat: 
-                <span className='font-normal ml-1'>09:00AM - 10:00PM</span>
+      <div className='flex gap-10 flex-col md:flex-row'>
+        <div className='flex flex-col'>
+          <p className='flex flex-wrap capitalize'>
+            {restaurant.cuisines.map((cuisine, index) => (
+              <span key={cuisine} className='flex items-center'>
+                <span className='text-gray-700 text-[12px] md:text-[16px]'>{cuisine}</span>
+                {index < restaurant.cuisines.length - 1 && <Dot />}
               </span>
+            ))}
+          </p>
+          <div className='flex gap-1 py-2 items-center'>
+            <ShoppingBasket 
+              size={20} 
+              className='text-gray-900' 
+            /> 
+            <p className='text-gray-700'>
+              {restaurant.delivery 
+                ? <span className='flex md:gap-1 text-[14px] md:text-[16px] items-center'>Delivery
+                    <span className='ml-1 flex md:hidden'>:</span>
+                    <span className='hidden md:flex'>available</span> 
+                    <span className='flex ml-2 items-center text-[12px] md:hidden'>
+                      <span>{restaurant.deliveryTime}</span> 
+                      <Dot />
+                      <span>${restaurant.deliveryPrice}</span>
+                    </span>
+                  </span> 
+                : 'Delivery unavailable'
+              }
+            </p>
+          </div>
+        </div>
+        <div className='border py-2 px-4 rounded-md ml-2 md:flex flex-1 w-full justify-center md:justify-end hidden'>
+          <div className='flex gap-2 md:items-end'>
+            <div className='flex flex-col items-center'>
+              <p className='font-semibold capitalize'>delivery time</p>
+              <p className='text-gray-700 text-[14px]'>
+                {restaurant.delivery 
+                  ? restaurant.deliveryTime 
+                  : 'unavailable'
+                }
+              </p>
             </div>
             <Separator orientation='vertical' />
             <div className='flex flex-col items-center'>
-              <span className='font-semibold text-sm'>delivery price</span>
-              <span className='text-gray-600 font-semibold'>${restaurant.deliveryPrice}</span>
+              <p className='font-semibold capitalize'>pricing & fees</p>
+              <p className='text-gray-700 text-[14px]'>
+                {restaurant.delivery 
+                  ? `$${restaurant.deliveryPrice}` 
+                  : 'unavailable'
+                }
+              </p>
             </div>
           </div>
         </div>
