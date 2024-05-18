@@ -10,7 +10,7 @@ const RestaurantInfo = ({ restaurant }: { restaurant: Restaurant }) => {
         {restaurant.city}, {restaurant.country}
       </p>
       <div className='flex gap-2 flex-col md:flex-row'>
-        <div className='flex flex-col w-[500px]'>
+        <div className='flex flex-col md:w-[380px] lg:w-[500px]'>
           <p className='flex flex-wrap capitalize'>
             {restaurant.cuisines.map((cuisine, index) => (
               <span key={cuisine} className='flex items-center'>
