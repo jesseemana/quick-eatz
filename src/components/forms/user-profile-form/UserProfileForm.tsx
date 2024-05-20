@@ -17,7 +17,14 @@ import LoadingButton from '@/components/LoadingButton';
 import { UserFormData, userSchema } from '@/schemas/user-profile';
 
 
-const UserProfileForm = ({ onSave, isLoading, currentUser, checkOut, title='user profile', buttonText='submit' }: FormProps) => {
+const UserProfileForm = ({ 
+  onSave, 
+  isLoading, 
+  currentUser, 
+  checkOut, 
+  buttonText='submit', 
+  title='user profile', 
+}: FormProps) => {
   const form = useForm<UserFormData>({
     resolver: zodResolver(userSchema),
     defaultValues: currentUser,
@@ -45,7 +52,11 @@ const UserProfileForm = ({ onSave, isLoading, currentUser, checkOut, title='user
             <FormItem>
               <FormLabel>Email:</FormLabel>
               <FormControl>
-                <Input {...field} disabled className='bg-white' />
+                <Input 
+                  {...field} 
+                  disabled 
+                  className='bg-white' 
+                />
               </FormControl>
             </FormItem>
           )} 
@@ -111,7 +122,9 @@ const UserProfileForm = ({ onSave, isLoading, currentUser, checkOut, title='user
           />
         </div>
 
-        {isLoading ? <LoadingButton /> : (
+        {isLoading 
+        ? <LoadingButton /> 
+        : (
           <Button 
             type='submit' 
             variant='default'

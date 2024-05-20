@@ -27,7 +27,7 @@ const restaurant: Restaurant = {
   city: 'toronto',
   country: 'canada',
   delivery: true,
-  deliveryPrice: 20,
+  deliveryPrice: 2000,
   deliveryTime: '09:00AM - 10:00PM',
   estimatedDeliveryTime: 20,
   cuisines: ['chinese', 'fastfood', 'noodles', 'vegan', 'american'],
@@ -36,37 +36,37 @@ const restaurant: Restaurant = {
       _id: 'random_id_1',
       name: 'kendrick lamar special',
       ingridients: 'Fried rice, dip sauce, blammy.',
-      price: 15
+      price: 1500
     },
     {
       _id: 'random_id_2',
       name: 'hot wings',
       ingridients: 'Fried chicken, chilli sauce, chips, pepsi or coke.',
-      price: 7
+      price: 200
     },
     {
       _id: 'random_id_3',
       name: 'magherita pizza',
       ingridients: 'Tomato, mozarella, basil & olive oil.',
-      price: 6
+      price: 1000
     },
     {
       _id: 'random_id_4',
       name: 'calamari fritti',
       ingridients: 'Deep fried calamari, smoked paprika, olives & preserved lemon.',
-      price: 12
+      price: 1200
     },
     {
       _id: 'random_id_5',
       name: 'bacon & avo & feta pizza',
       ingridients: 'Tomato, mozarella, bacon, avocadp & feta.',
-      price: 6
+      price: 1200
     },
     {
       _id: 'random_id_6',
       name: 'melanzane parmigiana',
       ingridients: 'Aurbegine, mozarella, napolitana & basil aioli.',
-      price: 12
+      price: 1480
     },
   ],
   imageUrl: '',

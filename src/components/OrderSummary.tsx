@@ -20,7 +20,7 @@ const OrderSummary = ({ restaurant, cartItems, addToCart, decreaseCart, removeFr
     
     const totalWithDelivery = total + restaurant.deliveryPrice;
 
-    return totalWithDelivery;
+    return (totalWithDelivery / 100).toFixed(2);
   };
 
   return (
@@ -28,14 +28,18 @@ const OrderSummary = ({ restaurant, cartItems, addToCart, decreaseCart, removeFr
       <CardHeader>
         <CardTitle className='flex justify-between tracking-tight lg:text-2xl capitalize'>
           <p>total order 
-            <span className='font font-normal'>(plus delivery)</span>
+            {cartItems.length > 0 &&
+              <span className='font font-normal md:text-[16px] ml-1'>
+                (plus delivery)
+              </span>
+            }
           </p>
-          <p>${getTotalCost()}</p>
+          <p>${cartItems.length > 0 && getTotalCost()}</p>
         </CardTitle>
         <Separator />
         <CardContent className='p-0'>
           {cartItems.length === 0 
-          ? <p className='text text-center py-4'>choose meal(s) to order</p> 
+          ? <p className='text text-center py-4 text-gray-500'>choose meal(s) to order</p> 
           : <>
             {cartItems.map((item) => (
               <div 
@@ -64,7 +68,7 @@ const OrderSummary = ({ restaurant, cartItems, addToCart, decreaseCart, removeFr
                   />
                 </div>
                 <div className='flex gap-2 flex-row-revers'>
-                  ${(item.price * item.quantity)}
+                  ${((item.price * item.quantity) / 100).toFixed(2)}
                   <Trash 
                     color='red'
                     size={20}

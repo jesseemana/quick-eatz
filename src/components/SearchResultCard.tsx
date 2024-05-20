@@ -1,7 +1,7 @@
 import { Restaurant } from '@/types';
 import { Link } from 'react-router-dom';
 import { AspectRatio } from './ui/aspect-ratio';
-import { Dot } from 'lucide-react';
+import { Dot, Clock, Banknote, } from 'lucide-react';
 
 
 const SearchResultCard = ({ restaurant }: { restaurant: Restaurant }) => {
@@ -33,7 +33,7 @@ const SearchResultCard = ({ restaurant }: { restaurant: Restaurant }) => {
           <div className='flex gap-2 flex-col'>
             <div className='flex items-center gap-1 text-green-600'>
               <Clock className='text-green-600' />
-              {restaurant.estimatedDeliveryTime} mins
+              {restaurant.estimatedDeliveryTime} mins.
             </div>
             <div className='flex items-center gap-1'>
               <Banknote />

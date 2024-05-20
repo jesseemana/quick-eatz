@@ -10,7 +10,7 @@ const useCreateCheckoutSession = () => {
   async function createCheckoutSessionRequest(checkoutData: CheckoutRequestType): Promise<{ url: string }> {
     const token = await getAccessTokenSilently();
     const response = await axios_instance.post(
-      '/api/order/create-checkout-session', 
+      '/api/order/checkout/create-checkout-session', 
       JSON.stringify(checkoutData), 
       {
         headers: {

@@ -32,7 +32,7 @@ const RestaurantInfo = ({ restaurant }: { restaurant: Restaurant }) => {
                     <span className='flex ml-2 items-center text-[12px] md:hidden'>
                       <span>{restaurant.deliveryTime}</span> 
                       <Dot />
-                      <span>${restaurant.deliveryPrice}</span>
+                      <span>${(restaurant.deliveryPrice / 100).toFixed(2)}</span>
                     </span>
                   </span> 
                 : 'Delivery unavailable'
@@ -43,7 +43,7 @@ const RestaurantInfo = ({ restaurant }: { restaurant: Restaurant }) => {
         <div className='border py-2 px-4 rounded-md ml-2 md:flex flex-1 w-full justify-center md:justify-end hidden'>
           <div className='flex gap-2 md:items-end'>
             <div className='flex flex-col items-center'>
-              <p className='font-semibold capitalize'>delivery time</p>
+              <p className='font-semibold capitalize'>deliveries</p>
               <p className='text-gray-700 text-[14px]'>
                 {restaurant.delivery 
                   ? restaurant.deliveryTime 
@@ -56,7 +56,7 @@ const RestaurantInfo = ({ restaurant }: { restaurant: Restaurant }) => {
               <p className='font-semibold capitalize'>pricing & fees</p>
               <p className='text-gray-700 text-[14px]'>
                 {restaurant.delivery 
-                  ? `$${restaurant.deliveryPrice}` 
+                  ? `$${(restaurant.deliveryPrice / 100).toFixed(2)}` 
                   : 'unavailable'
                 }
               </p>
