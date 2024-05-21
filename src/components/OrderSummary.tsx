@@ -47,7 +47,7 @@ const OrderSummary = ({ restaurant, cartItems, addToCart, decreaseCart, removeFr
                 className='grid grid-cols-[4fr_2fr_2fr] place-items-center gap-4'
               >
                 <p className='py-2'>
-                  <span className='capitalize flex items-start'>{item.name}</span>
+                  <span className='capitalize flex items-start text-gray-700'>{item.name}</span>
                 </p>
                 <div className='flex'>
                   <Minus 
