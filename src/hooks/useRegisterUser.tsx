@@ -9,7 +9,7 @@ const useRegisterUser = () => {
   async function registerUserRequest({ auth0Id, email }: { auth0Id: string, email: string }) {
     const token = getAccessTokenSilently();
     const response = await axios_instance.post(
-      import.meta.env.VITE_MY_USER_ENDPOINT, 
+      '/api/my/user', 
       JSON.stringify({ auth0Id, email }), 
       {
         headers: {

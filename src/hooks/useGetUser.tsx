@@ -9,15 +9,12 @@ const useGetUser = () => {
 
   async function getMyUserRequest(): Promise<User> {
     const token = await getAccessTokenSilently();
-    const response = await axios_instance.get(
-      import.meta.env.VITE_MY_USER_ENDPOINT, 
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const response = await axios_instance.get('/api/my/user', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
     return response.data;
   }
 

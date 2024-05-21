@@ -10,21 +10,18 @@ const useGetMyRestaurant = () => {
 
   async function getMyRestaurant(): Promise<Restaurant> {
     const token = await getAccessTokenSilently();
-    const response = await axios_instance.get(
-      import.meta.env.VITE_MY_RESTAURANT_ENDPOINT, 
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const response = await axios_instance.get('/api/my/restaurant', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
     return response.data;
   }
 
   const { data: restaurant, isLoading, error, } = useQuery('fetchMyRestaurant', getMyRestaurant);
 
-  if (error) { toast.error(error.toString()) }
+  if (error) { toast.error(error.toString()); }
 
   return { isLoading, restaurant, }
 }

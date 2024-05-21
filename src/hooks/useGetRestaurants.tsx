@@ -1,23 +1,21 @@
 import { axios_instance } from '@/api/axios';
 import { Restaurant } from '@/types';
 import { useQuery } from 'react-query';
+import { toast } from 'sonner';
 
 const useGetRestaurant = (restaurant_id?: string)=> {
   async function getRestaurantById(): Promise<Restaurant | undefined> {
-    try {
-      const response = await axios_instance.get(`/api/restaurant/${restaurant_id}`);
-      return response.data;
-    } catch (error: unknown) {
-      // @ts-expect-error might/might not be axios error
-      console.error('Error fetching restaurants:', error.message);
-    }
+    const response = await axios_instance.get(`/api/restaurant/${restaurant_id}`);
+    return response.data;
   }
 
-  const { data: restaurant, isLoading } = useQuery(
+  const { data: restaurant, isLoading, error, } = useQuery(
     'fetchRestaurant', 
     getRestaurantById, 
     { enabled: !!restaurant_id }
   );
+
+  if (error) { toast.error(error.toString()); }
 
   return { restaurant, isLoading, }
 }

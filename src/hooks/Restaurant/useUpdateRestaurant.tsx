@@ -11,7 +11,7 @@ const useUpdateRestaurant = () => {
   async function updateRestaurantRequest(restaurant_data: FormData): Promise<Restaurant> {
     const token = getAccessTokenSilently();
     const response = await axios_instance.put(
-      import.meta.env.VITE_MY_RESTAURANT_ENDPOINT, 
+      '/api/my/restaurant', 
       JSON.stringify(restaurant_data), 
       {
         headers: {
@@ -27,7 +27,7 @@ const useUpdateRestaurant = () => {
 
   if (isSuccess) { toast.success('Restaurant updated!'); }
 
-  if (error) { toast.error('Failed to update restaurant!'); }
+  if (error) { toast.error(error.toString()); }
 
   return { updateRestaurant, isLoading, }
 }

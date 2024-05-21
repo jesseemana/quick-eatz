@@ -11,7 +11,7 @@ const useCreateRestaurant = () => {
   async function createRestaurantRequest(restaurant_data: FormData): Promise<Restaurant> {
     const token = getAccessTokenSilently();
     const response = await axios_instance.post(
-      import.meta.env.VITE_MY_RESTAURANT_ENDPOINT, 
+      '/api/my/restaurant', 
       JSON.stringify(restaurant_data), 
       {
         headers: {
