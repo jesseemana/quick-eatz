@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 import { useState } from 'react';
 import { useParams } from 'react-router';
 import { UserFormData } from '@/schemas/user-profile';
@@ -23,7 +24,7 @@ export type CartItem = {
 const restaurant: Restaurant = {
   _id: '90709809198sf90akjaz78',
   user: '897109rj1gs989asf9100',
-  restaurantName: 'new ho king',
+  restaurantName: 'New Ho King',
   city: 'toronto',
   country: 'canada',
   delivery: true,
@@ -79,7 +80,7 @@ const RestaurantDetails = () => {
   const { isLoading: isRestaurantLoading, } = useGetRestaurant(id);
   const { createCheckoutSession, isLoading: isCheckoutLoading } = useCreateCheckoutSession();
   
-  useDocumentTitle(`${restaurant.restaurantName}`);
+  useDocumentTitle(`Order ${restaurant.restaurantName}`);
  
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const stored_items = sessionStorage.getItem(`cartItems-${id}`);
@@ -108,7 +109,7 @@ const RestaurantDetails = () => {
     window.location.href = data.url;
   }
 
-  const addToCart = (menu_item: MenuItem) => {
+  function addToCart(menu_item: MenuItem) {
     setCartItems((prev) => {
       const existing_item = prev.find(cart_item => cart_item._id === menu_item._id);
 
@@ -144,7 +145,7 @@ const RestaurantDetails = () => {
     });
   }
 
-  const decreaseCart = (menu_item: CartItem) => { 
+  function decreaseCart(menu_item: CartItem) { 
     setCartItems((prev) => {
       const cartItems = prev.map(cart_item => 
         cart_item._id === menu_item._id 
@@ -166,7 +167,7 @@ const RestaurantDetails = () => {
     });
   }
 
-  const removeFromCart = (cart_item: CartItem) => { 
+  function removeFromCart(cart_item: CartItem) { 
     setCartItems((prev) => {
       const updatedCart = prev.filter(item => item._id !== cart_item._id);
 
@@ -174,6 +175,8 @@ const RestaurantDetails = () => {
         `cartItems-${id}`, 
         JSON.stringify(updatedCart)
       );
+
+      toast.success('Item removed');
 
       return updatedCart;
     });
@@ -202,7 +205,7 @@ const RestaurantDetails = () => {
           </div>
         </div>
         <div>
-          <Card className='mt-8 rounded-lg'>
+          <Card className='mt-8 rounded-lg shadow-sm'>
             <OrderSummary 
               addToCart={addToCart}
               cartItems={cartItems} 
