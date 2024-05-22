@@ -10,12 +10,16 @@ const useUpdateUser = () => {
 
   async function updateUserRequest(user_data: UserData) {
     const token = await getAccessTokenSilently();
-    const response = await axios_instance.put('/api/my/user', JSON.stringify(user_data), {
-      headers: {
-        Authorization: `Bearer ${token}`, 
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await axios_instance.put(
+      '/api/my/user', 
+      JSON.stringify(user_data), 
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, 
+          'Content-Type': 'application/json',
+        },
+      }
+    );
     return response.data;
   }
 

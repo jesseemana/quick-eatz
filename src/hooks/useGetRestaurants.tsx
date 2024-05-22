@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { toast } from 'sonner';
 
 const useGetRestaurant = (restaurant_id?: string)=> {
-  async function getRestaurantById(): Promise<Restaurant | undefined> {
+  async function getRestaurantById(): Promise<Restaurant> {
     const response = await axios_instance.get(`/api/restaurant/${restaurant_id}`);
     return response.data;
   }
