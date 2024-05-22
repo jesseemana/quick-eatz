@@ -79,7 +79,7 @@ const SearchResults = () => {
           </Button>
         )}
       </header>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }
