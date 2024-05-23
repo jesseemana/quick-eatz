@@ -3,13 +3,13 @@ import {
   HomePage, 
   NotFound, 
   Profile, 
-  SearchPage, 
   Restaurant, 
   AuthCallBackPage, 
 } from './pages';
 import Layout from './layouts/Layout';
 import ProtectedRoute from './auth/ProtectedRoute';
 import OrderStatus from './pages/OrderStatus';
+import SearchResults from './pages/SearchResults';
 import RestaurantDetails from './pages/RestaurantDetails';
 
 
@@ -32,11 +32,7 @@ const App = () => {
 
       <Route 
         path='/search/:city' 
-        element={
-          <Layout styles='bg-black'>
-            <SearchPage />
-          </Layout> 
-        } 
+        element={<SearchResults />} 
       />
 
       <Route 
