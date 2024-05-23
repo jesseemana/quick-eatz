@@ -64,13 +64,13 @@ const SearchPage = () => {
     }));
   }
 
-  const resetSearch = () => {
-    setSearchState(prev => ({
-      ...prev,
-      searchQuery: '',
-      page: 1,
-    }));
-  }
+  // const resetSearch = () => {
+  //   setSearchState(prev => ({
+  //     ...prev,
+  //     searchQuery: '',
+  //     page: 1,
+  //   }));
+  // }
 
   return (
     <div className='min-h-[700px] md:pt-16 flex flex-col lg:grid lg:grid-cols-[250px_1fr] gap-5'>
@@ -85,7 +85,6 @@ const SearchPage = () => {
 
       <div id='main-content' className='p-1 '>
         <SearchBar 
-          onReset={resetSearch} 
           onSubmit={setSearchQuery}
           searchQuery={searchState.searchQuery}
         />
