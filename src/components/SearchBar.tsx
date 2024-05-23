@@ -1,17 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
-import { Search } from 'lucide-react';
+import { Search,  } from 'lucide-react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Form, FormControl, FormField, FormItem } from './ui/form';
 import { SearchForm, searchSchema } from '@/schemas/search';
 
-
-const SearchBar = ({ onSubmit, onReset, searchQuery }: {
+// TODO: add callback and logic for resetting form in props and component, use form.reset()
+const SearchBar = ({ onSubmit, searchQuery, styles }: {
   onSubmit: (formData: SearchForm) => void;
-  onReset: () => void;
   searchQuery: string;
+  styles?: string;
 }) => {
   const form = useForm<SearchForm>({
     resolver: zodResolver(searchSchema),
@@ -24,55 +24,35 @@ const SearchBar = ({ onSubmit, onReset, searchQuery }: {
     form.reset({ searchQuery });
   }, [form, searchQuery]);
 
-  const handleReset = () => {
-    form.reset({ searchQuery: '', });
-    if (onReset) { onReset(); }
-  };
-
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className={`flex items-center gap-3 justify-between flex-row border border-gray-500 rounded-full p-3 mb-4 ${
-          form.formState.errors.searchQuery && 'border-red-500'
-        }`}
-      >
-        <Search
-          strokeWidth={2.5}
-          size={30}
-          className='ml-1 text-black hidden md:block'
-        />
-        
-        <FormField
+      <form 
+        onSubmit={form.handleSubmit(onSubmit)} 
+        className={`flex items-center rounded-full px-4 lg:w-[800px] bg-gray-100 py-1 ${styles}`}
+      > 
+        <Button 
+          type='submit'
+          className='bg-transparent shadow-none hover:bg-transparent p-0 text-gray-700'
+        >
+          <Search />
+        </Button>
+        <FormField 
           control={form.control}
-          name='searchQuery'
+          name='searchQuery' 
           render={({ field }) => (
-            <FormItem className='flex-1'>
+            <FormItem className='w-full'>
               <FormControl>
-                <Input
+                <Input 
                   {...field}
-                  className='border-none shadow-none text-sm md:text-lg focus-visible:ring-0'
-                  placeholder='search by restaurant name or cuisine'
+                  autoComplete='off'
+                  placeholder='search by cuisine or restaurant'
+                  className='border-none shadow-none focus-visible:ring-0' 
                 />
               </FormControl>
             </FormItem>
           )}
         />
-
-        <Button
-          onClick={handleReset}
-          type='button'
-          variant='outline'
-          className='rounded-full'
-        >
-          clear
-        </Button>
-        <Button 
-          type='submit'
-          className='rounded-full bg-black'
-        >
-          Search
-        </Button>
+        {/* button/icon for resetting form goes here */}
       </form>
     </Form>
   );
