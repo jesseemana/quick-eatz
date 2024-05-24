@@ -23,7 +23,7 @@ const Hero = () => {
       <div className='grid place-items-center md:flex'>
         <HomeSearch 
           onSubmit={handleSearch} 
-          styles='absolute md:top-[30%] lg:left-[3%] top-[20%]' 
+          styles='absolute md:top-[35%] lg:left-[3%] top-[20%]' 
         />
       </div>
     </div>

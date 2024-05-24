@@ -47,7 +47,7 @@ const SearchHeader = ({ city, searchState, handleSearch }: {
               <Menu />
             </SheetTrigger>
             <SheetContent side='left' className='xl:w-1/4'>
-              // TODO: add navigation stuff right here
+              // TODO: add navigation stuff here
             </SheetContent>
           </Sheet>
           <Link 

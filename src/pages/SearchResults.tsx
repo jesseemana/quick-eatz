@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
-import SearchHeader from '@/components/SearchHeader';
-import useDocumentTitle from '@/hooks/useDocumentTitle';
 import { SearchForm } from '@/schemas/search';
+import Footer from '@/components/Footer';
+import SearchHeader from '@/components/SearchHeader';
+import SearchLoading from '@/components/SearchLoading';
+import useDocumentTitle from '@/hooks/useDocumentTitle';
 import useSearchRestaurants from '@/hooks/useSearchRestaurants';
-// import Footer from '@/components/Footer';
 
 
 export type SearchState = {
@@ -37,15 +38,31 @@ const SearchResults = () => {
     }));
   }
 
-  return (
-    <div className='lg:container'>
+  if (isLoading) return (
+    <div className='md:container'>
       <SearchHeader 
         city={city} 
         searchState={searchState} 
         handleSearch={handleSearch}
       />
-      {isLoading && <p>loading...</p>}
-      {/* <Footer /> */}
+      <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>
+        {[...new Array(16)].map((_, index) => <SearchLoading key={index} />) }
+      </div>
+      <Footer />
+    </div>
+  )
+
+  return (
+    <div className='md:container'>
+      <SearchHeader 
+        city={city} 
+        searchState={searchState} 
+        handleSearch={handleSearch}
+      />
+      <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 min-h-[700px] xl:min-h-[400px]'>
+        <p>search results</p>
+      </div>
+      <Footer />
     </div>
   )
 }

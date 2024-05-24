@@ -28,7 +28,7 @@ const SearchBar = ({ onSubmit, searchQuery, styles }: {
     <Form {...form}>
       <form 
         onSubmit={form.handleSubmit(onSubmit)} 
-        className={`flex items-center rounded-full px-4 md:w-[380px] lg:w-[500px] xl:w-[800px] bg-gray-100 py-1 ${styles}`}
+        className={`flex items-center rounded-full px-4 md:w-[300px] lg:w-[500px] xl:w-[800px] bg-gray-100 py-1 ${styles}`}
       > 
         <Button 
           type='submit'
