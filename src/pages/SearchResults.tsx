@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { SearchForm } from '@/schemas/search';
+import { useCity } from '@/context/CityProvider';
+import { useSearchState } from '@/context/SearchQueryProvider';
 import Footer from '@/components/Footer';
 import SearchHeader from '@/components/SearchHeader';
 import SearchLoading from '@/components/SearchLoading';
@@ -11,15 +12,6 @@ import useSearchRestaurants from '@/hooks/useSearchRestaurants';
 import img1 from '@/assets/restaurant1.jpg';
 import img2 from '@/assets/restaurant2.jpg';
 import img3 from '@/assets/restaurant3.jpg';
-import { useCity } from '@/context/CityProvider';
-
-export type SearchState = {
-  searchQuery: string;
-  page: number;
-  selectedCuisines: string[];
-  sortOption: string;
-};
-
 
 const restaurants = [
   {
@@ -64,22 +56,15 @@ const restaurants = [
   },
 ]
 
-
 const SearchResults = () => {
   const { city } = useParams();
-
   const { setCity } = useCity();
 
   setCity(city as string);
 
   useDocumentTitle('Search results');
 
-  const [searchState, setSearchState] = useState<SearchState>({
-    searchQuery: '',
-    page: 1,
-    selectedCuisines: [],
-    sortOption: 'bestMatch'
-  })
+  const { searchState, setSearchState } = useSearchState();
 
   const { results, isLoading } = useSearchRestaurants(searchState, city);
 

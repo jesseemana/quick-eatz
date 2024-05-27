@@ -1,12 +1,12 @@
 import { toast } from 'sonner';
 import { useState } from 'react';
-import { useParams } from 'react-router';
-import { SearchState } from './SearchResults';
+import { useParams, useNavigate } from 'react-router';
 import { SearchForm } from '@/schemas/search';
 import { useCity } from '@/context/CityProvider';
 import { UserFormData } from '@/schemas/user-profile';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardFooter } from '@/components/ui/card';
+import { useSearchState } from '../context/SearchQueryProvider';
 import { CheckoutRequestType, MenuItem, Restaurant } from '@/types';
 import useCreateCheckoutSession from '@/hooks/useCreateCheckoutSession';
 import useGetRestaurant from '@/hooks/useGetRestaurants';
@@ -87,24 +87,18 @@ const restaurant: Restaurant = {
 
 const RestaurantDetails = () => {
   const { id } = useParams();
-
   const { city } = useCity();
-
+  const { searchState, setSearchState } = useSearchState();
   const { isLoading: isRestaurantLoading, } = useGetRestaurant(id);
   const { createCheckoutSession, isLoading: isCheckoutLoading } = useCreateCheckoutSession();
+  
+  const navigate = useNavigate();
   
   useDocumentTitle(`Order ${restaurant.restaurantName}`);
  
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const stored_items = sessionStorage.getItem(`cartItems-${id}`);
-    return stored_items? JSON.parse(stored_items) : [];
-  });
-
-  const [searchState, setSearchState] = useState<SearchState>({
-    searchQuery: '',
-    page: 1,
-    selectedCuisines: [],
-    sortOption: 'bestMatch'
+    return stored_items ? JSON.parse(stored_items) : [];
   });
 
   const onCheckOut = async (user_data: UserFormData) => {
@@ -129,7 +123,7 @@ const RestaurantDetails = () => {
     window.location.href = data.url;
   }
 
-  function addToCart(menu_item: MenuItem) {
+  const addToCart = (menu_item: MenuItem) => {
     setCartItems((prev) => {
       const existing_item = prev.find(cart_item => cart_item._id === menu_item._id);
 
@@ -165,7 +159,7 @@ const RestaurantDetails = () => {
     });
   }
 
-  function decreaseCart(menu_item: CartItem) { 
+  const decreaseCart = (menu_item: CartItem) => { 
     setCartItems((prev) => {
       const cartItems = prev.map(cart_item => 
         cart_item._id === menu_item._id 
@@ -187,7 +181,7 @@ const RestaurantDetails = () => {
     });
   }
 
-  function removeFromCart(cart_item: CartItem) { 
+  const removeFromCart = (cart_item: CartItem) => { 
     setCartItems((prev) => {
       const updatedCart = prev.filter(item => item._id !== cart_item._id);
 
@@ -202,12 +196,16 @@ const RestaurantDetails = () => {
     });
   }
 
-  function handleSearch(data: SearchForm) {
+  const handleSearch = (data: SearchForm) => {
     setSearchState((prev) => ({
       ...prev,
       searchQuery: data.searchQuery,
       page: 1
     }));
+
+    navigate({
+      pathname: `/search/${city}`,
+    });
   }
 
   return (
