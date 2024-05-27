@@ -30,6 +30,5 @@ export const CityProvider = ({ children }: { children: React.ReactNode }) => {
 // eslint-disable-next-line react-refresh/only-export-components
 export const useCity = () => {
   const context = useContext(CityProviderContext);
-
   return context;
 }

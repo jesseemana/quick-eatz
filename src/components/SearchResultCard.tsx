@@ -9,7 +9,7 @@ const SearchResultCard = ({ restaurant }: { restaurant: Restaurant }) => {
     <Link to={`/restaurant/${restaurant._id}`}>
       <AspectRatio ratio={16/7}>
         <img 
-          src={restaurant.image}
+          src={restaurant.imageUrl}
           alt='restaurant banner' 
           loading='lazy'
           className='rounded-xl h-full w-full object-cover'
@@ -19,9 +19,9 @@ const SearchResultCard = ({ restaurant }: { restaurant: Restaurant }) => {
         </div>
       </AspectRatio>
       <p className='font-semibold text-xl capitalize text-gray-800'>
-        {restaurant.name}
+        {restaurant.restaurantName}
       </p>
-      <span className='flex items-center text-gray-900 md:text-[10px] text-sm lg:text-sm capitalize'>
+      <span className='flex items-center text-gray-900 md:text-[10px] text-sm lg:text-sm capitalize tracking-tight'>
         <span>MWK{(restaurant.deliveryPrice/100)} delivery fee</span>
         <Dot className='px-0 text-gray-700' /> 
         <span className='flex items-center space-x-1 text-gray-500'>

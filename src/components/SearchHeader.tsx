@@ -5,23 +5,23 @@ import { Link, useNavigate } from 'react-router-dom';
 import { SearchState } from '@/pages/SearchPage';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SearchForm, searchSchema } from '@/schemas/search';
-import { Form, FormField, FormItem, FormControl, } from './ui/form';
-import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
 import { Sheet, SheetContent, SheetTrigger, } from './ui/sheet';
+import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
+import { Form, FormField, FormItem, FormControl, } from './ui/form';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import SearchBar from './SearchBar';
 import useSearchRestaurants from '@/hooks/useSearchRestaurants';
 
 
-const SearchHeader = ({ city, searchState, handleSearch }: { 
+const SearchHeader = ({ city, searchState, handleSearch, }: { 
   city?: string, 
   searchState: SearchState, 
   handleSearch: (data: SearchForm) => void, 
 }) => {  
   const navigate = useNavigate();
 
-  // useSearchRestaurants(searchState, city);
+  useSearchRestaurants(searchState, city);
 
   const { isAuthenticated, loginWithRedirect } = useAuth0();
 

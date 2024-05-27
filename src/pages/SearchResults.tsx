@@ -16,7 +16,7 @@ import img3 from '@/assets/restaurant3.jpg';
 const restaurants = [
   {
     _id: '638919710ba78a',
-    image: img1,
+    imageUrl: img1,
     name: 'Test Restaurant 1',
     deliveryPrice: 100000,
     deliveryMin: 10,
@@ -24,32 +24,32 @@ const restaurants = [
   },
   {
     _id: '638919710ba78b',
-    image: img2,
-    name: 'Test Restaurant 2',
+    imageUrl: img2,
+    restaurantName: 'Test Restaurant 2',
     deliveryPrice: 350000,
     deliveryMin: 10,
     deliveryMax: 20
   },
   {
     _id: '638919710ba78c',
-    image: img3,
-    name: 'Test Restaurant 3',
+    imageUrl: img3,
+    restaurantName: 'Test Restaurant 3',
     deliveryPrice: 280000,
     deliveryMin: 20,
     deliveryMax: 40
   },
   {
     _id: '638919710ba78d',
-    image: img1,
-    name: 'Test Restaurant 4',
+    imageUrl: img1,
+    restaurantName: 'Test Restaurant 4',
     deliveryPrice: 170000,
     deliveryMin: 10,
     deliveryMax: 30
   },
   {
     _id: '638919710ba78e',
-    image: img2,
-    name: 'Test Restaurant 5',
+    imageUrl: img2,
+    restaurantName: 'Test Restaurant 5',
     deliveryPrice: 90000,
     deliveryMin: 10,
     deliveryMax: 30
