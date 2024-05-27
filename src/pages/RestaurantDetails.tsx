@@ -13,6 +13,7 @@ import OrderSummary from '@/components/OrderSummary';
 import MenuItems from '@/components/MenuItems';
 import CheckOut from '@/components/CheckOut';
 import Banner from '@/components/Banner';
+import RestaurantLoader from '@/components/RestaurantLoader';
 
 export type CartItem = {
   _id: string;
@@ -182,7 +183,13 @@ const RestaurantDetails = () => {
     });
   }
 
-  if (isRestaurantLoading) return <p className='pt-14 min-h-[500px]'>loading...</p>
+  const isLoading = true;
+  // if (isRestaurantLoading) return <RestaurantLoader />
+  if (isLoading) return (
+    <div className='pt-8'>
+      <RestaurantLoader />
+    </div>
+  );
 
   return (
     <div className='pt-8'>
