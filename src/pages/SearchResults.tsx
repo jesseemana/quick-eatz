@@ -11,6 +11,7 @@ import useSearchRestaurants from '@/hooks/useSearchRestaurants';
 import img1 from '@/assets/restaurant1.jpg';
 import img2 from '@/assets/restaurant2.jpg';
 import img3 from '@/assets/restaurant3.jpg';
+import { useCity } from '@/context/CityProvider';
 
 export type SearchState = {
   searchQuery: string;
@@ -67,6 +68,10 @@ const restaurants = [
 const SearchResults = () => {
   const { city } = useParams();
 
+  const { setCity } = useCity();
+
+  setCity(city as string);
+
   useDocumentTitle('Search results');
 
   const [searchState, setSearchState] = useState<SearchState>({
@@ -76,8 +81,7 @@ const SearchResults = () => {
     sortOption: 'bestMatch'
   })
 
-  // const { results, isLoading } = useSearchRestaurants(searchState, city);
-  const isLoading = false;
+  const { results, isLoading } = useSearchRestaurants(searchState, city);
 
   function handleSearch(data: SearchForm) {
     setSearchState((prev) => ({

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router';
 import { SearchState } from './SearchResults';
 import { SearchForm } from '@/schemas/search';
+import { useCity } from '@/context/CityProvider';
 import { UserFormData } from '@/schemas/user-profile';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardFooter } from '@/components/ui/card';
@@ -17,6 +18,7 @@ import MenuItems from '@/components/MenuItems';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import RestaurantInfo from '@/components/RestaurantInfo';
 import RestaurantLoader from '@/components/RestaurantLoader';
+import Footer from '@/components/Footer';
 
 
 export type CartItem = {
@@ -85,6 +87,8 @@ const restaurant: Restaurant = {
 
 const RestaurantDetails = () => {
   const { id } = useParams();
+
+  const { city } = useCity();
 
   const { isLoading: isRestaurantLoading, } = useGetRestaurant(id);
   const { createCheckoutSession, isLoading: isCheckoutLoading } = useCreateCheckoutSession();
@@ -209,11 +213,12 @@ const RestaurantDetails = () => {
   return (
     <>
       <SearchHeader 
+        city={city}
         searchState={searchState} 
         handleSearch={handleSearch} 
       />
       {isRestaurantLoading ? <RestaurantLoader /> : (
-      <div className='container'>
+      <div className='container mb-8'>
         <div className='space-y-2'>
           <Banner image={restaurant.imageUrl} />
           <RestaurantInfo restaurant={restaurant} />
@@ -253,6 +258,7 @@ const RestaurantDetails = () => {
           </div>
         </div>
       </div>)}
+      <Footer />
     </>
   );
 }
