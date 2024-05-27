@@ -1,4 +1,4 @@
-import { axios_instance } from '@/api/axios';
+import axios from '@/api/axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useMutation } from 'react-query';
 import { toast } from 'sonner';
@@ -8,7 +8,7 @@ const useRegisterUser = () => {
 
   async function registerUserRequest({ auth0Id, email }: { auth0Id: string, email: string }) {
     const token = getAccessTokenSilently();
-    const response = await axios_instance.post(
+    const response = await axios.post(
       '/api/my/user', 
       JSON.stringify({ auth0Id, email }), 
       {

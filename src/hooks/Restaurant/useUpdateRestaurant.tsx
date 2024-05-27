@@ -1,4 +1,4 @@
-import { axios_instance } from '@/api/axios';
+import axios from '@/api/axios';
 import { Restaurant } from '@/types';
 import { useAuth0 } from '@auth0/auth0-react'
 import { useMutation } from 'react-query';
@@ -10,7 +10,7 @@ const useUpdateRestaurant = () => {
 
   async function updateRestaurantRequest(restaurant_data: FormData): Promise<Restaurant> {
     const token = getAccessTokenSilently();
-    const response = await axios_instance.put(
+    const response = await axios.put(
       '/api/my/restaurant', 
       JSON.stringify(restaurant_data), 
       {

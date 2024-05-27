@@ -1,4 +1,4 @@
-import { axios_instance } from '@/api/axios';
+import axios from '@/api/axios';
 import { Order } from '@/types';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useQuery } from 'react-query';
@@ -9,7 +9,7 @@ const useGetMyOrders = () => {
 
   async function getMyOrdersRequest(): Promise<Order[]> {
     const token = await getAccessTokenSilently();
-    const response = await axios_instance.get('/api/order', {
+    const response = await axios.get('/api/order', {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',

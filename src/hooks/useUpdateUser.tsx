@@ -1,8 +1,8 @@
-import { axios_instance } from '@/api/axios';
+import axios from '@/api/axios';
+import { toast } from 'sonner';
+import { UserData } from '@/types';
 import { useMutation } from 'react-query';
 import { useAuth0 } from '@auth0/auth0-react';
-import { UserData } from '@/types';
-import { toast } from 'sonner';
 
 
 const useUpdateUser = () => {
@@ -10,7 +10,7 @@ const useUpdateUser = () => {
 
   async function updateUserRequest(user_data: UserData) {
     const token = await getAccessTokenSilently();
-    const response = await axios_instance.put(
+    const response = await axios.put(
       '/api/my/user', 
       JSON.stringify(user_data), 
       {
