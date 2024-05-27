@@ -1,19 +1,23 @@
 import { toast } from 'sonner';
 import { useState } from 'react';
 import { useParams } from 'react-router';
+import { SearchState } from './SearchResults';
+import { SearchForm } from '@/schemas/search';
 import { UserFormData } from '@/schemas/user-profile';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardFooter } from '@/components/ui/card';
 import { CheckoutRequestType, MenuItem, Restaurant } from '@/types';
 import useCreateCheckoutSession from '@/hooks/useCreateCheckoutSession';
 import useGetRestaurant from '@/hooks/useGetRestaurants';
+import OrderSummary from '@/components/OrderSummary';
+import SearchHeader from '@/components/SearchHeader';
+import Banner from '@/components/Banner';
+import CheckOut from '@/components/CheckOut';
+import MenuItems from '@/components/MenuItems';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import RestaurantInfo from '@/components/RestaurantInfo';
-import OrderSummary from '@/components/OrderSummary';
-import MenuItems from '@/components/MenuItems';
-import CheckOut from '@/components/CheckOut';
-import Banner from '@/components/Banner';
 import RestaurantLoader from '@/components/RestaurantLoader';
+
 
 export type CartItem = {
   _id: string;
@@ -22,6 +26,7 @@ export type CartItem = {
   quantity: number;
 };
 
+
 const restaurant: Restaurant = {
   _id: '90709809198sf90akjaz78',
   user: '897109rj1gs989asf9100',
@@ -29,8 +34,10 @@ const restaurant: Restaurant = {
   city: 'toronto',
   country: 'canada',
   delivery: true,
-  deliveryPrice: 2000,
-  deliveryTime: '09:00AM - 10:00PM',
+  deliveryPrice: 200000,
+  deliveryMin: 10,
+  deliveryMax: 30,
+  deliveryTime: 30,
   estimatedDeliveryTime: 20,
   cuisines: ['chinese', 'fastfood', 'noodles', 'vegan', 'american'],
   menuItems: [
@@ -75,6 +82,7 @@ const restaurant: Restaurant = {
   lastUpdated: '2024-05-13',
 }
 
+
 const RestaurantDetails = () => {
   const { id } = useParams();
 
@@ -86,6 +94,13 @@ const RestaurantDetails = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const stored_items = sessionStorage.getItem(`cartItems-${id}`);
     return stored_items? JSON.parse(stored_items) : [];
+  });
+
+  const [searchState, setSearchState] = useState<SearchState>({
+    searchQuery: '',
+    page: 1,
+    selectedCuisines: [],
+    sortOption: 'bestMatch'
   });
 
   const onCheckOut = async (user_data: UserFormData) => {
@@ -183,55 +198,62 @@ const RestaurantDetails = () => {
     });
   }
 
-  const isLoading = true;
-  // if (isRestaurantLoading) return <RestaurantLoader />
-  if (isLoading) return (
-    <div className='pt-8'>
-      <RestaurantLoader />
-    </div>
-  );
+  function handleSearch(data: SearchForm) {
+    setSearchState((prev) => ({
+      ...prev,
+      searchQuery: data.searchQuery,
+      page: 1
+    }));
+  }
 
   return (
-    <div className='pt-8'>
-      <div className='space-y-2'>
-        <Banner image={restaurant.imageUrl} />
-        <RestaurantInfo restaurant={restaurant} />
-      </div>
-      <Separator className='md:w-[380px] lg:w-[500px] mt-4 md:mt-0' />
-      <div className='grid md:grid-cols-[4fr_2fr] gap-5 mt-4'>
-        <div className='gap-4'>
-          <h1 className='text-2xl font-semibold tracking-tight capitalize'>menu</h1>
-          <div className='grid md:grid-cols-2 gap-4'>
-            {restaurant.menuItems.map(item => (
-              <MenuItems 
-                key={item._id} 
-                menuItem={item}
-                addToCart={() => addToCart(item)}
+    <>
+      <SearchHeader 
+        searchState={searchState} 
+        handleSearch={handleSearch} 
+      />
+      {isRestaurantLoading ? <RestaurantLoader /> : (
+      <div className='container'>
+        <div className='space-y-2'>
+          <Banner image={restaurant.imageUrl} />
+          <RestaurantInfo restaurant={restaurant} />
+        </div>
+        <Separator className='md:w-[380px] lg:w-[500px] mt-4 md:mt-0' />
+        <div className='grid md:grid-cols-[4fr_2fr] gap-5 mt-4'>
+          <div className='gap-4'>
+            <h1 className='text-2xl font-semibold tracking-tight capitalize'>menu</h1>
+            <div className='grid md:grid-cols-2 gap-4'>
+              {restaurant.menuItems.map(item => (
+                <MenuItems 
+                  key={item._id} 
+                  menuItem={item}
+                  addToCart={() => addToCart(item)}
+                />
+              ))}
+            </div>
+          </div>
+          <div>
+            <Card className='mt-8 rounded-lg shadow-sm'>
+              <OrderSummary 
+                addToCart={addToCart}
+                cartItems={cartItems} 
+                restaurant={restaurant} 
+                decreaseCart={decreaseCart}
+                removeFromCart={removeFromCart}
               />
-            ))}
+              <CardFooter className='grid place-items-center'>
+                <CheckOut 
+                  onCheckout={onCheckOut}
+                  checkout={cartItems.length > 0}
+                  disabled={cartItems.length === 0} 
+                  isLoading={isCheckoutLoading}
+                />
+              </CardFooter>
+            </Card>
           </div>
         </div>
-        <div>
-          <Card className='mt-8 rounded-lg shadow-sm'>
-            <OrderSummary 
-              addToCart={addToCart}
-              cartItems={cartItems} 
-              restaurant={restaurant} 
-              decreaseCart={decreaseCart}
-              removeFromCart={removeFromCart}
-            />
-            <CardFooter className='grid place-items-center'>
-              <CheckOut 
-                onCheckout={onCheckOut}
-                checkout={cartItems.length > 0}
-                disabled={cartItems.length === 0} 
-                isLoading={isCheckoutLoading}
-              />
-            </CardFooter>
-          </Card>
-        </div>
-      </div>
-    </div>
+      </div>)}
+    </>
   );
 }
 

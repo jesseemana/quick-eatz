@@ -37,11 +37,7 @@ const App = () => {
 
       <Route 
         path='/restaurant/:id' 
-        element={
-          <Layout styles='bg-black'>
-            <RestaurantDetails />
-          </Layout> 
-        } 
+        element={<RestaurantDetails />} 
       />
 
       <Route 

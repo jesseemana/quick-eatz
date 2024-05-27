@@ -21,7 +21,7 @@ const SearchHeader = ({ city, searchState, handleSearch }: {
 }) => {  
   const navigate = useNavigate();
 
-  useSearchRestaurants(searchState, city);
+  // useSearchRestaurants(searchState, city);
 
   const { isAuthenticated, loginWithRedirect } = useAuth0();
 

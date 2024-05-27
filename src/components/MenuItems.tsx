@@ -17,7 +17,7 @@ const MenuItems = ({ menuItem, addToCart, }: {
       <>
         <h1 className='capitalize font-semibold'>{menuItem.name}</h1>
         <p className='text-gray-700'>
-          ${(menuItem.price / 100).toFixed(2)}
+          MWK{(menuItem.price / 100).toFixed(2)}
         </p>
         <p className='text-gray-500'>{menuItem.ingridients}</p>
       </>

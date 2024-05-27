@@ -1,12 +1,16 @@
 import { useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import { SearchForm } from '@/schemas/search';
 import Footer from '@/components/Footer';
 import SearchHeader from '@/components/SearchHeader';
 import SearchLoading from '@/components/SearchLoading';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
+import SearchResultCard from '@/components/SearchResultCard';
 import useSearchRestaurants from '@/hooks/useSearchRestaurants';
 
+import img1 from '@/assets/restaurant1.jpg';
+import img2 from '@/assets/restaurant2.jpg';
+import img3 from '@/assets/restaurant3.jpg';
 
 export type SearchState = {
   searchQuery: string;
@@ -14,6 +18,50 @@ export type SearchState = {
   selectedCuisines: string[];
   sortOption: string;
 };
+
+
+const restaurants = [
+  {
+    _id: '638919710ba78a',
+    image: img1,
+    name: 'Test Restaurant 1',
+    deliveryPrice: 100000,
+    deliveryMin: 10,
+    deliveryMax: 30
+  },
+  {
+    _id: '638919710ba78b',
+    image: img2,
+    name: 'Test Restaurant 2',
+    deliveryPrice: 350000,
+    deliveryMin: 10,
+    deliveryMax: 20
+  },
+  {
+    _id: '638919710ba78c',
+    image: img3,
+    name: 'Test Restaurant 3',
+    deliveryPrice: 280000,
+    deliveryMin: 20,
+    deliveryMax: 40
+  },
+  {
+    _id: '638919710ba78d',
+    image: img1,
+    name: 'Test Restaurant 4',
+    deliveryPrice: 170000,
+    deliveryMin: 10,
+    deliveryMax: 30
+  },
+  {
+    _id: '638919710ba78e',
+    image: img2,
+    name: 'Test Restaurant 5',
+    deliveryPrice: 90000,
+    deliveryMin: 10,
+    deliveryMax: 30
+  },
+]
 
 
 const SearchResults = () => {
@@ -28,7 +76,8 @@ const SearchResults = () => {
     sortOption: 'bestMatch'
   })
 
-  const { results, isLoading } = useSearchRestaurants(searchState, city);
+  // const { results, isLoading } = useSearchRestaurants(searchState, city);
+  const isLoading = false;
 
   function handleSearch(data: SearchForm) {
     setSearchState((prev) => ({
@@ -38,20 +87,6 @@ const SearchResults = () => {
     }));
   }
 
-  if (isLoading) return (
-    <div className='md:container'>
-      <SearchHeader 
-        city={city} 
-        searchState={searchState} 
-        handleSearch={handleSearch}
-      />
-      <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>
-        {[...new Array(16)].map((_, index) => <SearchLoading key={index} />) }
-      </div>
-      <Footer />
-    </div>
-  )
-
   return (
     <div className='md:container'>
       <SearchHeader 
@@ -59,9 +94,21 @@ const SearchResults = () => {
         searchState={searchState} 
         handleSearch={handleSearch}
       />
-      <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 min-h-[700px] xl:min-h-[400px]'>
-        <p>search results</p>
-      </div>
+      {isLoading ? <SearchLoading /> : (
+        <div className='md:container'>
+          <p className='px-4 text-gray-800 font-semibold lg:text-3xl text-xl'>
+            Results for <span className='capitalize'>{city}</span>
+          </p>
+          <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-8 p-4 lg:min-h-[700px] xl:min-h-[400px]'>
+            {restaurants.map((restaurant) => (
+              <SearchResultCard 
+                key={restaurant._id} 
+                restaurant={restaurant} 
+              />
+            ))}
+          </div>
+        </div>
+      )}
       <Footer />
     </div>
   )

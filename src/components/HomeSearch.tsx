@@ -11,23 +11,20 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SearchForm, searchSchema } from '@/schemas/search';
 
 
-const HomeSearch = ({ onSubmit, styles }: { 
-  onSubmit: (searchValues: SearchForm) => void 
-  styles?: string 
-}) => {
+const HomeSearch = ({ onSubmit }: { onSubmit: (searchValues: SearchForm) => void }) => {
   const form = useForm<SearchForm>({
     resolver: zodResolver(searchSchema),
   });
   
   return (
-    <div className={`flex flex-col gap-8 p-4 ${styles}`}>
+    <div className='flex flex-col gap-8 p-4'>
       <p className='md:text-5xl text-3xl font-bold text-black lg:text-white md:tracking-wide'>
         Order delivery near you
       </p>
       <Form {...form}>
         <form 
           onSubmit={form.handleSubmit(onSubmit)} 
-          className={`flex items-center gap-3 flex-col md:flex-row`}
+          className='flex items-center gap-2 flex-col md:flex-row'
         >
           <FormField 
             control={form.control} 

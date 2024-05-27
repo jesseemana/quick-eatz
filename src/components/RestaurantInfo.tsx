@@ -30,9 +30,9 @@ const RestaurantInfo = ({ restaurant }: { restaurant: Restaurant }) => {
                     <span className='ml-1 flex md:hidden'>:</span>
                     <span className='hidden md:flex'>available</span> 
                     <span className='flex ml-2 items-center text-[12px] md:hidden'>
-                      <span>{restaurant.deliveryTime}</span> 
+                      <span>{restaurant.deliveryMin}-{restaurant.deliveryMax}</span> 
                       <Dot />
-                      <span>${(restaurant.deliveryPrice / 100).toFixed(2)}</span>
+                      <span>MWK{(restaurant.deliveryPrice / 100).toFixed(2)}</span>
                     </span>
                   </span> 
                 : 'Delivery unavailable'
@@ -42,21 +42,21 @@ const RestaurantInfo = ({ restaurant }: { restaurant: Restaurant }) => {
         </div>
         <div className='border py-2 px-4 rounded-md ml-2 md:flex flex-1 w-full justify-center md:justify-end hidden'>
           <div className='flex gap-2 md:items-end'>
-            <div className='flex flex-col items-center'>
-              <p className='font-semibold capitalize'>deliveries</p>
-              <p className='text-gray-700 text-[14px]'>
+            <div className='flex items-center flex-col-reverse tracking-tighter'>
+              <p className='font-normal capitalize text-gray-500 text-[14px]'>delivery time</p>
+              <p className='text-black font-semibold text-[14px]'>
                 {restaurant.delivery 
-                  ? restaurant.deliveryTime 
+                  ? <span>{restaurant.deliveryMin}-{restaurant.deliveryMax}min</span>
                   : 'unavailable'
                 }
               </p>
             </div>
             <Separator orientation='vertical' />
-            <div className='flex flex-col items-center'>
-              <p className='font-semibold capitalize'>pricing & fees</p>
-              <p className='text-gray-700 text-[14px]'>
+            <div className='flex flex-col-reverse items-center tracking-tighter'>
+              <p className='font-normal capitalize text-gray-500 text-[14px]'>pricing & fees</p>
+              <p className='text-gray-900 font-semibold text-[14px]'>
                 {restaurant.delivery 
-                  ? `$${(restaurant.deliveryPrice / 100).toFixed(2)}` 
+                  ? `MWK${(restaurant.deliveryPrice / 100).toFixed(2)} Delivery fee` 
                   : 'unavailable'
                 }
               </p>

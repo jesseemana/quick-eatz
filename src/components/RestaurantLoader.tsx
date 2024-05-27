@@ -4,7 +4,7 @@ import { AspectRatio } from './ui/aspect-ratio';
 
 const RestaurantLoader = () => {
   return (
-    <div className='space-y-4'>
+    <div className='space-y-4 container mt-2'>
       <AspectRatio ratio={16/4}>
         <Skeleton className='h-full bg-gray-100 rounded-none' />
       </AspectRatio>

@@ -55,7 +55,9 @@ export type Restaurant = {
   city: string;
   country: string;
   deliveryPrice: number;
-  deliveryTime: string;
+  deliveryTime: number;
+  deliveryMin: number;
+  deliveryMax: number;
   estimatedDeliveryTime: number;
   cuisines: string[];
   menuItems: MenuItem[];

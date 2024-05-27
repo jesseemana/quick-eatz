@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
-import hero from '../assets/hero.jpg';
-import HomeSearch from './HomeSearch';
 import { SearchForm } from '@/schemas/search';
+import HomeSearch from './HomeSearch';
+import hero from '../assets/hero.jpg';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -20,11 +20,8 @@ const Hero = () => {
         className='w-full object-cover min-h-screen lg:max-h-[600px]'
         loading='lazy'
       />
-      <div className='grid place-items-center md:flex'>
-        <HomeSearch 
-          onSubmit={handleSearch} 
-          styles='absolute md:top-[35%] lg:left-[3%] top-[20%]' 
-        />
+      <div className='absolute md:top-[35%] top-[25%] left-5 flex items-center justify-center'>
+        <HomeSearch onSubmit={handleSearch} />
       </div>
     </div>
   )
