@@ -7,34 +7,28 @@ import {
   PaginationNext, 
 } from './ui/pagination';
 
-
-const PaginationSelector = ({ page, pages, onPageChange, }: {
-  page: number;
-  pages: number;
-  onPageChange: (page: number) => void;
+const PaginationSelector = ({ page, pages, onPageChange }: {
+  page: number, 
+  pages: number, 
+  onPageChange: (page: number) => void, 
 }) => {
   const pageNumbers = [];
-  for (let i = 0; i <= pages; i++) {
-    pageNumbers.push(i);
-  }
+  for (let i = 1; i <= pages; i++) { pageNumbers.push(i) }
 
   return (
-    <Pagination>
+    <Pagination className='py-4'>
       <PaginationContent>
-        {/* {page !== 1 && ( */}
-          <PaginationItem>
-            <PaginationPrevious
-              href='#'
-              onClick={() => onPageChange(page - 1)}
-              aria-disabled={page !== 1}
-            />
-          </PaginationItem>
-        {/* )}  */}
+        <PaginationItem>
+          <PaginationPrevious 
+            onClick={() => onPageChange(page - 1)}
+            className={`${page === 1 ? 'cursor-not-allowed hover:bg-inherit' : 'cursor-pointer'}`}
+          />
+        </PaginationItem>
 
         {pageNumbers.map((number) => (
-          <PaginationItem>
+          <PaginationItem key={number}>
             <PaginationLink 
-              href='#'
+              className='cursor cursor-pointer'
               onClick={() => onPageChange(number)}
               isActive={page === number}
             >
@@ -42,19 +36,16 @@ const PaginationSelector = ({ page, pages, onPageChange, }: {
             </PaginationLink>
           </PaginationItem>
         ))}
-
-        {/* {page !== pageNumbers.length && ( */}
-          <PaginationItem>
-            <PaginationNext 
-              href='#' 
-              onClick={() => onPageChange(page + 1)} 
-              aria-disabled={page !== pageNumbers.length}
-            />
-          </PaginationItem>
-        {/* )}  */}
+        
+        <PaginationItem>
+          <PaginationNext 
+            onClick={() => onPageChange(page + 1)} 
+            className={`${page === pageNumbers.length ? 'cursor-not-allowed hover:bg-inherit' : 'cursor-pointer'}`}
+          />
+        </PaginationItem>
       </PaginationContent>
     </Pagination>
-  )
+  );
 }
 
 export default PaginationSelector;
