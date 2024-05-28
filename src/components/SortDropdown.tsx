@@ -4,24 +4,24 @@ import {
   DropdownMenuItem, 
   DropdownMenuTrigger, 
 } from './ui/dropdown-menu';
-import { sort_options } from '@/constants/constants';
+import { sortOptions } from '@/constants/constants';
 
 
 const SortDropdown = ({ onChange, sortOption, }: { 
   onChange: (value: string) => void, 
   sortOption: string, 
 }) => {
-  const sort_label = sort_options.find(option => option.value === sortOption)?.label || sort_options[0].label
+  const label = sortOptions.find(option => option.value === sortOption)?.label || sortOptions[0].label
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className='cursor-pointer flex items-start'>
         <span className='w-auto shadow bg-gray-50 p-2 text-gray-700 rounded-sm font-normal hover:bg-gray-50 hover:border-gray-50 hover:shadow-md'>
-          Sort: {sort_label}
+          Sort: {label}
         </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='mr-40 md:mr-12'>
-        {sort_options.map(option => (
+        {sortOptions.map(option => (
           <DropdownMenuItem 
             key={option.value} 
             className='cursor-pointer' 

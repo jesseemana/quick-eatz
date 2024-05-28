@@ -1,17 +1,18 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
-import { Search,  } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { cn } from '@/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Search } from 'lucide-react';
+import { Form, FormControl, FormField, FormItem } from './ui/form';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import { Form, FormControl, FormField, FormItem } from './ui/form';
 import { SearchForm, searchSchema } from '@/schemas/search';
 
 // TODO: add callback and logic for resetting form in props and component, use form.reset()
-const SearchBar = ({ onSubmit, searchQuery, styles }: {
-  onSubmit: (formData: SearchForm) => void;
-  searchQuery: string;
-  styles?: string;
+const SearchBar = ({ onSubmit, searchQuery, className }: { 
+  onSubmit: (formData: SearchForm) => void 
+  searchQuery: string 
+  className?: string 
 }) => {
   const form = useForm<SearchForm>({
     resolver: zodResolver(searchSchema),
@@ -28,7 +29,7 @@ const SearchBar = ({ onSubmit, searchQuery, styles }: {
     <Form {...form}>
       <form 
         onSubmit={form.handleSubmit(onSubmit)} 
-        className={`flex items-center rounded-full px-4 md:w-[300px] lg:w-[500px] xl:w-[800px] bg-gray-100 py-1 ${styles}`}
+        className={cn('flex items-center rounded-full px-4 md:w-[300px] lg:w-[500px] xl:w-[800px] bg-gray-100 py-1', className)}
       > 
         <Button 
           type='submit'

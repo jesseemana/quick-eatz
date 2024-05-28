@@ -1,11 +1,11 @@
 import { Restaurant } from '@/types';
-import { CartItem } from '@/pages/RestaurantDetails';
 import { Trash, Plus, Minus, } from 'lucide-react';
 import { CardContent, CardHeader, CardTitle } from './ui/card';
 import { Separator } from './ui/separator';
 import { Badge } from './ui/badge';
+import { CartItem } from '@/context/CartProvider';
 
-const OrderSummary = ({ restaurant, cartItems, addToCart, decreaseCart, removeFromCart, }: {
+const OrderSummary = ({ restaurant, cartItems, addToCart, decreaseCart, removeFromCart }: {
   restaurant: Restaurant;
   cartItems: CartItem[];
   addToCart: (cartItem: CartItem) => void;
@@ -26,7 +26,7 @@ const OrderSummary = ({ restaurant, cartItems, addToCart, decreaseCart, removeFr
   return (
     <>
       <CardHeader>
-        <CardTitle className='flex justify-between tracking-tight lg:text-2xl capitalize'>
+        <CardTitle className='flex justify-between tracking-tight lg:text-xl capitalize'>
           <p>total order 
             {cartItems.length > 0 &&
               <span className='font font-normal md:text-[16px] ml-1'>
@@ -34,7 +34,7 @@ const OrderSummary = ({ restaurant, cartItems, addToCart, decreaseCart, removeFr
               </span>
             }
           </p>
-          <p>${cartItems.length > 0 && getTotalCost()}</p>
+          <p>MWK{cartItems.length > 0 && getTotalCost()}</p>
         </CardTitle>
         <Separator />
         <CardContent className='p-0'>

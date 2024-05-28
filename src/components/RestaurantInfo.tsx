@@ -6,7 +6,7 @@ const RestaurantInfo = ({ restaurant }: { restaurant: Restaurant }) => {
   return (
     <div className='space-y-2'>
       <p className='md:text-4xl font-bold text-xl capitalize'>{restaurant.restaurantName}</p>
-      <p className='md:text-lg text-gray-700 capitalize'>
+      <p className='md:text-lg text-gray-800 capitalize'>
         {restaurant.city}, {restaurant.country}
       </p>
       <div className='flex gap-2 flex-col md:flex-row'>
@@ -14,7 +14,7 @@ const RestaurantInfo = ({ restaurant }: { restaurant: Restaurant }) => {
           <p className='flex flex-wrap capitalize'>
             {restaurant.cuisines.map((cuisine, index) => (
               <span key={cuisine} className='flex items-center'>
-                <span className='text-gray-700 text-[12px] md:text-[14px]'>{cuisine}</span>
+                <span className='text-gray-700 text-[14px]'>{cuisine}</span>
                 {index < restaurant.cuisines.length - 1 && <Dot />}
               </span>
             ))}
@@ -26,11 +26,11 @@ const RestaurantInfo = ({ restaurant }: { restaurant: Restaurant }) => {
             /> 
             <p className='text-gray-700'>
               {restaurant.delivery 
-                ? <span className='flex md:gap-1 text-[14px] md:text-[16px] items-center'>Delivery
-                    <span className='ml-1 flex md:hidden'>:</span>
-                    <span className='hidden md:flex'>available</span> 
-                    <span className='flex ml-2 items-center text-[12px] md:hidden'>
-                      <span>{restaurant.deliveryMin}-{restaurant.deliveryMax}</span> 
+                ? <span className='flex md:gap-1 text-[14px] md:text-[16px] items-center text-gray-800'>Delivery
+                    <span className='flex md:hidden'>:</span>
+                    <span className='hidden md:flex text-gray-500'>available</span> 
+                    <span className='flex ml-2 items-center text-[14px] md:hidden text-gray-500'>
+                      <span>{restaurant.deliveryMin}-{restaurant.deliveryMax}min</span> 
                       <Dot />
                       <span>MWK{(restaurant.deliveryPrice / 100).toFixed(2)}</span>
                     </span>

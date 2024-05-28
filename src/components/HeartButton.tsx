@@ -6,9 +6,7 @@ import useHandleBookmark from '@/hooks/useHandleBookmark';
 
 const HeartButton = ({ restaurantId }: { restaurantId: string }) => {
   const { pathname } = useLocation();
-
   const { isAuthenticated, loginWithRedirect } = useAuth0();
-
   const { bookmarked } = useCheckFavorite(restaurantId);
   const isBookmarked = !!bookmarked
   const { toggleBookmark } = useHandleBookmark({ restaurantId, isBookmarked });
