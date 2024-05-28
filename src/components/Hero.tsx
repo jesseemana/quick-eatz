@@ -2,14 +2,17 @@ import { useNavigate } from 'react-router';
 import { SearchForm } from '@/schemas/search';
 import HomeSearch from './HomeSearch';
 import hero from '../assets/hero.jpg';
+import { useCity } from '@/context/CityProvider';
 
 const Hero = () => {
   const navigate = useNavigate();
+  const { setCity } = useCity();
 
   const handleSearch = (searchValues: SearchForm) => {
     navigate({
       pathname: `/search/${searchValues.searchQuery}`,
     });
+    setCity(searchValues.searchQuery);
   }
 
   return (
