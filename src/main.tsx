@@ -7,6 +7,8 @@ import { SearchStateProvider } from './context/SearchQueryProvider';
 import { CityProvider } from './context/CityProvider';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { CartProvider } from './context/CartProvider';
+import { RestaurantIdProvider } from './context/RestaurantIdProvider';
 import Auth0ProviderWithNavigate from './auth/Auth0ProviderWithNavigate';
 
 const queryClient = new QueryClient({
@@ -19,21 +21,25 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <CityProvider>
+    <RestaurantIdProvider>
       <SearchStateProvider>
-        <Router>
-          <QueryClientProvider client={queryClient}>
-            <Auth0ProviderWithNavigate>
-              <App />
-              <Toaster 
-                richColors 
-                visibleToasts={1} 
-                position='bottom-right' 
-              />
-            </Auth0ProviderWithNavigate>
-          </QueryClientProvider>
-        </Router>
+        <CartProvider>
+          <CityProvider>
+            <Router>
+              <QueryClientProvider client={queryClient}>
+                <Auth0ProviderWithNavigate>
+                  <App />
+                  <Toaster 
+                    richColors 
+                    visibleToasts={1} 
+                    position='bottom-right' 
+                  />
+                </Auth0ProviderWithNavigate>
+              </QueryClientProvider>
+            </Router>
+          </CityProvider>
+        </CartProvider>
       </SearchStateProvider>
-    </CityProvider>
+    </RestaurantIdProvider>
   </React.StrictMode>
 );
