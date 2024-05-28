@@ -1,17 +1,12 @@
-import { useForm } from 'react-hook-form';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Menu, MapPin, Search } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { SearchState } from '@/pages/SearchPage';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { SearchForm, searchSchema } from '@/schemas/search';
+import { SearchForm } from '@/schemas/search';
 import { Sheet, SheetContent, SheetTrigger, } from './ui/sheet';
-import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
-import { Form, FormField, FormItem, FormControl, } from './ui/form';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
 import SearchBar from './SearchBar';
 import useSearchRestaurants from '@/hooks/useSearchRestaurants';
+import SearchModal from './SearchModal';
 
 
 const SearchHeader = ({ city, searchState, handleSearch, }: { 
@@ -34,12 +29,8 @@ const SearchHeader = ({ city, searchState, handleSearch, }: {
   
   const refresh = () => navigate(0);
 
-  const form = useForm<SearchForm>({
-    resolver: zodResolver(searchSchema),
-  });
-
   return (
-    <header className='p-3 grid space-y-6'>
+    <header className='p-3 grid space-y-4'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center md:space-x-2'>
           <Sheet>
@@ -47,7 +38,7 @@ const SearchHeader = ({ city, searchState, handleSearch, }: {
               <Menu />
             </SheetTrigger>
             <SheetContent side='left' className='xl:w-1/4'>
-              // TODO: add navigation stuff here
+              {/* // TODO: add navigation stuff here */}
             </SheetContent>
           </Sheet>
           <Link 
@@ -58,51 +49,15 @@ const SearchHeader = ({ city, searchState, handleSearch, }: {
           </Link>
         </div>
 
-        <Dialog>
-          <DialogTrigger>
-            <div className='capitalize font-semibold flex items-center gap-1'>
-              <MapPin size={18} />
-              <span className='text-gray-600'>{city}</span>
-            </div>
-          </DialogTrigger>
-          <DialogContent className='max-w-[400px] rounded-2xl'>
-            <p>Change location</p>
-            <Form {...form}>
-              <form 
-                onSubmit={form.handleSubmit(searchCity)} 
-                className='flex items-center rounded-full px-4 bg-gray-100 py-1'
-              > 
-                <Button 
-                  type='submit'
-                  className='bg-transparent shadow-none hover:bg-transparent p-0 text-gray-700'
-                >
-                  <Search />
-                </Button>
-                <FormField 
-                  control={form.control}
-                  name='searchQuery' 
-                  render={({ field }) => (
-                    <FormItem className='w-full'>
-                      <FormControl>
-                        <Input 
-                          {...field}
-                          autoComplete='off'
-                          placeholder='search different location'
-                          className='border-none shadow-none focus-visible:ring-0' 
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-              </form>
-            </Form>
-          </DialogContent>
-        </Dialog>
+        <SearchModal 
+          city={city} 
+          searchCity={searchCity}
+        />
 
         <SearchBar 
-          styles='hidden md:flex'
           onSubmit={handleSearch} 
           searchQuery={searchState.searchQuery}
+          className='hidden md:flex'
         />
 
         {!isAuthenticated && (
@@ -116,9 +71,9 @@ const SearchHeader = ({ city, searchState, handleSearch, }: {
       </div>
 
       <SearchBar 
-        styles='md:hidden'
         onSubmit={handleSearch} 
         searchQuery={searchState.searchQuery}
+        className='md:hidden'
       />
     </header>
   )
