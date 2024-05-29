@@ -1,3 +1,4 @@
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import { 
   DropdownMenu,
   DropdownMenuContent, 
@@ -6,32 +7,38 @@ import {
 } from './ui/dropdown-menu';
 import { sortOptions } from '@/constants/constants';
 
-
-const SortDropdown = ({ onChange, sortOption, }: { 
+const SortDropdown = ({ onChange, isExpanded, onExpand}: { 
   onChange: (value: string) => void, 
-  sortOption: string, 
+  onExpand: () => void, 
+  isExpanded: boolean, 
 }) => {
-  const label = sortOptions.find(option => option.value === sortOption)?.label || sortOptions[0].label
-
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger className='cursor-pointer flex items-start'>
-        <span className='w-auto shadow bg-gray-50 p-2 text-gray-700 rounded-sm font-normal hover:bg-gray-50 hover:border-gray-50 hover:shadow-md'>
-          Sort: {label}
-        </span>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className='mr-40 md:mr-12'>
-        {sortOptions.map(option => (
-          <DropdownMenuItem 
-            key={option.value} 
-            className='cursor-pointer' 
-            onClick={() => onChange(option.value)}
-          >
-            {option.label}
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className='flex gap-2 px-4'>
+      <DropdownMenu>
+        <DropdownMenuTrigger className='rounded-full px-4 py-2 text-[14px] bg-gray-100 font-normal'>
+          <button onClick={onExpand} >
+            {isExpanded 
+            ? <span className='flex'>
+                Delivery <ChevronUp strokeWidth={1} />
+              </span> 
+            : <span className='flex'>
+                Delivery <ChevronDown strokeWidth={1} />
+              </span>}
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className='lg:ml-14 ml-4'>
+          {sortOptions.map((option) => (
+            <DropdownMenuItem 
+              key={option.value} 
+              className='cursor-pointer capitalize' 
+              onClick={() => onChange(option.value)}
+            >
+              sort by {option.label}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   );
 }
 

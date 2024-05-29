@@ -5,7 +5,7 @@ const BestMatch = ({ checked, toggleBestMatch }: {
   toggleBestMatch: (e: React.ChangeEvent<HTMLInputElement>) => void, 
 }) => {
   return (
-    <div>
+    <>
       <input 
         id='bestMatch'
         type='checkbox' 
@@ -24,7 +24,7 @@ const BestMatch = ({ checked, toggleBestMatch }: {
       >
         best match
       </Label>
-    </div>
+    </>
   )
 }
 
