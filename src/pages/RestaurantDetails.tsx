@@ -1,38 +1,29 @@
 import { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router';
-import { SearchForm } from '@/schemas/search';
-import { useCity } from '@/context/CityProvider';
+import { useParams } from 'react-router';
 import { UserFormData } from '@/schemas/user-profile';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardFooter } from '@/components/ui/card';
-import { useSearchState } from '../context/SearchQueryProvider';
 import { CheckoutRequestType } from '@/types';
 import { useRestaurantId } from '@/context/RestaurantIdProvider';
 import { CartItem, useCart } from '@/context/CartProvider';
 import useCreateCheckoutSession from '@/hooks/useCreateCheckoutSession';
 import useGetRestaurant from '@/hooks/useGetRestaurants';
 import OrderSummary from '@/components/OrderSummary';
-import SearchHeader from '@/components/SearchHeader';
 import Banner from '@/components/Banner';
 import CheckOut from '@/components/CheckOut';
 import MenuItems from '@/components/MenuItems';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import RestaurantInfo from '@/components/RestaurantInfo';
 import RestaurantLoader from '@/components/RestaurantLoader';
-import Footer from '@/components/Footer';
 import { restaurant } from '@/constants/constants';
 
 
 const RestaurantDetails = () => {
   const { id } = useParams();
-  const { city } = useCity();
   const { setRestaurantId } = useRestaurantId();
-  const { searchState, setSearchState } = useSearchState();
   const { addToCart, decreaseCart, removeFromCart, } = useCart();
   const { isLoading: isRestaurantLoading, } = useGetRestaurant(id);
   const { isLoading: isCheckoutLoading, createCheckoutSession } = useCreateCheckoutSession();
-
-  const navigate = useNavigate();
   
   useDocumentTitle(`Order ${restaurant.restaurantName}`);
 
@@ -67,27 +58,8 @@ const RestaurantDetails = () => {
     window.location.href = data.url;
   }
 
-  const handleSearch = (data: SearchForm) => {
-    setSearchState((prev) => ({
-      ...prev,
-      searchQuery: data.searchQuery,
-      page: 1
-    }));
-
-    navigate({
-      pathname: `/search/${city}`,
-    });
-  }
-
   return (
     <>
-      <div className='px-4'>
-        <SearchHeader 
-          city={city}
-          searchState={searchState} 
-          handleSearch={handleSearch} 
-        />
-      </div>
       {isRestaurantLoading ? <RestaurantLoader /> : (
         <div className='mb-8 container mt-4'>
           <div className='space-y-2'>
@@ -130,7 +102,6 @@ const RestaurantDetails = () => {
           </div>
         </div>
       )}
-      <Footer />
     </>
   );
 }

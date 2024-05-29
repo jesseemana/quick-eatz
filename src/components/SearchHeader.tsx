@@ -10,7 +10,7 @@ import SearchModal from './SearchModal';
 
 
 const SearchHeader = ({ city, searchState, handleSearch, }: { 
-  city?: string, 
+  city: string, 
   searchState: SearchState, 
   handleSearch: (data: SearchForm) => void, 
 }) => {  
@@ -30,7 +30,7 @@ const SearchHeader = ({ city, searchState, handleSearch, }: {
   const refresh = () => navigate(0);
 
   return (
-    <header className='p-3 grid space-y-4'>
+    <header className='p-3 grid space-y-4 py-4'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center md:space-x-2'>
           <Sheet>

@@ -2,7 +2,7 @@ import { Skeleton } from './ui/skeleton';
 
 const SearchLoading = () => {
   return (
-    <div className='p-4 space-y-4'>
+    <div className='p-2 space-y-4'>
       <Skeleton className='h-8 w-[40%] rounded-none bg-gray-200' />
       <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-6'>
         {[...new Array(16)].map((_, index) => (

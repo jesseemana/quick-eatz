@@ -21,14 +21,14 @@ const PaginationSelector = ({ page, pages, onPageChange }: {
         <PaginationItem>
           <PaginationPrevious 
             onClick={() => onPageChange(page - 1)}
-            className={`${page === 1 ? 'cursor-not-allowed hover:bg-inherit' : 'cursor-pointer'}`}
+            className={`${page === 1 ? 'cursor-not-allowed hover:bg-inherit' : 'cursor-pointer'} border`}
           />
         </PaginationItem>
 
         {pageNumbers.map((number) => (
           <PaginationItem key={number}>
             <PaginationLink 
-              className='cursor cursor-pointer'
+              className={`cursor cursor-pointer`}
               onClick={() => onPageChange(number)}
               isActive={page === number}
             >
@@ -40,7 +40,7 @@ const PaginationSelector = ({ page, pages, onPageChange }: {
         <PaginationItem>
           <PaginationNext 
             onClick={() => onPageChange(page + 1)} 
-            className={`${page === pageNumbers.length ? 'cursor-not-allowed hover:bg-inherit' : 'cursor-pointer'}`}
+            className={`${page === pageNumbers.length ? 'cursor-not-allowed hover:bg-inherit' : 'cursor-pointer'} border`}
           />
         </PaginationItem>
       </PaginationContent>

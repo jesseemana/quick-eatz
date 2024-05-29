@@ -19,7 +19,7 @@ const Restaurant = () => {
   
   return (
     <div className='min-h-screen'>
-      <h1 className='pt-14 mb-4'>View orders and manage your restaurant.</h1>
+      <h1 className='mb-4'>View orders and manage your restaurant.</h1>
       <Tabs defaultValue='orders'>
         <TabsList className='rounded-[4px] text-black bg-transparent'>
           <TabsTrigger 

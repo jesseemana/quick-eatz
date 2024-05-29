@@ -18,11 +18,7 @@ const App = () => {
     <Routes>
       <Route 
         path='/'
-        element={
-          <Layout showHero styles='bg-transparent'>
-            <HomePage />
-          </Layout>
-        }
+        element={<HomePage />}
       />
 
       <Route 
@@ -32,18 +28,26 @@ const App = () => {
 
       <Route 
         path='/search/:city' 
-        element={<SearchResults />} 
+        element={
+          <Layout>
+            <SearchResults />
+          </Layout>
+        } 
       />
 
       <Route 
         path='/restaurant/:id' 
-        element={<RestaurantDetails />} 
+        element={
+          <Layout>
+            <RestaurantDetails />
+          </Layout>
+        } 
       />
 
       <Route 
         path='/order-status' 
         element={
-          <Layout styles='bg-black'>
+          <Layout>
             <OrderStatus />
           </Layout>
         }
@@ -52,22 +56,22 @@ const App = () => {
       <Route 
         path='/manage-restaurant' 
         element={
-          <Layout styles='bg-black'>
+          <Layout>
             <Restaurant />
           </Layout>
         } 
       />
 
-      <Route element={<ProtectedRoute />}>
+      {/* <Route element={<ProtectedRoute />}> */}
         <Route 
           path='/user' 
           element={
-            <Layout styles='bg-black'>
+            <Layout>
               <Profile/>
             </Layout>
           } 
         />
-      </Route>
+      {/* </Route> */}
       <Route path='*' element={<NotFound />} />
     </Routes>
   );

@@ -16,7 +16,7 @@ const BestMatch = ({ checked, toggleBestMatch }: {
       />
       <Label 
         htmlFor='bestMatch'
-        className={`items-center cursor-pointer font-normal capitalize rounded-full px-4 py-2 text-[14px] ${
+        className={`items-center cursor-pointer font-semibold capitalize rounded-full px-4 py-2 text-[14px] ${
           checked 
           ? 'bg-black text-white' 
           : 'border-gray-100 bg-gray-100'

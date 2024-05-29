@@ -11,18 +11,18 @@ const Profile = () => {
 
   if (isGetUserLoading) return (
     <div className='h-[540px]'>
-      <p className='pt-10'>Loading...</p>
+      <p className='px-4'>Loading...</p>
     </div>
   )
 
   if (!currentUser) return (
     <div className='h-[540px]'>
-      <p className='pt-10 text-gray-600'>unable to load user profile!</p>
+      <p className='px-4 text-gray-600'>unable to load user profile!</p>
     </div>
   )
 
   return (
-    <div className='pt-[70px]'>
+    <div className='px-4'>
       <UserProfileForm 
         onSave={updateUser} 
         currentUser={currentUser} 

@@ -28,12 +28,12 @@ const OrderStatusHeader = ({ order }: { order: Order }) => {
     <>
       <h1 className='md:text-3xl text-lg font-light tracking-tighter flex flex-col gap-5 md:flex-row md:justify-between mb-2'>
         <span> Order Status: 
-          <span className='font font-bold text-gray-700 ml-1'>
+          <span className='font font-semibold text-gray-700 ml-1'>
             {getOrderStatusInfo().label}
           </span>
         </span>
         <span> Expected by: 
-          <span className='font font-bold text-gray-700 ml-1'>
+          <span className='font font-semibold text-gray-700 ml-1'>
             {getExpectedDelivery()}
           </span>
         </span>
