@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { SearchForm } from '@/schemas/search';
 import { useCity } from '@/context/CityProvider';
@@ -33,10 +34,14 @@ const RestaurantDetails = () => {
 
   const navigate = useNavigate();
   
-  setRestaurantId(id as string);
-  
   useDocumentTitle(`Order ${restaurant.restaurantName}`);
- 
+
+  useEffect(() => {
+    if (id) {
+      setRestaurantId(id);
+    }
+  }, [id, setRestaurantId]);
+  
   const stored_items = sessionStorage.getItem(`cartItems-${id}`);
   const cartItems: CartItem[] = stored_items ? JSON.parse(stored_items) : [];
 

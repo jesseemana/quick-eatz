@@ -1,79 +1,38 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { SearchForm } from '@/schemas/search';
 import { useCity } from '@/context/CityProvider';
 import { useSearchState } from '@/context/SearchQueryProvider';
-import Footer from '@/components/Footer';
-import SearchHeader from '@/components/SearchHeader';
 import SearchLoading from '@/components/SearchLoading';
-import useDocumentTitle from '@/hooks/useDocumentTitle';
+import SortDropdown from '@/components/SortDropdown';
+import BestMatch from '@/components/BestMatch';
+import PaginationSelector from '@/components/Pagination';
+import SearchHeader from '@/components/SearchHeader';
 import SearchResultCard from '@/components/SearchResultCard';
+import useDocumentTitle from '@/hooks/useDocumentTitle';
 import useSearchRestaurants from '@/hooks/useSearchRestaurants';
+import Footer from '@/components/Footer';
+import { restaurants } from '@/constants/constants';
 
-import img1 from '@/assets/restaurant1.jpg';
-import img2 from '@/assets/restaurant2.jpg';
-import img3 from '@/assets/restaurant3.jpg';
-
-const restaurants = [
-  {
-    _id: '638919710ba78a',
-    imageUrl: img1,
-    name: 'Test Restaurant 1',
-    deliveryPrice: 100000,
-    deliveryMin: 10,
-    deliveryMax: 30
-  },
-  {
-    _id: '638919710ba78b',
-    imageUrl: img2,
-    restaurantName: 'Test Restaurant 2',
-    deliveryPrice: 350000,
-    deliveryMin: 10,
-    deliveryMax: 20
-  },
-  {
-    _id: '638919710ba78c',
-    imageUrl: img3,
-    restaurantName: 'Test Restaurant 3',
-    deliveryPrice: 280000,
-    deliveryMin: 20,
-    deliveryMax: 40
-  },
-  {
-    _id: '638919710ba78d',
-    imageUrl: img1,
-    restaurantName: 'Test Restaurant 4',
-    deliveryPrice: 170000,
-    deliveryMin: 10,
-    deliveryMax: 30
-  },
-  {
-    _id: '638919710ba78e',
-    imageUrl: img2,
-    restaurantName: 'Test Restaurant 5',
-    deliveryPrice: 90000,
-    deliveryMin: 10,
-    deliveryMax: 30
-  },
-]
 
 const SearchResults = () => {
   const { city } = useParams();
   const { setCity } = useCity();
-
-  setCity(city as string);
+  const { searchState, handleSearch, setPage, setSortOption, } = useSearchState();
+  const { results, isLoading } = useSearchRestaurants(searchState, city);
+  const [checked, setChecked] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useDocumentTitle('Search results');
 
-  const { searchState, setSearchState } = useSearchState();
+  useEffect(() => {
+    if (city) { setCity(city) }
+  }, [city, setCity]);
 
-  const { results, isLoading } = useSearchRestaurants(searchState, city);
+  // const isLoading = false
 
-  function handleSearch(data: SearchForm) {
-    setSearchState((prev) => ({
-      ...prev,
-      searchQuery: data.searchQuery,
-      page: 1
-    }));
+  const toggleBestMatch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked((prev) => !prev)
+    setSortOption(e.target.value);
   }
 
   return (
@@ -84,11 +43,22 @@ const SearchResults = () => {
         handleSearch={handleSearch}
       />
       {isLoading ? <SearchLoading /> : (
-        <div className='md:container'>
-          <p className='px-4 text-gray-800 font-semibold lg:text-3xl text-xl'>
+        <div className='space-y-4'>
+          <div className='flex items-center px-4'>
+            <BestMatch 
+              checked={checked} 
+              toggleBestMatch={toggleBestMatch} 
+            />
+            <SortDropdown 
+              isExpanded={isExpanded} 
+              onChange={(value) => setSortOption(value)} 
+              onExpand={() => setIsExpanded((prev) => !prev)} 
+            />
+          </div>
+          <p className='px-4 text-gray-800 font-semibold lg:text-2xl text-xl'>
             Results for <span className='capitalize'>{city}</span>
           </p>
-          <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-8 p-4 lg:min-h-[700px] xl:min-h-[400px]'>
+          <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-8 p-4 lg:min-h-[700px] xl:min-h-[400px]'>
             {restaurants.map((restaurant) => (
               <SearchResultCard 
                 key={restaurant._id} 
@@ -96,11 +66,16 @@ const SearchResults = () => {
               />
             ))}
           </div>
+          <PaginationSelector 
+            page={searchState.page}
+            pages={3} 
+            onPageChange={setPage}
+          />
         </div>
       )}
       <Footer />
     </div>
-  )
+  );
 }
 
 export default SearchResults;
