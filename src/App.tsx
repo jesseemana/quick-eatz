@@ -62,7 +62,7 @@ const App = () => {
         } 
       />
 
-      {/* <Route element={<ProtectedRoute />}> */}
+      <Route element={<ProtectedRoute />}>
         <Route 
           path='/user' 
           element={
@@ -71,7 +71,7 @@ const App = () => {
             </Layout>
           } 
         />
-      {/* </Route> */}
+      </Route>
       <Route path='*' element={<NotFound />} />
     </Routes>
   );

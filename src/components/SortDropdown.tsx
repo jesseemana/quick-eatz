@@ -1,4 +1,3 @@
-import { ChevronDown, ChevronUp } from 'lucide-react';
 import { 
   DropdownMenu,
   DropdownMenuContent, 
@@ -6,8 +5,9 @@ import {
   DropdownMenuTrigger, 
 } from './ui/dropdown-menu';
 import { sortOptions } from '@/constants/constants';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
-const SortDropdown = ({ onChange, isExpanded, onExpand}: { 
+const SortDropdown = ({ onChange, isExpanded, onExpand }: { 
   onChange: (value: string) => void, 
   onExpand: () => void, 
   isExpanded: boolean, 
