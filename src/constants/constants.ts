@@ -1,3 +1,5 @@
+import { Restaurant } from '@/types';
+
 import img1 from '@/assets/restaurant(1).webp';
 import img2 from '@/assets/restaurant(2).webp';
 import img3 from '@/assets/restaurant(3).webp';
@@ -6,7 +8,31 @@ import img5 from '@/assets/restaurant(5).webp';
 import img6 from '@/assets/restaurant(6).webp';
 import img7 from '@/assets/restaurant(7).webp';
 import img8 from '@/assets/restaurant(8).webp';
-import { Restaurant } from '@/types';
+
+import american from '@/assets/American.png';
+import asian from '@/assets/Asian.png';
+import bakery from '@/assets/Bakery.png';
+import bbq from '@/assets/BBq.png';
+import chicken from '@/assets/Chicken.png';
+import chinese from '@/assets/Chinese.png';
+import coffee from '@/assets/Coffee.png';
+import dessert from '@/assets/Dessert.png';
+import fastfood from '@/assets/FastFood.png';
+import greek from '@/assets/Greek.png';
+import halal from '@/assets/Halal.png';
+import healthy from '@/assets/Healthy.png';
+import indian from '@/assets/Indian.png';
+import icecream from '@/assets/IceCream.png';
+import italian from '@/assets/Italian.png';
+import korean from '@/assets/Korean.png';
+import mexican from '@/assets/Mexican.png';
+import pizza from '@/assets/Pizza.png';
+import salad from '@/assets/Salad.png';
+import seafood from '@/assets/Seafood.png';
+import sushi from '@/assets/Sushi.png';
+import vegan from '@/assets/Vegan.png';
+import wings from '@/assets/Wings.png';
+
 
 export const restaurants = [
   {
@@ -75,6 +101,7 @@ export const restaurants = [
   },
 ]
 
+
 export const restaurant: Restaurant = {
   _id: '90709809198sf90akjaz78',
   user: '897109rj1gs989asf9100',
@@ -130,6 +157,7 @@ export const restaurant: Restaurant = {
   lastUpdated: '2024-05-13',
 }
 
+
 export const links = [
   {
     id: 1,
@@ -147,6 +175,7 @@ export const links = [
     link: '/manage-restaurant'
   },
 ]
+
 
 export const main_links = [
   {
@@ -166,11 +195,8 @@ export const main_links = [
   },
 ]
 
+
 export const sortOptions = [
-  // {
-  //   label: 'Best Match',
-  //   value: 'bestMatch'
-  // },
   {
     label: 'price',
     value: 'deliveryPrice'
@@ -181,31 +207,99 @@ export const sortOptions = [
   },
 ]
 
-export const cuisine_list = [
-  'American',
-  'BBQ',
-  'Breakfast',
-  'Burgers',
-  'Cafe',
-  'Chinese',
-  'Desserts',
-  'French',
-  'Fastfood',
-  'Greek',
-  'Healthy',
-  'Indian',
-  'Italian',
-  'Japanese',
-  'Mexican',
-  'Noodles',
-  'Organic',
-  'Pasta',
-  'Pizza',
-  'Salads',
-  'Seafood',
-  'Spanish',
-  'Steak',
-  'Sushi',
-  'Tacos',
-  'Vegan',
-];
+
+export const cuisines = [
+  {
+    name: 'American',
+    icon: american,
+  },
+  {
+    name: 'Asian',
+    icon: asian,
+  },
+  {
+    name: 'Fastfood',
+    icon: fastfood,
+  },
+  {
+    name: 'Breakfast',
+    icon: bakery,
+  },
+  {
+    name: 'Coffee',
+    icon: coffee,
+  },
+  {
+    name: 'Pizza',
+    icon: pizza,
+  },
+  {
+    name: 'Desserts',
+    icon: dessert,
+  },
+  {
+    name: 'Chinese',
+    icon: chinese,
+  },
+  {
+    name: 'BBQ',
+    icon: bbq,
+  },
+  {
+    name: 'Chicken',
+    icon: chicken,
+  },
+  {
+    name: 'Tacos',
+    icon: greek,
+  },
+  {
+    name: 'IceCream',
+    icon: icecream,
+  },
+  {
+    name: 'Healthy',
+    icon: healthy,
+  },
+  {
+    name: 'Indian',
+    icon: indian,
+  },
+  {
+    name: 'Italian',
+    icon: italian,
+  },
+  {
+    name: 'Halal',
+    icon: halal,
+  },
+  {
+    name: 'Mexican',
+    icon: mexican,
+  },
+  {
+    name: 'Noodles',
+    icon: korean,
+  },
+  {
+    name: 'Wings',
+    icon: wings,
+  },
+  {
+    name: 'Salads',
+    icon: salad,
+  },
+  {
+    name: 'Seafood',
+    icon: seafood,
+  },
+  {
+    name: 'Sushi',
+    icon: sushi,
+  },
+  {
+    name: 'Vegan',
+    icon: vegan,
+  },
+]
+
