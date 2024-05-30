@@ -17,9 +17,11 @@ const SearchResults = () => {
   const { city } = useParams();
   const { setCity } = useCity();
   const { searchState, setPage, setSortOption, setSelectedCuisines } = useSearchState();
-  const { results, isLoading } = useSearchRestaurants(searchState, city);
+  // const { results, isLoading } = useSearchRestaurants(searchState, city);
   const [checked, setChecked] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  
+  const isLoading = false;
 
   useDocumentTitle('Search results');
 

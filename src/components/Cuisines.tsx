@@ -1,5 +1,12 @@
 import { cuisines } from '@/constants/constants';
 import { Label } from './ui/label';
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem, 
+  CarouselNext, 
+  CarouselPrevious 
+} from './ui/carousel';
 
 const Cuisines = ({ onChange, selectedCuisines, }: { 
   onChange: (cuisines: string[]) => void
@@ -17,38 +24,42 @@ const Cuisines = ({ onChange, selectedCuisines, }: {
   }
 
   return (
-    <div className='flex overflow-hidden gap-4'>
-      {cuisines.map((cuisine) => {
-        const isSelected = selectedCuisines.includes(cuisine.name);
-        return (
-          <div 
-            key={cuisine.name} 
-            className='flex flex-col'
-          >
-            <input 
-              id={`cuisine_${cuisine.name}`}
-              type='checkbox' 
-              value={cuisine.name}
-              className='hidden'
-              checked={isSelected}
-              onChange={handleChecked}
-            />
-            <Label 
-              htmlFor={`cuisine_${cuisine.name}`}
-              className={`flex flex-1 items-center flex-col w-16 text-gray-800 font-medium cursor-pointer p-1 ${
-                isSelected ? 'border-b-2 border-gray-700' : 'border-none'
-              }`}
-            >
-              <img 
-                src={cuisine.icon} 
-                alt={cuisine.name} 
-                className='w-14 h-14' 
-              />
-              {cuisine.name}
-            </Label>
-          </div>
-        )
-      })}
+    <div className='container'>
+      <Carousel>
+        <CarouselContent className='-ml-4 p-1'>
+          {cuisines.map((cuisine) => {
+            const isSelected = selectedCuisines.includes(cuisine.name);
+            return (
+              <div key={cuisine.name} >
+                <CarouselItem className='basis-1/2 pl-4'>
+                  <input 
+                    id={`cuisine_${cuisine.name}`}
+                    type='checkbox' 
+                    value={cuisine.name}
+                    className='hidden'
+                    checked={isSelected}
+                    onChange={handleChecked}
+                  />
+                  <Label 
+                    htmlFor={`cuisine_${cuisine.name}`}
+                    className={`flex flex-1 items-center flex-col w-20 text-gray-800 font-medium cursor-pointer p-1 ${
+                      isSelected ? 'border-b-2 border-slate-500' : 'border-none'
+                    }`}
+                  >
+                    <img 
+                      src={cuisine.icon} 
+                      alt={cuisine.name} 
+                      className='w-14 h-14' 
+                    />
+                    {cuisine.name}
+                  </Label>
+                </CarouselItem>
+              </div>
+            )})}
+          </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
     </div>
   );
 }
