@@ -1,7 +1,7 @@
 import axios from '@/api/axios';
 import { useQuery } from 'react-query';
 import { RestaurantSearchResponse } from '@/types';
-import { SearchState } from '@/pages/SearchPage';
+import { SearchState } from '@/context/SearchQueryProvider';
 import { toast } from 'sonner';
 
 const useSearchRestaurants = (search_state: SearchState, city?: string) => {
