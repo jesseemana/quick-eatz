@@ -1,12 +1,11 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { Menu } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { SearchState } from '@/pages/SearchPage';
+import { SearchState } from '@/context/SearchQueryProvider';
 import { SearchForm } from '@/schemas/search';
-import { Sheet, SheetContent, SheetTrigger, } from './ui/sheet';
 import SearchBar from './SearchBar';
 import useSearchRestaurants from '@/hooks/useSearchRestaurants';
 import SearchModal from './SearchModal';
+import Sidebar from './navbar/Nav';
 
 
 const SearchHeader = ({ city, searchState, handleSearch, }: { 
@@ -33,14 +32,7 @@ const SearchHeader = ({ city, searchState, handleSearch, }: {
     <header className='p-3 grid space-y-4 py-4'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center md:space-x-2'>
-          <Sheet>
-            <SheetTrigger>
-              <Menu />
-            </SheetTrigger>
-            <SheetContent side='left' className='xl:w-1/4'>
-              {/* // TODO: add navigation stuff here */}
-            </SheetContent>
-          </Sheet>
+          <Sidebar className='text-black' />
           <Link 
             to='/' 
             className='font-normal text-lg md:text-2xl md:mb-2 mb-1'
