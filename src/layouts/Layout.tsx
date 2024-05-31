@@ -20,13 +20,11 @@ const Layout = ({ children, }: {
       page: 1
     }));
 
-    navigate({
-      pathname: `/search/${city}`,
-    });
+    navigate({ pathname: `/search/${city}` });
   }
 
   return (
-    <div className={`flex flex-col min-h-screen container mx-auto`}>
+    <div className='flex flex-col min-h-screen px-4 md:px-8'>
       <Header 
         city={city} 
         handleSearch={handleSearch} 
