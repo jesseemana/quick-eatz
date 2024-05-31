@@ -157,22 +157,49 @@ export const restaurant: Restaurant = {
   lastUpdated: '2024-05-13',
 }
 
+import { Wallet } from 'lucide-react';
+import { BookmarkX } from 'lucide-react';
+import { LifeBuoy } from 'lucide-react';
+import { Briefcase } from 'lucide-react';
+import { Tag } from 'lucide-react';
+import { UsersRound } from 'lucide-react';
 
 export const links = [
   {
     id: 1,
     name: 'orders',
-    link: '/order-status'
-  },
-  {
-    id: 2,
-    name: 'profile',
-    link: '/user'
+    link: '/order-status',
+    icon: BookmarkX,
   },
   {
     id: 3,
-    name: 'restaurant',
-    link: '/manage-restaurant'
+    name: 'wallet',
+    link: '/manage-restaurant',
+    icon: Wallet,
+  },
+  {
+    id: 4,
+    name: 'meal plan',
+    link: '/manage-restaurant',
+    icon: Briefcase,
+  },
+  {
+    id: 5,
+    name: 'help',
+    link: '/manage-restaurant',
+    icon: LifeBuoy,
+  },
+  {
+    id: 6,
+    name: 'promotions',
+    link: '/manage-restaurant',
+    icon: Tag,
+  },
+  {
+    id: 7,
+    name: 'invite friends',
+    link: '/manage-restaurant',
+    icon: UsersRound
   },
 ]
 
@@ -302,4 +329,3 @@ export const cuisines = [
     icon: vegan,
   },
 ]
-
