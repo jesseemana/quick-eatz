@@ -7,7 +7,7 @@ const Links = ({ link, title, icon }: { link: string, title: string, icon: Lucid
     <>
       <Link 
         to={link} 
-        className='font-semibold text-[16px] hover:text-green-700 text-black flex gap-2 group'
+        className='font-semibold text-[16px] hover:text-green-700 hover:underline text-gray-700 flex gap-2 group'
       > 
         <IconWrapper 
           IconComponent={icon} 

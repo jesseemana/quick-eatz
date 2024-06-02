@@ -42,7 +42,11 @@ const UserProfileForm = ({
       >
         <>
           <h2 className='text-2xl font-bold capitalize'>{title}</h2>
-          {!checkOut && <FormDescription>view and update your profile.</FormDescription>}
+          {!checkOut && (
+            <FormDescription>
+              view and update your profile.
+            </FormDescription>
+          )}
         </>
 
         <FormField 

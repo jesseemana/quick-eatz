@@ -36,22 +36,37 @@ const Nav = ({ className }: { className: string }) => {
                 className='w-20'
               />
               <div className='text-lg md:text-xl'>
-                <p className='capitalize hover:cursor-default'>{user?.given_name}</p>
-                <Link 
-                  to='/user' 
-                  className='text-gray-900'
-                >
-                  <p className='text-green-600 hover:underline font-medium tracking-tight'>Manage account</p>
+                <p className='capitalize hover:cursor-default text-gray-700'>{user?.given_name}</p>
+                <Link to='/user'>
+                  <p className='text-green-600 hover:underline font-medium tracking-tight'>
+                    Manage account
+                  </p>
                 </Link>
               </div>
             </div>) : (
-            <div className='space-y-2'>
-              <h1 className='text text-center'>Quickeatz</h1>
-              <Separator />
+            // <div className='space-y-2'>
+            //   <h1 className='text text-center'>Quickeatz</h1>
+            //   <Separator />
+            // </div>
+            <div className='flex items-center font-bold gap-2'>
+              <img 
+                src={profile} 
+                alt='user profile icon' 
+                className='w-20'
+              />
+              <div className='text-lg md:text-xl'>
+                <p className='capitalize hover:cursor-default text-gray-700'>{'jesse'}</p>
+                <Link to='/user'>
+                  <p className='text-green-600 hover:underline font-medium tracking-tight'>
+                    Manage account
+                  </p>
+                </Link>
+              </div>
             </div>
           )}
         </SheetTitle>
         <SheetDescription className='space-y-8 pt-4'>
+          <NavLinks /> 
           {isAuthenticated 
           ? <NavLinks /> 
           : (

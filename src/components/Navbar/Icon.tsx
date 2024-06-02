@@ -11,7 +11,7 @@ const IconWrapper: React.FC<IconProps> = ({ IconComponent, size = 20, className 
   return (
     <IconComponent  
       size={size} 
-      className={cn('text-black', className)}
+      className={cn('text-gray-700', className)}
     />
   );
 };

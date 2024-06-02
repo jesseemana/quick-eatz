@@ -11,6 +11,7 @@ import ProtectedRoute from './auth/ProtectedRoute';
 import OrderStatus from './pages/OrderStatus';
 import SearchResults from './pages/SearchResults';
 import RestaurantDetails from './pages/RestaurantDetails';
+import Edit from './pages/Edit';
 
 
 const App = () => {
@@ -62,7 +63,7 @@ const App = () => {
         } 
       />
 
-      {/* <Route element={<ProtectedRoute />}> */}
+      <Route element={<ProtectedRoute />}>
         <Route 
           path='/user' 
           element={
@@ -71,7 +72,18 @@ const App = () => {
             </Layout>
           } 
         />
-      {/* </Route> */}
+      </Route>
+
+      <Route element={<ProtectedRoute />}>
+        <Route 
+          path='/edit-profile' 
+          element={
+            <Layout>
+              <Edit />
+            </Layout>
+          } 
+        />
+      </Route>
       <Route path='*' element={<NotFound />} />
     </Routes>
   );
