@@ -167,38 +167,38 @@ import { UsersRound } from 'lucide-react';
 export const links = [
   {
     id: 1,
-    name: 'orders',
+    name: 'Orders',
     link: '/order-status',
     icon: BookmarkX,
   },
   {
     id: 3,
-    name: 'wallet',
-    link: '/manage-restaurant',
+    name: 'Wallet',
+    link: '#',
     icon: Wallet,
   },
   {
     id: 4,
-    name: 'meal plan',
-    link: '/manage-restaurant',
+    name: 'Meal plan',
+    link: '#',
     icon: Briefcase,
   },
   {
     id: 5,
-    name: 'help',
-    link: '/manage-restaurant',
+    name: 'Help',
+    link: '#',
     icon: LifeBuoy,
   },
   {
     id: 6,
-    name: 'promotions',
-    link: '/manage-restaurant',
+    name: 'Promotions',
+    link: '#',
     icon: Tag,
   },
   {
     id: 7,
-    name: 'invite friends',
-    link: '/manage-restaurant',
+    name: 'Invite friends',
+    link: '#',
     icon: UsersRound
   },
 ]
