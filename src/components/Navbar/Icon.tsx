@@ -1,16 +1,17 @@
 import { LucideIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface IconProps {
   IconComponent: LucideIcon;
-  color?: string;
   size?: number;
+  className?: string;
 }
 
-const IconWrapper: React.FC<IconProps> = ({ IconComponent, color = 'black', size = 20 }) => {
+const IconWrapper: React.FC<IconProps> = ({ IconComponent, size = 20, className }) => {
   return (
-    <IconComponent 
-      color={color} 
+    <IconComponent  
       size={size} 
+      className={cn('text-black', className)}
     />
   );
 };

@@ -31,7 +31,7 @@ const Cuisines = ({ onChange, selectedCuisines, }: {
             const isSelected = selectedCuisines.includes(cuisine.name);
             return (
               <div key={cuisine.name} >
-                <CarouselItem className='basis-1/2 pl-4'>
+                <CarouselItem className='basis-1/3 pl-4'>
                   <input 
                     id={`cuisine_${cuisine.name}`}
                     type='checkbox' 
@@ -42,7 +42,7 @@ const Cuisines = ({ onChange, selectedCuisines, }: {
                   />
                   <Label 
                     htmlFor={`cuisine_${cuisine.name}`}
-                    className={`flex flex-1 items-center flex-col w-20 text-gray-800 font-medium cursor-pointer p-1 ${
+                    className={`flex flex-1 items-center flex-col w-14 md:w-20 text-gray-800 font-medium cursor-pointer p-1 ${
                       isSelected ? 'border-b-2 border-slate-500' : 'border-none'
                     }`}
                   >
@@ -55,10 +55,11 @@ const Cuisines = ({ onChange, selectedCuisines, }: {
                   </Label>
                 </CarouselItem>
               </div>
-            )})}
-          </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+            )}
+          )}
+        </CarouselContent>
+        <CarouselPrevious className='hidden md:flex' />
+        <CarouselNext className='hidden md:flex' />
       </Carousel>
     </div>
   );
