@@ -11,7 +11,7 @@ const HomePage = () => {
     <>
       <Header />
       <Hero />
-      <div className='flex flex-col gap-12'>
+      <div className='flex flex-col gap-12 py-10'>
         <div className='grid md:grid-cols-2 gap-5'>
           <img 
             src={landingImage} 
