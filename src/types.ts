@@ -4,6 +4,7 @@ export type User = {
   _id: string;
   email: string;
   name: string;
+  phone: string;
   addressLine1: string;
   city: string;
   country: string;
