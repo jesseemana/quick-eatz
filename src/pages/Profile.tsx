@@ -23,14 +23,12 @@ const Profile = () => {
     </div>
   );
 
-  // @ts-expect-error expecing user details object to have some properties
-  const user_details: User = {}
-  Object.assign(user_details, { 
+  const user_details: Pick<User, 'name' | 'email' | 'city' | 'phone'> = {
+    city: currentUser.city, 
     name: currentUser.name, 
     email: currentUser.email, 
     phone: currentUser.phone, 
-    city: currentUser.city, 
-  });
+  }
 
   return (
     <div className='px-10 py-4'>
