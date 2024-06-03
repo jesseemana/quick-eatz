@@ -68,7 +68,7 @@ const SearchResults = () => {
           </div>
           <PaginationSelector 
             page={searchState.page}
-            pages={3} 
+            pages={3}
             onPageChange={setPage}
           />
         </div>

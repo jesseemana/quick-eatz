@@ -1,5 +1,12 @@
 import { UserFormData } from './schemas/user-profile';
 
+export type CartItem = {
+  _id: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
 export type User = {
   _id: string;
   email: string;

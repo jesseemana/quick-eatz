@@ -1,14 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import { useRestaurantId } from './RestaurantIdProvider';
-import { MenuItem } from '@/types';
+import { MenuItem, CartItem } from '@/types';
 import { toast } from 'sonner';
-
-export type CartItem = {
-  _id: string;
-  name: string;
-  price: number;
-  quantity: number;
-}
 
 type CartProviderState = {
   cartItems: CartItem[]
@@ -30,7 +23,7 @@ const CartProviderContext = createContext<CartProviderState>(initialState);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const { id } = useRestaurantId();
-
+  
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const stored_items = sessionStorage.getItem(`cartItems-${id}`);
     return stored_items ? JSON.parse(stored_items) : [];

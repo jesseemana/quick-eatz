@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router';
+import { toast } from 'sonner';
 import { UserFormData } from '@/schemas/user-profile';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardFooter } from '@/components/ui/card';
-import { CheckoutRequestType } from '@/types';
-import { useRestaurantId } from '@/context/RestaurantIdProvider';
-import { CartItem, useCart } from '@/context/CartProvider';
+import { CheckoutRequestType, MenuItem, CartItem } from '@/types';
 import useCreateCheckoutSession from '@/hooks/useCreateCheckoutSession';
 import useGetRestaurant from '@/hooks/useGetRestaurants';
 import OrderSummary from '@/components/OrderSummary';
@@ -20,21 +19,90 @@ import { restaurant } from '@/constants/constants';
 
 const RestaurantDetails = () => {
   const { id } = useParams();
-  const { setRestaurantId } = useRestaurantId();
-  const { addToCart, decreaseCart, removeFromCart, } = useCart();
-  const { isLoading: isRestaurantLoading, } = useGetRestaurant(id);
   const { isLoading: isCheckoutLoading, createCheckoutSession } = useCreateCheckoutSession();
-  
+  const { isLoading: isRestaurantLoading, } = useGetRestaurant(id);
+
+  // const isRestaurantLoading = false;
+
   useDocumentTitle(`Order ${restaurant.restaurantName}`);
 
-  useEffect(() => {
-    if (id) {
-      setRestaurantId(id);
-    }
-  }, [id, setRestaurantId]);
-  
-  const stored_items = sessionStorage.getItem(`cartItems-${id}`);
-  const cartItems: CartItem[] = stored_items ? JSON.parse(stored_items) : [];
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    const stored_items = sessionStorage.getItem(`cartItems-${id}`);
+    return stored_items ? JSON.parse(stored_items) : [];
+  });
+
+  const addToCart = (menuItem: MenuItem) => {
+    setCartItems((prev) => {
+      const existing_item = prev.find(cartItem => cartItem._id === menuItem._id);
+
+      let updatedCartItems;
+
+      if (existing_item) {  
+        updatedCartItems = prev.map((cartItem) => 
+          cartItem._id === menuItem._id 
+          ? { 
+              ...cartItem, 
+              quantity: cartItem.quantity + 1, 
+            } 
+          : cartItem
+        );
+      } else {  
+        updatedCartItems = [
+          ...prev,
+          {
+            _id: menuItem._id,
+            name: menuItem.name,
+            price: menuItem.price,
+            quantity: 1,
+          }
+        ]
+      }
+
+      sessionStorage.setItem(
+        `cartItems-${id}`, 
+        JSON.stringify(updatedCartItems)
+      );
+
+      return updatedCartItems;
+    });
+  }
+
+  const decreaseCart = (item: CartItem) => { 
+    setCartItems((prev) => {
+      const cartItems = prev.map(cartItem => 
+        cartItem._id === item._id 
+        ? cartItem.quantity > 1 
+          ? { 
+              ...cartItem, 
+              quantity: cartItem.quantity - 1 
+            } 
+          : cartItem
+        : cartItem
+      );
+
+      sessionStorage.setItem(
+        `cartItems-${id}`, 
+        JSON.stringify(cartItems)
+      );
+
+      return cartItems;
+    });
+  }
+
+  const removeFromCart = (item: CartItem) => { 
+    setCartItems((prev) => {
+      const updatedCart = prev.filter(cartItem => cartItem._id !== item._id);
+
+      sessionStorage.setItem(
+        `cartItems-${id}`, 
+        JSON.stringify(updatedCart)
+      );
+
+      toast.success('Item removed');
+
+      return updatedCart;
+    });
+  }
 
   const onCheckOut = async (user_data: UserFormData) => {
     if (!restaurant) return;
