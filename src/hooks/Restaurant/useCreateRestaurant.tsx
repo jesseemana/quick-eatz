@@ -12,7 +12,7 @@ const useCreateRestaurant = () => {
     const token = getAccessTokenSilently();
     const response = await axios.post(
       '/api/my/restaurant', 
-      JSON.stringify(restaurant_data), 
+      restaurant_data, 
       {
         headers: {
           Authorization: `Bearer ${token}`,

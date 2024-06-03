@@ -5,15 +5,17 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 const AuthCallBackPage = () => {
   const navigate = useNavigate();
-
   const { user } = useAuth0();
   const { registerUser } = useRegisterUser();
 
-  const hasCreatedUser = useRef(false); // ensuring the component (useEffect hook) renders only once
+  const hasCreatedUser = useRef(false); // ensuring the component (useEffect) renders only once
 
   useEffect(() => {
     if (user && user.sub && user.email && !hasCreatedUser.current) {
-      registerUser({ auth0Id: user.sub, email: user.email, });
+      registerUser({ 
+        auth0Id: user.sub, 
+        email: user.email, 
+      });
       hasCreatedUser.current = true;
     }
     navigate('/');

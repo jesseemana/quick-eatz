@@ -69,6 +69,7 @@ export type Restaurant = {
   estimatedDeliveryTime: number;
   cuisines: string[];
   menuItems: MenuItem[];
+  thumbNail: string;
   imageUrl: string;
   lastUpdated: string;
 };

@@ -9,7 +9,7 @@ const SearchResultCard = ({ restaurant }: { restaurant: Restaurant }) => {
     <Link to={`/restaurant/${restaurant._id}`}>
       <AspectRatio ratio={16/7}>
         <img 
-          src={restaurant.imageUrl}
+          src={restaurant.thumbNail}
           alt='restaurant banner' 
           loading='lazy'
           className='rounded-xl h-full w-full object-cover'
