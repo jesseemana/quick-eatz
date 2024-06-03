@@ -11,6 +11,7 @@ import Menu from './Menu';
 import Banner from './Banner';
 import Details from './Details';
 import Cuisines from './Cuisines';
+import ThumbNail from './ThumbNail';
 
 
 const ManageRestaurantForm = ({ onSave, loading, restaurant }: { 
@@ -53,20 +54,48 @@ const ManageRestaurantForm = ({ onSave, loading, restaurant }: {
     formData.append('restaurantName', formDataJson.restaurantName);
     formData.append('city', formDataJson.city);
     formData.append('country', formDataJson.country);
-    formData.append('deliveryPrice', (formDataJson.deliveryPrice).toString());
-    formData.append('estimatedDeliveryPrice', (formDataJson.estimatedDeliveryTime).toString());
-    formDataJson.cuisines.forEach((cuisine, index) => formData.append(`cuisines[${index}]`, cuisine));
+
+    formData.append(
+      'deliveryPrice', 
+      (formDataJson.deliveryPrice).toString()
+    );
+
+    formData.append(
+      'deliveryMin',
+      (formDataJson.deliveryMin).toString()
+    );
+
+    formData.append(
+      'deliveryMax',
+      (formDataJson.deliveryMax).toString()
+    );
+
+    formData.append(
+      'estimatedDeliveryPrice', 
+      (formDataJson.estimatedDeliveryTime).toString()
+    );
+
+    formDataJson.cuisines.forEach((cuisine, index) => {
+      formData.append(`cuisines[${index}]`, cuisine)
+    });
+    
     formDataJson.menuItems.forEach((menuItem, index) => {
       formData.append(`menuItems[${index}][name]`, menuItem.name);
       formData.append(`menuItems[${index}][price]`, (menuItem.price).toString());
     })
+
+    if (formDataJson.thumbNailFile) {
+      formData.append('thumbNail', formDataJson.thumbNailFile);
+    }
 
     if (formDataJson.imageFile) {
       formData.append('imageFile', formDataJson.imageFile);
     }
 
     onSave(formData);
+    console.log(Object.fromEntries(formData));
   }
+
 
   return (
     <Form {...form}>
@@ -80,18 +109,16 @@ const ManageRestaurantForm = ({ onSave, loading, restaurant }: {
         <Separator />
         <Menu />
         <Separator />
+        <ThumbNail />
         <Banner />
         {loading ? <LoadingButton /> : (
-          <Button 
-            type='submit' 
-            className='capitalize'
-          >
-            submit
+          <Button type='submit'>
+            Submit
           </Button>
         )}
       </form>
     </Form>
-  )
+  );
 }
 
 export default ManageRestaurantForm;
