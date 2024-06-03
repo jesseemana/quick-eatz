@@ -1,5 +1,5 @@
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Link, useNavigate } from 'react-router-dom';
 import { SearchState } from '@/context/SearchQueryProvider';
 import { SearchForm } from '@/schemas/search';
 import SearchBar from './SearchBar';
@@ -7,17 +7,24 @@ import useSearchRestaurants from '@/hooks/useSearchRestaurants';
 import SearchModal from './SearchModal';
 import Sidebar from './navbar/Nav';
 
-
 const SearchHeader = ({ city, searchState, handleSearch, }: { 
   city: string, 
   searchState: SearchState, 
   handleSearch: (data: SearchForm) => void, 
 }) => {  
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
 
   useSearchRestaurants(searchState, city);
 
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  async function onLogin() {
+    await loginWithRedirect({
+      appState: {
+        returnTo: pathname,
+      },
+    });
+  }
 
   function searchCity(searchValues: SearchForm) {
     navigate({
@@ -54,7 +61,7 @@ const SearchHeader = ({ city, searchState, handleSearch, }: {
 
         {!isAuthenticated && (
           <button 
-            onClick={() => loginWithRedirect()} 
+            onClick={onLogin} 
             className='md:px-6 px-4 py-1 rounded-sm bg-transparent border border-black text-black text-md hover:text-white hover:bg-black hover:border-none' 
           >
             Login

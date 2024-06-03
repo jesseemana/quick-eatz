@@ -7,7 +7,6 @@ import { useLocation } from 'react-router-dom';
 import LoadingButton from './LoadingButton';
 import useGetUser from '@/hooks/useGetUser';
 
-
 const CheckOut = ({ onCheckout, disabled, isLoading, checkout, }: {
   onCheckout: (userFormData: UserFormData) => void;
   disabled: boolean;
@@ -15,10 +14,8 @@ const CheckOut = ({ onCheckout, disabled, isLoading, checkout, }: {
   isLoading: boolean;
 }) => {
   const { pathname } = useLocation();
-
-  const { isLoading: isAuthLoading, loginWithRedirect, isAuthenticated, } = useAuth0();
-
   const { currentUser } = useGetUser();
+  const { isLoading: isAuthLoading, loginWithRedirect, isAuthenticated, } = useAuth0();
 
   async function onLogin() {
     await loginWithRedirect({
