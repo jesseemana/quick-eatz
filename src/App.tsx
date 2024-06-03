@@ -1,17 +1,15 @@
 import { Routes, Route } from 'react-router';
-import { 
-  HomePage, 
-  NotFound, 
-  Profile, 
-  Restaurant, 
-  AuthCallBackPage, 
-} from './pages';
 import Layout from './layouts/Layout';
-import ProtectedRoute from './auth/ProtectedRoute';
+import HomePage from './pages/HomePage';
+import NotFound from './pages/NotFound';
+import Profile from './pages/Profile';
+import Edit from './pages/Edit';
+import Restaurant from './pages/Restaurant';
+import AuthCallBackPage from './pages/AuthCallBackPage';
 import OrderStatus from './pages/OrderStatus';
 import SearchResults from './pages/SearchResults';
 import RestaurantDetails from './pages/RestaurantDetails';
-import Edit from './pages/Edit';
+import ProtectedRoute from './auth/ProtectedRoute';
 
 
 const App = () => {

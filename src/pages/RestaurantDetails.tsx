@@ -6,30 +6,29 @@ import { Separator } from '@/components/ui/separator';
 import { Card, CardFooter } from '@/components/ui/card';
 import { CheckoutRequestType, MenuItem, CartItem } from '@/types';
 import useCreateCheckoutSession from '@/hooks/useCreateCheckoutSession';
-import useGetRestaurant from '@/hooks/useGetRestaurants';
-import OrderSummary from '@/components/OrderSummary';
-import Banner from '@/components/Banner';
-import CheckOut from '@/components/CheckOut';
-import MenuItems from '@/components/MenuItems';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
-import RestaurantInfo from '@/components/RestaurantInfo';
-import RestaurantLoader from '@/components/RestaurantLoader';
-import { restaurant } from '@/constants/constants';
+import useGetRestaurant from '@/hooks/useGetRestaurants';
+import Banner from '@/components/restaurant/Banner';
+import CheckOut from '@/components/restaurant/CheckOut';
+import MenuItems from '@/components/restaurant/MenuItems';
+import OrderSummary from '@/components/restaurant/OrderSummary';
+import RestaurantInfo from '@/components/restaurant/RestaurantInfo';
+import RestaurantLoader from '@/components/loading/RestaurantLoader';
 
 
 const RestaurantDetails = () => {
   const { id } = useParams();
-  const { isLoading: isCheckoutLoading, createCheckoutSession } = useCreateCheckoutSession();
-  const { isLoading: isRestaurantLoading, } = useGetRestaurant(id);
+  const { createCheckoutSession, isLoading: isCheckoutLoading } = useCreateCheckoutSession();
+  const { restaurant, isLoading: isRestaurantLoading } = useGetRestaurant(id);
 
-  // const isRestaurantLoading = false;
-
-  useDocumentTitle(`Order ${restaurant.restaurantName}`);
+  useDocumentTitle(`Order ${restaurant?.restaurantName}`);
 
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const stored_items = sessionStorage.getItem(`cartItems-${id}`);
     return stored_items ? JSON.parse(stored_items) : [];
   });
+
+  if (!restaurant) return <p className='px-4 text-gray-600'>restaurant doesn't exist</p>
 
   const addToCart = (menuItem: MenuItem) => {
     setCartItems((prev) => {

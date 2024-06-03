@@ -3,7 +3,8 @@ import appDownloadImage from '../assets/appDownload.png';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
-import Header from '@/components/Header';
+import Header from '@/components/header/Header';
+
 
 const HomePage = () => {
   useDocumentTitle('Quick Eatz - Your Next Meal Delivered At Your At Your Door');

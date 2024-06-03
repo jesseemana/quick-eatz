@@ -1,5 +1,5 @@
-import OrderStatusDetail from '@/components/OrderStatusDetail';
-import OrderStatusHeader from '@/components/OrderStatusHeader';
+import OrderStatusDetail from '@/components/restaurant/OrderStatusDetail';
+import OrderStatusHeader from '@/components/restaurant/OrderStatusHeader';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 const orders = [

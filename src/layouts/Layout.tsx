@@ -1,5 +1,5 @@
 import Footer from '@/components/Footer';
-import Header from '@/components/SearchHeader';
+import Header from '@/components/header/SearchHeader';
 import { useNavigate } from 'react-router-dom';
 import { SearchForm } from '@/schemas/search';
 import { useCity } from '@/context/CityProvider';
