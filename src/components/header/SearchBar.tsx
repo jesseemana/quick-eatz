@@ -1,12 +1,13 @@
+import { cn } from '@/lib/utils';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Search } from 'lucide-react';
-import { Form, FormControl, FormField, FormItem } from './ui/form';
-import { Input } from './ui/input';
-import { Button } from './ui/button';
 import { SearchForm, searchSchema } from '@/schemas/search';
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
+import { Form, FormControl, FormField, FormItem } from '../ui/form';
+
 
 // TODO: add callback and logic for resetting form in props and component, use form.reset()
 const SearchBar = ({ onSubmit, searchQuery, className }: { 

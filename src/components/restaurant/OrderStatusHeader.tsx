@@ -1,5 +1,5 @@
 import { Order } from '@/types';
-import { Progress } from './ui/progress';
+import { Progress } from '../ui/progress';
 import { ORDER_STATUS } from '@/constants/orderstatus';
 
 const OrderStatusHeader = ({ order }: { order: Order }) => {

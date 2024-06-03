@@ -1,6 +1,6 @@
-import { Skeleton } from './ui/skeleton';
-import { Separator } from './ui/separator';
-import { AspectRatio } from './ui/aspect-ratio';
+import { Skeleton } from '../ui/skeleton';
+import { Separator } from '../ui/separator';
+import { AspectRatio } from '../ui/aspect-ratio';
 
 const RestaurantLoader = () => {
   return (

@@ -1,6 +1,7 @@
 import { Restaurant } from '@/types';
-import { Separator } from './ui/separator';
+import { Separator } from '../ui/separator';
 import { Dot, ShoppingBasket, } from 'lucide-react';
+
 
 const RestaurantInfo = ({ restaurant }: { restaurant: Restaurant }) => {
   return (

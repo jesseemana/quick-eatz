@@ -1,10 +1,10 @@
 import { UserFormData } from '@/schemas/user-profile';
-import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
-import UserProfileForm from './forms/user-profile-form/UserProfileForm';
+import { Dialog, DialogContent, DialogTrigger } from '../ui/dialog';
+import UserProfileForm from '../forms/user-profile-form/UserProfileForm';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { useLocation } from 'react-router-dom';
-import LoadingButton from './LoadingButton';
+import LoadingButton from '../loading/LoadingButton';
 import useGetUser from '@/hooks/useGetUser';
 
 const CheckOut = ({ onCheckout, disabled, isLoading, checkout, }: {

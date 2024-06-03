@@ -1,12 +1,7 @@
 import { cuisines } from '@/constants/constants';
-import { Label } from './ui/label';
-import { 
-  Carousel, 
-  CarouselContent, 
-  CarouselItem, 
-  CarouselNext, 
-  CarouselPrevious 
-} from './ui/carousel';
+import { Label } from '../ui/label';
+import { Carousel, CarouselContent, CarouselItem, } from '../ui/carousel';
+
 
 const Cuisines = ({ onChange, selectedCuisines, }: { 
   onChange: (cuisines: string[]) => void
@@ -24,14 +19,14 @@ const Cuisines = ({ onChange, selectedCuisines, }: {
   }
 
   return (
-    <div className='container'>
+    <>
       <Carousel>
-        <CarouselContent className='-ml-4 p-1'>
+        <CarouselContent className=''>
           {cuisines.map((cuisine) => {
             const isSelected = selectedCuisines.includes(cuisine.name);
             return (
               <div key={cuisine.name} >
-                <CarouselItem className='basis-1/3 pl-4'>
+                <CarouselItem className=''>
                   <input 
                     id={`cuisine_${cuisine.name}`}
                     type='checkbox' 
@@ -42,7 +37,7 @@ const Cuisines = ({ onChange, selectedCuisines, }: {
                   />
                   <Label 
                     htmlFor={`cuisine_${cuisine.name}`}
-                    className={`flex flex-1 items-center flex-col w-14 md:w-20 text-gray-800 font-medium cursor-pointer p-1 ${
+                    className={`flex flex-1 items-center flex-col w-14 md:w-16 lg:w-20 text-gray-800 font-medium cursor-pointer p-1 ${
                       isSelected ? 'border-b-2 border-slate-500' : 'border-none'
                     }`}
                   >
@@ -58,10 +53,8 @@ const Cuisines = ({ onChange, selectedCuisines, }: {
             )}
           )}
         </CarouselContent>
-        <CarouselPrevious className='hidden md:flex' />
-        <CarouselNext className='hidden md:flex' />
       </Carousel>
-    </div>
+    </>
   );
 }
 

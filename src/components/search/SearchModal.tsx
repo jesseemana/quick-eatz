@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { MapPin, Search } from 'lucide-react';
-import { Dialog, DialogTrigger, DialogContent } from './ui/dialog';
-import { Form, FormField, FormItem, FormControl, } from './ui/form';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
+import { Dialog, DialogTrigger, DialogContent } from '../ui/dialog';
+import { Form, FormField, FormItem, FormControl, } from '../ui/form';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 import { SearchForm, searchSchema } from '@/schemas/search';
 import { zodResolver } from '@hookform/resolvers/zod';
 

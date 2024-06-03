@@ -1,8 +1,8 @@
 import { Dot } from 'lucide-react';
 import { Restaurant } from '@/types';
 import { Link } from 'react-router-dom';
-import { AspectRatio } from './ui/aspect-ratio';
-import HeartButton from './HeartButton';
+import { AspectRatio } from '../ui/aspect-ratio';
+import HeartButton from '../HeartButton';
 
 const SearchResultCard = ({ restaurant }: { restaurant: Restaurant }) => {
   return (

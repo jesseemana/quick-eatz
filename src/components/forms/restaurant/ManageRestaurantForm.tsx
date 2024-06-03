@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { RestaurantFormData, restaurantSchema } from '@/schemas/restaurant';
-import LoadingButton from '@/components/LoadingButton';
+import LoadingButton from '@/components/loading/LoadingButton';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';

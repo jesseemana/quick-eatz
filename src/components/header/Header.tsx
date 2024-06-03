@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import Nav from './navbar/Nav';
-import { Button } from './ui/button';
+import Nav from '../navbar/Nav';
+import { Button } from '../ui/button';
 import { useAuth0 } from '@auth0/auth0-react';
 
 

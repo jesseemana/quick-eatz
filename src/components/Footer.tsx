@@ -7,9 +7,9 @@ const Footer = () => {
   return (
     <>
       <Separator />
-      <div className='py-8 text-black border-t-'>
-        <div className='container mx-auto justify-between items-center'>
-          <div className='py-2 lg:grid lg:grid-cols-2 flex justify-between flex-col md:flex-row'>
+      <div className='py-4 md:py-8 text-black'>
+        <div className='md:container mx-auto justify-between items-center px-4 md:px-0'>
+          <div className='py-2 lg:grid lg:grid-cols-2 flex md:space-x-8 lg:space-x-4 flex-col md:flex-row'>
             <div>
               <h1 className='text-2xl font-bold tracking-tight capitalize'>quick eatz</h1>
               <img 

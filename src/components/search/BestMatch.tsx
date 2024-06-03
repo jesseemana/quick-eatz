@@ -1,4 +1,4 @@
-import { Label } from './ui/label';
+import { Label } from '../ui/label';
 
 const BestMatch = ({ checked, toggleBestMatch }: { 
   checked: boolean, 

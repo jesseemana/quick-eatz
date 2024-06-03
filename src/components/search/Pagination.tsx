@@ -5,7 +5,7 @@ import {
   PaginationPrevious, 
   PaginationLink, 
   PaginationNext, 
-} from './ui/pagination';
+} from '../ui/pagination';
 
 const PaginationSelector = ({ page, pages, onPageChange }: {
   page: number, 

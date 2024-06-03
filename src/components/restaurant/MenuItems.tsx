@@ -1,7 +1,8 @@
-import { MenuItem } from '@/types';
-import { Card } from './ui/card';
-import { PlusIcon } from 'lucide-react';
 import { toast } from 'sonner';
+import { PlusIcon } from 'lucide-react';
+import { MenuItem } from '@/types';
+import { Card } from '../ui/card';
+
 
 const MenuItems = ({ menuItem, addToCart, }: {
   menuItem: MenuItem;

@@ -1,9 +1,9 @@
-import { Restaurant } from '@/types';
 import { Trash, Plus, Minus, } from 'lucide-react';
-import { CardContent, CardHeader, CardTitle } from './ui/card';
-import { Separator } from './ui/separator';
-import { Badge } from './ui/badge';
-import { CartItem } from '@/context/CartProvider';
+import { CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Separator } from '../ui/separator';
+import { Badge } from '../ui/badge';
+import { Restaurant, CartItem } from '@/types';
+
 
 const OrderSummary = ({ restaurant, cartItems, addToCart, decreaseCart, removeFromCart }: {
   restaurant: Restaurant;
