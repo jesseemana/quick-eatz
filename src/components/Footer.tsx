@@ -1,17 +1,22 @@
 import { Separator } from './ui/separator';
 import appDownloadImage from '../assets/appDownload.png';
 import { FacebookIcon, Twitter, Instagram, } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 
 const Footer = () => {
   return (
     <>
-      <Separator />
-      <div className='py-4 md:py-8 text-black'>
+      <div className='py-4 md:py-8 md:px-8 px-2 text-black'>
         <div className='md:container mx-auto justify-between items-center px-4 md:px-0'>
           <div className='py-2 lg:grid lg:grid-cols-2 flex md:space-x-8 lg:space-x-4 flex-col md:flex-row'>
             <div>
-              <h1 className='text-2xl font-bold tracking-tight capitalize'>quick eatz</h1>
+              <Link 
+                to='/' 
+                className='text-2xl font-bold tracking-tight capitalize'
+              >
+                quick eatz
+              </Link>
               <img 
                 src={appDownloadImage} 
                 alt='app download icons'

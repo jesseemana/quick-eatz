@@ -4,6 +4,7 @@ import useDocumentTitle from '@/hooks/useDocumentTitle';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import Header from '@/components/header/Header';
+import { Separator } from '@/components/ui/separator';
 
 
 const HomePage = () => {
@@ -34,6 +35,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      <Separator />
       <Footer />
     </>
   );

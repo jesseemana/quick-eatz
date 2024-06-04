@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { SearchForm } from '@/schemas/search';
 import { useCity } from '@/context/CityProvider';
 import { useSearchState } from '@/context/SearchQueryProvider';
+import { Separator } from '@/components/ui/separator';
 
 const Layout = ({ children, }: {
   children: React.ReactNode 
@@ -24,17 +25,20 @@ const Layout = ({ children, }: {
   }
 
   return (
-    <div className='flex flex-col min-h-screen px-4 md:px-8'>
-      <Header 
-        city={city} 
-        handleSearch={handleSearch} 
-        searchState={searchState} 
-      />
-      <main className='flex-1'>
-        {children}
-      </main>
+    <>
+      <div className='flex flex-col min-h-screen px-4 md:px-8'>
+        <Header 
+          city={city} 
+          handleSearch={handleSearch} 
+          searchState={searchState} 
+        />
+        <main className='flex-1'>
+          {children}
+        </main>
+      </div>
+      <Separator />
       <Footer />
-    </div>
+    </>
   );
 };
 
