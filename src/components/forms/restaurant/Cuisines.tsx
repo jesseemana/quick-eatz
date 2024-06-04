@@ -10,7 +10,9 @@ const Cuisines = () => {
     <div className='space-y-2'>
       <>
         <h1 className='capitalize font-semibold text-2xl'>cuisines</h1>
-        <FormDescription>Choose the cuisines available at your restaurant</FormDescription>
+        <FormDescription className='text-sm'>
+          Choose the cuisines available at your restaurant
+        </FormDescription>
       </>
       <FormField control={control} name='cuisines' render={({ field }) => (
         <FormItem>

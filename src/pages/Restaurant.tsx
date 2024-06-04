@@ -16,7 +16,7 @@ const Restaurant = () => {
   const isEditing = !!restaurant;
   
   return (
-    <div className='md:container py-4'>
+    <div className='md:container p-4 md:px-8'>
       <h1 className='mb-4 py-2 text-gray-600'>View orders and manage your restaurant.</h1>
       <Tabs defaultValue='orders'>
         <TabsList className='rounded-[4px] text-gray-700 bg-transparent'>

@@ -18,8 +18,8 @@ const ThumbNail = () => {
   return (
     <div className='space-y-2'>
       <>
-        <h2 className='text-2xl font-bold'>Thumbnail</h2>
-        <FormDescription>
+        <h2 className='md:text-2xl text-xl font-bold'>Thumbnail</h2>
+        <FormDescription className='text-sm'>
           Add an image that'll be used restaurant thumbnail
         </FormDescription>
       </>
@@ -54,7 +54,7 @@ const ThumbNail = () => {
         />
       </div>
     </div>
-  )
+  );
 }
 
 export default ThumbNail;

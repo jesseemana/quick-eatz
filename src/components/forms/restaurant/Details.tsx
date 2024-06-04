@@ -17,7 +17,9 @@ const Details = () => {
     <div className='space-y-2'>
       <>
         <h1 className='capitalize font-semibold text-2xl'>details</h1>
-        <FormDescription>Enter your restaurant details</FormDescription>
+        <FormDescription className='text-sm'>
+          Enter your restaurant details
+        </FormDescription>
       </>
 
       <FormField 
@@ -29,7 +31,7 @@ const Details = () => {
             <FormControl>
               <Input 
                 {...field} 
-                className='bg-white rounded-sm' 
+                className='bg-white rounded-sm shadow-none' 
               />
             </FormControl>
             <FormMessage />
@@ -47,7 +49,7 @@ const Details = () => {
               <FormControl>
                 <Input 
                   {...field} 
-                  className='bg-white rounded-sm' 
+                  className='bg-white rounded-sm shadow-none' 
                 />
               </FormControl>
               <FormMessage />
@@ -64,7 +66,7 @@ const Details = () => {
               <FormControl>
                 <Input 
                   {...field} 
-                  className='bg-white rounded-sm' 
+                  className='bg-white rounded-sm shadow-none' 
                 />
               </FormControl>
               <FormMessage />
@@ -83,7 +85,7 @@ const Details = () => {
               <FormControl>
                 <Input 
                   {...field} 
-                  className='bg-white rounded-sm' 
+                  className='bg-white rounded-sm shadow-none' 
                   placeholder='2,000' 
                 />
               </FormControl>
@@ -101,7 +103,7 @@ const Details = () => {
               <FormControl>
                 <Input 
                   {...field} 
-                  className='bg-white rounded-sm' 
+                  className='bg-white rounded-sm shadow-none' 
                   placeholder='30' 
                 />
               </FormControl>
@@ -121,7 +123,7 @@ const Details = () => {
               <FormControl>
                 <Input 
                   {...field} 
-                  className='bg-white rounded-sm' 
+                  className='bg-white rounded-sm shadow-none' 
                   placeholder='10' 
                 />
               </FormControl>
@@ -139,7 +141,7 @@ const Details = () => {
               <FormControl>
                 <Input 
                   {...field} 
-                  className='bg-white rounded-sm' 
+                  className='bg-white rounded-sm shadow-none' 
                   placeholder='30' 
                 />
               </FormControl>

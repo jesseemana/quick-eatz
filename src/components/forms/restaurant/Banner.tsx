@@ -18,7 +18,7 @@ const Banner = () => {
   return (
     <div className='space-y-2'>
       <>
-        <h2 className='text-2xl font-bold'>Image</h2>
+        <h2 className='md:text-2xl text-xl font-bold'>Image</h2>
         <FormDescription>
           Add an image that will be used as your restaurant's banner. Adding a new image will overwrite the existing one.
         </FormDescription>

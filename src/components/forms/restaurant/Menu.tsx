@@ -16,7 +16,7 @@ const Menu = () => {
     <div className='space-y-2'>
       <>
         <h1 className='capitalize font-semibold text-2xl'>menu</h1>
-        <FormDescription>
+        <FormDescription className='text-sm'>
           Create your menu and give each item a name and a price
         </FormDescription>
       </>

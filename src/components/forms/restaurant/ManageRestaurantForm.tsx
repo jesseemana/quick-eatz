@@ -85,7 +85,7 @@ const ManageRestaurantForm = ({ onSave, loading, restaurant }: {
     })
 
     if (formDataJson.thumbNailFile) {
-      formData.append('thumbNail', formDataJson.thumbNailFile);
+      formData.append('thumbNailFile', formDataJson.thumbNailFile);
     }
 
     if (formDataJson.imageFile) {
@@ -101,7 +101,7 @@ const ManageRestaurantForm = ({ onSave, loading, restaurant }: {
     <Form {...form}>
       <form 
         onSubmit={form.handleSubmit(onSubmit)} 
-        className='space-y-8 bg-gray-50 p-10 rounded-sm'
+        className='space-y-8 bg-gray-50 md:px-8 px-4 py-4 rounded-sm'
       >
         <Details />
         <Separator />
