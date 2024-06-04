@@ -38,14 +38,14 @@ export const restaurantSchema = z
     ),
     imageUrl: z.string().optional(),
     imageFile: z.instanceof(File, { message: 'image is required' }).optional(),
-    thumbNail: z.string().optional(),
+    thumbNailUrl: z.string().optional(),
     thumbNailFile: z.instanceof(File, { message: 'thumbnail is required' }).optional(),
+  }).refine((data) => data.thumbNailUrl || data.thumbNailFile, {
+    message: 'Provide thumbnail url or thumbnail file',
+    path: ['thumbNailFile'],
   }).refine((data) => data.imageUrl || data.imageFile, {
-    message: 'Either image URL or image File must be provided',
+    message: 'Provide image url or image file',
     path: ['imageFile'],
-  }).refine((data) => data.thumbNail || data.thumbNailFile, {
-    message: 'Either image URL or image File must be provided',
-    path: ['thumbNail'],
   });
 
 export type RestaurantFormData = z.infer<typeof restaurantSchema>;
