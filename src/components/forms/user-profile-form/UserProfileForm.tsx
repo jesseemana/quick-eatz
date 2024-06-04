@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import LoadingButton from '@/components/loading/LoadingButton';
 import { UserFormData, userSchema } from '@/schemas/user-profile';
+import { cn } from '@/lib/utils';
 
 
 const UserProfileForm = ({ 
@@ -22,8 +23,9 @@ const UserProfileForm = ({
   isLoading, 
   currentUser, 
   checkOut, 
+  className,
   buttonText='submit', 
-  title='user profile', 
+  title='user details', 
 }: FormProps) => {
   const form = useForm<UserFormData>({
     resolver: zodResolver(userSchema),
@@ -38,13 +40,13 @@ const UserProfileForm = ({
     <Form {...form}>
       <form 
         onSubmit={form.handleSubmit(onSave)} 
-        className='space-y-4 bg-gray-50 rounded-lg p-10'
+        className={cn('space-y-4 rounded-lg px-4 md:px-8 py-2', className)}
       >
         <>
           <h2 className='text-2xl font-bold capitalize'>{title}</h2>
           {!checkOut && (
-            <FormDescription>
-              view and update your profile.
+            <FormDescription className='text-sm'>
+              View and update your profile.
             </FormDescription>
           )}
         </>
@@ -53,15 +55,32 @@ const UserProfileForm = ({
           name='email' 
           control={form.control} 
           render={({ field }) => (
-            <FormItem>
+            <FormItem className='flex-1'>
               <FormLabel>Email:</FormLabel>
               <FormControl>
                 <Input 
                   {...field} 
                   disabled 
-                  className='bg-white' 
+                  className='bg-white shadow-none border-gray-400' 
                 />
               </FormControl>
+            </FormItem>
+          )} 
+        />
+
+        <FormField 
+          name='phone' 
+          control={form.control} 
+          render={({ field }) => (
+            <FormItem className='flex-1'>
+              <FormLabel>Phone:</FormLabel>
+              <FormControl>
+                <Input 
+                  {...field}
+                  className='bg-white shadow-none border-gray-400' 
+                />
+              </FormControl>
+              <FormMessage />
             </FormItem>
           )} 
         />
@@ -74,7 +93,7 @@ const UserProfileForm = ({
               <FormItem className='flex-1'>
                 <FormLabel>Name:</FormLabel>
                 <FormControl>
-                  <Input {...field} className='bg-white' />
+                  <Input {...field} className='bg-white shadow-none border-gray-400' />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -88,7 +107,10 @@ const UserProfileForm = ({
               <FormItem className='flex-1'>
                 <FormLabel>Address:</FormLabel>
                 <FormControl>
-                  <Input {...field} className='bg-white' />
+                  <Input 
+                    {...field} 
+                    className='bg-white shadow-none border-gray-400' 
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -104,7 +126,10 @@ const UserProfileForm = ({
               <FormItem className='flex-1'>
                 <FormLabel>City:</FormLabel>
                 <FormControl>
-                  <Input {...field} className='bg-white' />
+                  <Input 
+                    {...field} 
+                    className='bg-white shadow-none border-gray-400' 
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -118,7 +143,10 @@ const UserProfileForm = ({
               <FormItem className='flex-1'>
                 <FormLabel>Country:</FormLabel>
                 <FormControl>
-                  <Input {...field} className='bg-white' />
+                  <Input 
+                    {...field} 
+                    className='bg-white shadow-none border-gray-400' 
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -126,9 +154,7 @@ const UserProfileForm = ({
           />
         </div>
 
-        {isLoading 
-        ? <LoadingButton /> 
-        : (
+        {isLoading ? <LoadingButton /> : (
           <Button 
             type='submit' 
             variant='default'
@@ -138,7 +164,7 @@ const UserProfileForm = ({
         )}
       </form>
     </Form>
-  )
+  );
 }
 
 export default UserProfileForm;

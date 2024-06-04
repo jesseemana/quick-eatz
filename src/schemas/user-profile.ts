@@ -1,11 +1,22 @@
 import { z } from 'zod';
 
 export const userSchema = z.object({
+  name: z.string({
+    required_error: 'please provide a name'
+  }).min(1),
   email: z.string().optional(),
-  name: z.string().min(1, 'name is required'),
-  addressLine1: z.string().min(1, 'Address Line 1 is required'),
-  city: z.string().min(1, 'City is required'),
-  country: z.string().min(1, 'Country is required'),
+  phone: z.string({
+    required_error: 'please provide your phone numer'
+  }),
+  addressLine1: z.string({
+    required_error: 'please provide an address line'
+  }).min(1),
+  city: z.string({
+    required_error: 'please provide a city'
+  }).min(1),
+  country: z.string({
+    required_error: 'please provide a country'
+  }).min(1),
 });
 
 export type UserFormData = z.infer<typeof userSchema>;

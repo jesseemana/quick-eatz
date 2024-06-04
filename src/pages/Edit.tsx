@@ -22,7 +22,7 @@ const Edit = () => {
   )
 
   return (
-    <div className='px-4'>
+    <div className='px-4 py-4'>
       <UserProfileForm 
         onSave={updateUser} 
         currentUser={currentUser} 

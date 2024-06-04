@@ -14,21 +14,26 @@ const Cuisines = () => {
           Choose the cuisines available at your restaurant
         </FormDescription>
       </>
-      <FormField control={control} name='cuisines' render={({ field }) => (
-        <FormItem>
-          <div className='grid grid-cols-2 md:grid-cols-5 gap-1'>
-            {cuisines.map((cuisine, index) => (
-              <CusineCheck 
-                key={index}
-                field={field} 
-                cuisine={cuisine.name} 
-              />
-            ))}
-          </div>
-        </FormItem>
-      )} />
+      
+      <FormField 
+        control={control} 
+        name='cuisines' 
+        render={({ field }) => (
+          <FormItem>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-1'>
+              {cuisines.map((cuisine, index) => (
+                <CusineCheck 
+                  key={index}
+                  field={field} 
+                  cuisine={cuisine.name} 
+                />
+              ))}
+            </div>
+          </FormItem>
+        )} 
+      />
     </div>
-  )
+  );
 }
 
 export default Cuisines;

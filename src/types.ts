@@ -45,6 +45,7 @@ export type FormProps = {
   checkOut?: boolean
   currentUser: User
   title?: string
+  className?: string
   buttonText?: string
 }
 
