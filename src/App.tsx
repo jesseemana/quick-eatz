@@ -10,6 +10,7 @@ import OrderStatus from './pages/OrderStatus';
 import SearchResults from './pages/SearchResults';
 import RestaurantDetails from './pages/RestaurantDetails';
 import ProtectedRoute from './auth/ProtectedRoute';
+import OnBoardng from './pages/OnBoardng';
 
 
 const App = () => {
@@ -43,35 +44,6 @@ const App = () => {
         } 
       />
 
-      <Route 
-        path='/order-status' 
-        element={
-          <Layout>
-            <OrderStatus />
-          </Layout>
-        }
-      />
-
-      <Route 
-        path='/manage-restaurant' 
-        element={
-          <Layout>
-            <Restaurant />
-          </Layout>
-        } 
-      />
-
-      <Route element={<ProtectedRoute />}>
-        <Route 
-          path='/user' 
-          element={
-            <Layout>
-              <Profile/>
-            </Layout>
-          } 
-        />
-      </Route>
-
       <Route element={<ProtectedRoute />}>
         <Route 
           path='/edit-profile' 
@@ -80,6 +52,38 @@ const App = () => {
               <Edit />
             </Layout>
           } 
+        />
+        <Route 
+          path='/user' 
+          element={
+            <Layout>
+              <Profile/>
+            </Layout>
+          } 
+        />
+        <Route 
+          path='/order-status' 
+          element={
+            <Layout>
+              <OrderStatus />
+            </Layout>
+          }
+        />
+        <Route 
+          path='/manage-restaurant' 
+          element={
+            <Layout>
+              <Restaurant />
+            </Layout>
+          } 
+        />
+        <Route 
+          path='/onboarding' 
+          element={
+            <Layout>
+              <OnBoardng />
+            </Layout>
+          }
         />
       </Route>
       

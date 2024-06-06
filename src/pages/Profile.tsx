@@ -24,8 +24,8 @@ const Profile = () => {
   );
 
   const user_details: Pick<User, 'name' | 'email' | 'city' | 'phone'> = {
-    city: currentUser.city, 
     name: currentUser.name, 
+    city: currentUser.city, 
     email: currentUser.email, 
     phone: currentUser.phone, 
   }
