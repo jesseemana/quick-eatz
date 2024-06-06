@@ -1,6 +1,7 @@
 import { FormProps } from '@/types';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { 
   Form, 
@@ -15,7 +16,6 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import LoadingButton from '@/components/loading/LoadingButton';
 import { UserFormData, userSchema } from '@/schemas/user-profile';
-import { cn } from '@/lib/utils';
 
 
 const UserProfileForm = ({ 
@@ -26,6 +26,7 @@ const UserProfileForm = ({
   className,
   buttonText='submit', 
   title='user details', 
+  subTitle='View and update your profile.',
 }: FormProps) => {
   const form = useForm<UserFormData>({
     resolver: zodResolver(userSchema),
@@ -46,7 +47,7 @@ const UserProfileForm = ({
           <h2 className='text-2xl font-bold capitalize'>{title}</h2>
           {!checkOut && (
             <FormDescription className='text-sm'>
-              View and update your profile.
+              {subTitle}
             </FormDescription>
           )}
         </>

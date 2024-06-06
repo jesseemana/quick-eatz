@@ -36,6 +36,7 @@ export type UserData = {
   name: string
   city: string
   country: string
+  phone: string
   addressLine1: string
 }
 
@@ -45,6 +46,7 @@ export type FormProps = {
   checkOut?: boolean
   currentUser: User
   title?: string
+  subTitle?: string
   className?: string
   buttonText?: string
 }
