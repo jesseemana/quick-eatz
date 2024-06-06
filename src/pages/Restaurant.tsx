@@ -1,8 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ManageRestaurantForm from '@/components/forms/restaurant/ManageRestaurantForm';
-import useCreateRestaurant from '@/hooks/restaurant/useCreateRestaurant';
-import useGetMyRestaurant from '@/hooks/restaurant/useGetMyRestaurant';
-import useUpdateRestaurant from '@/hooks/restaurant/useUpdateRestaurant';
+import useCreateRestaurant from '@/hooks/useCreateRestaurant';
+import useGetMyRestaurant from '@/hooks/useGetMyRestaurant';
+import useUpdateRestaurant from '@/hooks/useUpdateRestaurant';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 
 

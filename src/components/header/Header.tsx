@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-import Nav from '../navbar/Nav';
 import { Button } from '../ui/button';
 import { useAuth0 } from '@auth0/auth0-react';
-
+import MainNav from '../navbar/MainNav';
 
 const Header = () => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
@@ -11,7 +10,7 @@ const Header = () => {
     <header className='fixed w-full py-3 z-10'>
       <nav className='container mx-auto flex justify-between items-center'>
         <div className='flex items-center gap-2'>
-          <Nav className='text-white' />
+          <MainNav className='text-white' />
           <Link
             to='/'
             className='text-2xl font-light tracking-tight text-white mb-2'

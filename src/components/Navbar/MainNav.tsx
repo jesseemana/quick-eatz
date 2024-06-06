@@ -6,7 +6,7 @@ import {
   Sheet, 
   SheetTitle, 
   SheetTrigger, 
-  SheetContent, 
+  SheetContent,  
   SheetDescription, 
 } from '../ui/sheet';
 import { Button } from '../ui/button';
@@ -14,8 +14,7 @@ import NavLinks from './NavLinks';
 import profile from '@/assets/profile.png'
 import { Separator } from '../ui/separator';
 
-
-const Nav = ({ className }: { className: string }) => {
+const MainNav = ({ className }: { className: string }) => {
   const { pathname } = useLocation();
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
@@ -74,7 +73,7 @@ const Nav = ({ className }: { className: string }) => {
         </SheetDescription>
       </SheetContent>
     </Sheet>
-  )
+  );
 }
 
-export default Nav;
+export default MainNav;

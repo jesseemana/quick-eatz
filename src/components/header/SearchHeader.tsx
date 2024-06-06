@@ -4,8 +4,8 @@ import { SearchState } from '@/context/SearchQueryProvider';
 import { SearchForm } from '@/schemas/search';
 import SearchBar from './SearchBar';
 import useSearchRestaurants from '@/hooks/useSearchRestaurants';
+import MainNav from '../navbar/MainNav';
 import SearchModal from '../search/SearchModal';
-import Sidebar from '../navbar/Nav';
 
 
 const SearchHeader = ({ city, searchState, handleSearch, }: { 
@@ -40,7 +40,7 @@ const SearchHeader = ({ city, searchState, handleSearch, }: {
     <header className='p-3 grid space-y-4 py-4'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center md:space-x-2'>
-          <Sidebar className='text-black' />
+          <MainNav className='text-black' />
           <Link 
             to='/' 
             className='font-normal text-lg md:text-2xl md:mb-2 mb-1'
