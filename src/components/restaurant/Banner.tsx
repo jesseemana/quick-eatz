@@ -1,4 +1,3 @@
-import banner from '../../assets/banner.jpg';
 import { AspectRatio } from '../ui/aspect-ratio';
 
 const Banner = ({ image }: { image: string }) => {
@@ -7,7 +6,7 @@ const Banner = ({ image }: { image: string }) => {
       <div className='md:hidden'>
         <AspectRatio ratio={16/6}>
           <img 
-            src={image || banner} 
+            src={image} 
             alt='restaurant banner' 
             className='rounded-xl object-cover h-full w-full'
           />
@@ -16,7 +15,7 @@ const Banner = ({ image }: { image: string }) => {
       <div className='hidden md:block'>
         <AspectRatio ratio={16/4}>
           <img 
-            src={image || banner} 
+            src={image} 
             alt='restaurant banner' 
             className='rounded-3xl object-cover h-full w-full'
           />
