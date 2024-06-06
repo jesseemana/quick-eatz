@@ -4,8 +4,8 @@ import { SearchState } from '@/context/SearchQueryProvider';
 import { SearchForm } from '@/schemas/search';
 import SearchBar from './SearchBar';
 import useSearchRestaurants from '@/hooks/useSearchRestaurants';
-import MainNav from '../navbar/MainNav';
 import SearchModal from '../search/SearchModal';
+import MainNav from '../navigation/MainNav';
 
 
 const SearchHeader = ({ city, searchState, handleSearch, }: { 
