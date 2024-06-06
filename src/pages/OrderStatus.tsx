@@ -1,39 +1,19 @@
 import OrderStatusDetail from '@/components/restaurant/OrderStatusDetail';
 import OrderStatusHeader from '@/components/restaurant/OrderStatusHeader';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
-
-const orders = [
-  {
-    _id: 'orderidnumber1',
-    restaurant: {
-      estimatedDeliveryTime: 30,
-    },
-    cartItems: [
-      {
-        menuItemId: 'menuitemidnumb1',
-        name: 'fried rice',
-        quantity: '1',
-      },
-      {
-        menuItemId: 'menuitemidnumbe3',
-        name: 'mushu pork',
-        quantity: '1',
-      },
-    ],
-    deliveryDetails: {
-      name: 'Jesse Emana',
-      addressLine1: 'Chinyonga',
-      city: 'Blantyre',
-      email: 'jesseemana@gmail.com',
-    },
-    totalAmount: 13000,
-    status: 'placed',
-    createdAt: '2024 18:04:11',
-    restaurantId: 'restaurantidnumber1',
-  }
-];
+import useGetMyOrders from '@/hooks/useGetMyOrders';
 
 const OrderStatus = () => {
+  const { orders, isLoading } = useGetMyOrders();
+
+  if (isLoading) return <p>loading...</p>
+  
+  if (!orders) return (
+    <div>
+      <p>you currently don't have any orders</p>
+    </div>
+  );
+
   return (
     <div className='lg:px-10 lg:py-4 space-y-10'>
       {orders.map(order => (
@@ -51,7 +31,7 @@ const OrderStatus = () => {
         </div>
       ))}
     </div>
-  )
+  );
 }
 
 export default OrderStatus;
