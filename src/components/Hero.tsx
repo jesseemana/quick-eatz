@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router';
 import { SearchForm } from '@/schemas/search';
 import HomeSearch from './HomeSearch';
-import hero from '../assets/hero.jpg';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -16,7 +15,7 @@ const Hero = () => {
     <div id='hero'>
       <div className='relative'>
         <img 
-          src={hero} 
+          src={'https://res.cloudinary.com/djcxl7oim/image/upload/v1717935640/quickeatz/header_ombe6v.png'} 
           alt='hero image' 
           className='w-full object-cover min-h-screen lg:max-h-[600px]'
           loading='lazy'
