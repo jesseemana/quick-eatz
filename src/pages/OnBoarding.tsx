@@ -3,7 +3,7 @@ import useGetUser from '@/hooks/useGetUser';
 import useUpdateUser from '@/hooks/useUpdateUser';
 import { useNavigate } from 'react-router';
 
-const OnBoardng = () => {
+const OnBoarding = () => {
   const navigate = useNavigate();
   const { currentUser, isLoading: isGetUserLoading } = useGetUser();
   const { updateUser, isLoading: isUpdateLoading } = useUpdateUser();
@@ -47,4 +47,4 @@ const OnBoardng = () => {
   );
 }
 
-export default OnBoardng;
+export default OnBoarding;

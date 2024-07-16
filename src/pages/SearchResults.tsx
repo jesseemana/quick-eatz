@@ -17,6 +17,7 @@ const SearchResults = () => {
   const { setCity } = useCity();
   const { searchState, setPage, setSortOption, setSelectedCuisines } = useSearchState();
   const { results, isLoading } = useSearchRestaurants(searchState, city);
+  
   const [checked, setChecked] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
 

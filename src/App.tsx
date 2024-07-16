@@ -10,7 +10,7 @@ import OrderStatus from './pages/OrderStatus';
 import SearchResults from './pages/SearchResults';
 import RestaurantDetails from './pages/RestaurantDetails';
 import ProtectedRoute from './auth/ProtectedRoute';
-import OnBoardng from './pages/OnBoardng';
+import OnBoarding from './pages/OnBoarding';
 
 
 const App = () => {
@@ -81,7 +81,7 @@ const App = () => {
           path='/onboarding' 
           element={
             <Layout>
-              <OnBoardng />
+              <OnBoarding />
             </Layout>
           }
         />
